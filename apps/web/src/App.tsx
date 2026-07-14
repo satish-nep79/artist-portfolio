@@ -1,5 +1,7 @@
+import Test from "./components/ui/Test";
+
 function App() {
-  return <h1>Artist Portfolio</h1>;
+  return <Test />;
 }
 
 export default App;
