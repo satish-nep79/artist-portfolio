@@ -56,3 +56,10 @@ button[disabled],
      remove it, otherwise the mouseover events won't fire! */
   pointer-events: auto !important; 
 }
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}

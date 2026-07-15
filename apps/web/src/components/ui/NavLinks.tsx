@@ -9,7 +9,7 @@ const NavLinks = ({ title, href, className }: NavLinksProps) => {
     <a
       href={href}
       data-cursor="hover"
-      className={`leading-5 text-text-primary font-bold hover:text-primary hover:text-shadow-glow ${className || ""}`}
+      className={`leading-5 text-text-primary hover:text-primary hover:text-shadow-glow ${className || ""}`}
     >
       {title}
     </a>

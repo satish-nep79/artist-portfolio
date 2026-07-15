@@ -3,20 +3,20 @@ import MonoLogo from "@/assets/logos/mono_logo.svg";
 import NavLinks from "@/components/ui/NavLinks";
 import CustomButton from "../ui/CustomButton";
 import ButtonType from "@/data/enums/ButonTypes";
+import { ListIcon} from "@phosphor-icons/react";
 
 function Navbar() {
   return (
     <header className="fixed top-16 left-0 w-full z-50">
       <Container>
-        <nav className="flex items-center justify-between bg-glass-bg rounded-full backdrop-blur-lg px-16 py-3 shadow-nav-glow border border-glass-border">
+        <nav className="flex items-center justify-between bg-glass-bg rounded-full backdrop-blur-lg px-6 py-3 lg:px-16 shadow-nav-glow border border-glass-border">
           <img
             data-cursor="hover"
             src={MonoLogo}
             alt="Logo"
-            width="32px"
-            className="bg-transparent"
+            className="w-8 h-auto"
           />
-          <ul className="nav-links flex gap-8">
+          <ul className="nav-links hidden md:flex  md:gap-4 lg:gap-6">
             <li>
               <NavLinks title="Home" href="/#hero" />
             </li>
@@ -37,6 +37,12 @@ function Navbar() {
             label="Inquiry"
             onClick={() => (window.location.href = "#contact")}
             buttonType={ButtonType.PRIMARY}
+            className="hidden md:block"
+          />
+          <ListIcon
+            size={32}
+            className="md:hidden cursor-pointer"
+            data-cursor="hover"
           />
         </nav>
       </Container>
