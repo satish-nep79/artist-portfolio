@@ -8,25 +8,7 @@ import {
   LinkedinLogoIcon,
   EnvelopeSimpleIcon,
 } from "@phosphor-icons/react";
-
-function SocialLink({
-  icon: Icon,
-  label,
-  href,
-}: {
-  icon: React.ElementType;
-  label: string;
-  href: string;
-}) {
-  return (
-    <a
-      href={href}
-      className="text-text-primary flex items-center gap-2 hover:text-primary hover:text-shadow-glow"
-    >
-      <Icon width={16} height={16} /> {label}
-    </a>
-  );
-}
+import SocialLink from "@/components/ui/SocialLink";
 
 function Footer() {
   return (

@@ -97,7 +97,10 @@
     /* Shadow Effects */
     --shadow-nav-glow: 0 0 12px 0 var(--color-glass-glow);
     --text-shadow-glow: 0 0 50px var(--color-primary-10), 0 0 25px var(--color-primary-25), 0 0 10px var(--color-primary-50), 0 0 2px var(--color-primary);
-    ;
+
+    /* Radial Gradients */
+    --background-image-radial-glow: radial-gradient(circle, var(--color-primary) 0%, var(--color-primary-50) 25%, var(--color-primary-10) 100%);
+    --blur-400: 400px;
 
     /* Status colors*/
     --color-success: var(--color-success);
@@ -117,7 +120,6 @@
 @layer base {
     * {
         box-sizing: border-box;
-        font-size: 16px;
         font-family: var(--font-sans);
     }
 
@@ -125,15 +127,19 @@
         scroll-behavior: smooth;
         background: var(--color-bg-primary);
         color: var(--color-text-body);
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
     }
 
     body {
         margin: 0;
+        padding: 0;
         min-width: 320px;
         min-height: 100vh;
 
         background: var(--color-bg-primary);
-        color: var(--color-text-body);
+        color: var(--color-text-primary);
 
         font-family: var(--font-sans);
 

@@ -1,13 +1,13 @@
 import Container from "@/components/ui/Container";
 import MonoLogo from "@/assets/logos/mono_logo.svg";
 import NavLinks from "@/components/ui/NavLinks";
-import CustomButton from "../ui/CustomButton";
+import Button from "../ui/Button";
 import ButtonType from "@/data/enums/ButonTypes";
 import { ListIcon} from "@phosphor-icons/react";
 
 function Navbar() {
   return (
-    <header className="fixed top-16 left-0 w-full z-50">
+    <header className="fixed top-8 md:top-16 left-0 w-full z-50">
       <Container>
         <nav className="flex items-center justify-between bg-glass-bg rounded-full backdrop-blur-lg px-6 py-3 lg:px-16 shadow-nav-glow border border-glass-border">
           <img
@@ -33,7 +33,7 @@ function Navbar() {
               <NavLinks title="Work With Me" href="/#work-with-me" />
             </li>
           </ul>
-          <CustomButton
+          <Button
             label="Inquiry"
             onClick={() => (window.location.href = "#contact")}
             buttonType={ButtonType.PRIMARY}
