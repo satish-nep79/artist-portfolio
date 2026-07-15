@@ -1,0 +1,58 @@
+/* Hide default cursor globally */
+html, body {
+  cursor: none;
+}
+
+/* Ensure links, buttons, and hovered items also hide the system cursor */
+a, button, [data-cursor="hover"] {
+  cursor: none;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-text-primary, #f5f5f5); /* Added fallback color */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s, height 0.35s, background 0.35s, border-color 0.35s, opacity 0.3s;
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: var(--color-text-primary, #f5f5f5); /* Added fallback color */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring.hover {
+  width: 88px;
+  height: 88px;
+  background: var(--color-accent-glow, rgba(124, 92, 255, 0.4)); /* Added fallback */
+  border-color: var(--color-primary, #7c5cff); /* Added fallback */
+  mix-blend-mode: normal;
+}
+
+.cursor-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+/* Ensure the native disabled cursor is styled on the button itself */
+button:disabled,
+button[disabled],
+.not-allowed-element {
+  cursor: not-allowed !important;
+  /* If you are using pointer-events: none on disabled buttons, 
+     remove it, otherwise the mouseover events won't fire! */
+  pointer-events: auto !important; 
+}
