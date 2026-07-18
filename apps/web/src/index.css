@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
-
-
 /* ==========================================
    Theme Tokens
    ========================================== */
-
 :root {
     /* ---------- Background ---------- */
     --color-bg-primary: #0b0b0f;
     --color-bg-secondary: #111318;
     --color-bg-surface: #16181d;
+
+    --color-overlay-10: rgba(11, 11, 15, 0.10);
+    --color-overlay-25: rgba(11, 11, 15, 0.25);
+    --color-overlay-50: rgba(11, 11, 15, 0.50);
+    --color-overlay-75: rgba(11, 11, 15, 0.75);
 
     /* ---------- Text ---------- */
     --color-text-primary: #f5f5f5;
@@ -25,7 +27,6 @@
     --color-primary-50: rgba(124, 92, 255, 0.50);
     --color-primary-60: rgba(124, 92, 255, 0.60);
     --color-accent-glow: rgba(124, 92, 255, 0.4);
-
 
     /* ---------- Glass ---------- */
     --color-glass-bg: rgba(255, 255, 255, 0.15);
@@ -43,27 +44,24 @@
     --color-warning: #d9a441;
     --color-error: #b85c5c;
 
-
     /* ---------- Layout ---------- */
     --container-width: 1440px;
 
     /* ---------- Animation ---------- */
     --transition-fast: 150ms ease;
-    --transition-normal: 30000ms linear;
+    --transition-normal: 300ms linear;
     --transition-slow: 400ms ease;
 }
 
 /* ==========================================
-   Tailwind Theme
+   Tailwind Theme Configuration (v4)
    ========================================== */
-
 @theme {
-
     /* Fonts */
     --font-sans: "Inter", sans-serif;
     --font-display: "Playfair Display", serif;
 
-    /* Background */
+    /* Backgrounds */
     --color-bg-primary: var(--color-bg-primary);
     --color-bg-secondary: var(--color-bg-secondary);
     --color-bg-surface: var(--color-bg-surface);
@@ -84,43 +82,67 @@
     /* Glass */
     --color-glass-bg: var(--color-glass-bg);
     --color-glass-bg-2: var(--color-glass-bg-2);
-
     --color-glass-border: var(--color-glass-border);
     --color-glass-border-2: var(--color-glass-border-2);
-
     --color-glass-glow: var(--color-glass-glow);
 
-    /* Shadows Colors*/
-    --color-shadow: var(--color-shadow);
-    --color-glass-shadow: var(--color-glass-shadow);
+    /* Shadows (FIX: Mapped to existing root variables instead of undefined names) */
+    --color-shadow: var(--shadow-color);
+    --color-glass-shadow: var(--shadow-glass);
 
     /* Shadow Effects */
     --shadow-nav-glow: 0 0 12px 0 var(--color-glass-glow);
     --text-shadow-glow: 0 0 50px var(--color-primary-10), 0 0 25px var(--color-primary-25), 0 0 10px var(--color-primary-50), 0 0 2px var(--color-primary);
+    --shadow-primary-glow: 0 0 50px var(--color-primary-10), 0 0 25px var(--color-primary-25), 0 0 10px var(--color-primary-50), 0 0 2px var(--color-primary);
 
-    /* Radial Gradients */
+    /* Gradients & Blurs */
     --background-image-radial-glow: radial-gradient(circle, var(--color-primary) 0%, var(--color-primary-50) 25%, var(--color-primary-10) 100%);
     --blur-400: 400px;
+    --background-image-overlay-horizontal: linear-gradient(180deg, var(--color-overlay-10) 0%, var(--color-overlay-75) 100%);
 
-    /* Status colors*/
+    /* Status Colors */
     --color-success: var(--color-success);
     --color-warning: var(--color-warning);
     --color-error: var(--color-error);
 
-    /* Transition */
+    /* Transitions */
     --transition-fast: var(--transition-fast);
     --transition-normal: var(--transition-normal);
     --transition-slow: var(--transition-slow);
 }
 
 /* ==========================================
-   Base Styles
+   Custom Typography Utilities (v4)
    ========================================== */
+@utility text-caption {
+    font-size: 0.8125rem;
+    /* 13px */
+    line-height: 1.2;
+    font-family: var(--font-sans);
+    /* "Inter", sans-serif */
+}
 
+@utility text-metadata {
+    font-size: 0.625rem;
+    /* 10px */
+    line-height: 1.2;
+    font-family: var(--font-sans);
+    /* "Inter", sans-serif */
+}
+
+@utility transition-default {
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+
+/* ==========================================
+   Base Styles & Typography Reset
+   ========================================== */
 @layer base {
     * {
         box-sizing: border-box;
-        font-family: var(--font-sans);
     }
 
     html {
@@ -137,25 +159,72 @@
         padding: 0;
         min-width: 320px;
         min-height: 100vh;
-
         background: var(--color-bg-primary);
         color: var(--color-text-primary);
-
         font-family: var(--font-sans);
-
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
+    /* --- Accessible Typography System --- */
+    h1 {
+        font-family: var(--font-display);
+        font-size: 3.8rem;
+        line-height: 1.2;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-family: var(--font-display);
+        font-size: 3.1rem;
+        line-height: 1.2;
+        font-weight: bold;
+    }
+
+    h3 {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        line-height: 1.2;
+        font-weight: bold;
+    }
+
+    h4 {
+        font-family: var(--font-display);
+        font-size: 1.9rem;
+        line-height: 1.2;
+        font-weight: bold;
+    }
+
+    h5 {
+        font-family: var(--font-sans);
+        font-size: 1.5rem;
+        line-height: 1.2;
+        font-weight: bold;
+    }
+
+    h6 {
+        font-family: var(--font-sans);
+        font-size: 1.25rem;
+        line-height: 1.2;
+        font-weight: bold;
+    }
+
+    /* Fallback element types */
     img {
         display: block;
         max-width: 100%;
     }
 
     a {
-        color: inherit;
+        color: var(--color-text-primary);
         text-decoration: none;
+        line-height: 1.25rem;
+    }
+
+    a:hover {
+        color: var(--color-primary);
+        text-shadow: var(--text-shadow-glow);
     }
 
     button {

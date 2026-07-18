@@ -1,7 +1,7 @@
 import Container from "@/components/ui/Container";
 import ButtonType from "@/data/enums/ButonTypes";
 import Button from "@/components/ui/Button";
-import { ArrowRightIcon } from "@phosphor-icons/react";
+import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import SocialLink from "@/components/ui/SocialLink";
 import {
   InstagramLogoIcon,
@@ -10,13 +10,19 @@ import {
   LinkedinLogoIcon,
   EnvelopeSimpleIcon,
 } from "@phosphor-icons/react";
+import FeaturedArt from "@/components/ui/FeaturedArt";
+import Carousel from "@/components/ui/Carousel";
+import { artworks } from "@/data/dummy_data/featured_artworks";
 
 const HeroSection = () => {
+  const featuredArtworks = Array.from({ length: artworks.length }, (_, i) => (
+    <FeaturedArt artwork={artworks[i]} />
+  )); // Get the first 3 artworks
   return (
     <Container id="hero">
       <div className="hidden md:block absolute right-0 top-0 w-200 h-200 rounded-full bg-radial-glow blur-400 p-0 m-0 mr-0 items-end justify-end"></div>
-      <div className="w-full h-screen flex flex-col md:flex-row pb-7.5 md:pb-15  pt-28 md:pt-44">
-        <div className="flex-1 h-full flex flex-col items-start justify-center">
+      <div className="w-full h-screen flex flex-col md:flex-row pb-7.5 md:pb-15  pt-28 md:pt-44 gap-6">
+        <div className="z-2 flex-1 h-full flex flex-col items-start justify-center">
           <div className="flex flex-col items-start">
             <h1 className="font-display font-bold text-text-primary text-4xl md:text-8xl tracking-wide leading-10 md:leading-tight">
               BIKRAM
@@ -33,20 +39,20 @@ const HeroSection = () => {
           <div className="w-full md:w-auto flex flex-row mt-6 md:mt-11 gap-8 md:gap-12">
             <Button
               label="Explore Gallery"
-              icon={ArrowRightIcon}
+              icon={ArrowCircleRightIcon}
               onClick={() => {
                 window.location.href = "#gallery";
               }}
             />
             <Button
               label="Get in Touch"
-              buttonType={ButtonType.OUTLINED}
+              buttonType={ButtonType.PRIMARY}
               onClick={() => {
                 window.location.href = "#contact";
               }}
             />
           </div>
-          <div className="w-full md:w-auto flex flex-row mt-6 md:mt-11 gap-4 md:gap-8">
+          <div className="w-full md:w-auto flex flex-row mt-6 md:mt-11 gap-4 md:gap-8 justify-between items-center">
             <SocialLink
               icon={InstagramLogoIcon}
               href="https://www.instagram.com/"
@@ -70,7 +76,9 @@ const HeroSection = () => {
             />
           </div>
         </div>
-        <div className="flex-1 h-full bg-glass-bg-2">Right</div>
+        <div className="z-2 flex-1 max-h-full m-auto text-center items-center justtify-center">
+          <Carousel items={featuredArtworks} autoPlay={true} />
+        </div>
       </div>
     </Container>
   );

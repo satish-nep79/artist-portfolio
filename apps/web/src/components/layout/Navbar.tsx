@@ -36,7 +36,6 @@ function Navbar() {
           <Button
             label="Inquiry"
             onClick={() => (window.location.href = "#contact")}
-            buttonType={ButtonType.PRIMARY}
             className="hidden md:block"
           />
           <ListIcon

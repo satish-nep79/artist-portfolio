@@ -29,7 +29,7 @@ const Button = ({
     switch (buttonType) {
       case ButtonType.PRIMARY:
         base +=
-          "bg-primary-60 text-text-primary font-semibold border border-glass-border";
+          "bg-glass-bg text-text-primary font-semibold border border-glass-border";
         break;
       case ButtonType.SECONDARY:
         base +=
@@ -41,19 +41,23 @@ const Button = ({
         break;
       default:
         base +=
-          "bg-glass-bg text-text-primary font-semibold border border-glass-border";
+          "bg-primary-50 text-text-primary font-semibold border border-glass-border";
         break;
     }
   }
   return (
     <button
       data-cursor={disabled ? "" : "hover"}
-      className={`px-4 py-2 md:py-3.5 md:px-6 text-[16px]  flex flex-row justify-center items-center gap-1.5 ${base} ${hoverEffect} ${className}`}
+      className={`transition-all duration-300 ease-in-out px-4 py-2 md:py-3.5 md:px-6 text-[16px]  flex flex-row justify-center items-center gap-1.5 ${base} ${hoverEffect} ${className}`}
       onClick={onClick}
       disabled={disabled}
     >
       {label}
-      {Icon ? <Icon width={20} height={20} /> : null}
+      {Icon ? 
+      <div className="h-5 aspect-square flex items-center justify-center">
+        <Icon height="100%" width="100%" />
+      </div>
+      : null}
     </button>
   );
 };

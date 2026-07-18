@@ -7,15 +7,26 @@ interface SocialLinkProps {
   size?: number;
 }
 
-const SocialLink = ({ icon: Icon, label, href, size = 16 }: SocialLinkProps) => {
+const SocialLink = ({
+  icon: Icon,
+  label,
+  href,
+  size = 16,
+}: SocialLinkProps) => {
   return (
     <a
+      data-cursor="hover"
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-text-primary flex items-center gap-2 hover:text-primary hover:text-shadow-glow"
+      className="flex items-center gap-2"
     >
-      <Icon width={size} height={size} /> {label}
+      <Icon
+        width={size}
+        height={size}
+        className="hover:scale-110 transition-default"
+      />{" "}
+      {label}
     </a>
   );
 };
