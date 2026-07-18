@@ -13,7 +13,7 @@ const FeaturedArt = ({ artwork }: FeaturedArtProps) => {
         alt={artwork.title}
         className="max-w-full max-h-[65vh] object-fit group-hover:scale-105 transition-default"
       />
-      <div className="absolute inset-0 h-full w-full bg-overlay-horizontal flex-col justify-between items-end px-6 py-6 hidden group-hover:flex transition-default">
+      <div className="absolute inset-0 h-full w-full bg-overlay-horizontal flex-col justify-between items-end px-6 py-6 flex md:opacity-0 group-hover:opacity-100 transition-default">
         <ArrowCircleUpRightIcon
           height={32}
           width={32}
