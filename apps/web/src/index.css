@@ -98,7 +98,8 @@
     /* Gradients & Blurs */
     --background-image-radial-glow: radial-gradient(circle, var(--color-primary) 0%, var(--color-primary-50) 25%, var(--color-primary-10) 100%);
     --blur-400: 400px;
-    --background-image-overlay-horizontal: linear-gradient(180deg, var(--color-overlay-10) 0%, var(--color-overlay-75) 100%);
+    --background-image-overlay-vertical: linear-gradient(180deg, var(--color-overlay-10) 0%, var(--color-overlay-75) 100%);
+    --background-image-overlay-mask: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.25) 75%, rgba(0, 0, 0, 0.15) 100%);
 
     /* Status Colors */
     --color-success: var(--color-success);

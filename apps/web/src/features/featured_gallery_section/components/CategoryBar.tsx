@@ -24,11 +24,14 @@ const CategoryBar = ({
         left: activeTab.offsetLeft,
         width: activeTab.offsetWidth,
       });
-      tabsRef.current[activeCategory]?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest", // Prevents the whole page from jumping vertically
-        inline: "center", // Centers the clicked tab inside the scrollable container
-      });
+      // Todo: Fix the scrollIntoView issue where the page jumps vertically when clicking on a tab.
+      // The following code is commented out because it causes the page to jump vertically, which is not the desired behavior.
+      // We need to find an alternative way to ensure the active tab is visible without causing the page to jump.
+      // tabsRef.current[activeCategory]?.scrollIntoView({
+      //   behavior: "smooth",
+      //   block: "nearest", // Prevents the whole page from jumping vertically
+      //   inline: "center", // Centers the clicked tab inside the scrollable container
+      // });
     }
   }, [activeCategory, categories]);
 

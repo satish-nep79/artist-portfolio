@@ -8,6 +8,7 @@ interface CarouselProps {
   autoPlay?: boolean;
   loop?: boolean;
   autoPlayDurationInSeconds?: number;
+  className?: string;
 }
 
 const Carousel = ({
@@ -16,6 +17,7 @@ const Carousel = ({
   autoPlay = true,
   loop = true,
   autoPlayDurationInSeconds = 3,
+  className,
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
@@ -82,10 +84,12 @@ const Carousel = ({
   }, [autoScrollDurationInSeconds, currentIndex]);
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center relative">
+    <div
+      className={`w-full h-full flex flex-col justify-center items-center relative ${className || ""}`}
+    >
       <div
         onClick={handlePrevClick}
-        className="z-2 absolute left-0 w-12 h-12 bg-glass-shadow border border-glass-border p-2 rounded-full hover:shadow-primary-glow transition-default"
+        className="z-2 absolute left-6 w-12 h-12 bg-glass-shadow border border-glass-border p-2 rounded-full hover:shadow-primary-glow transition-default"
       >
         <ArrowLeftIcon size={"100%"} className="text-text-body" />
       </div>
@@ -106,7 +110,7 @@ const Carousel = ({
       </div>
       <div
         onClick={handleNextClick}
-        className="z-2 absolute right-0 w-12 h-12 bg-glass-shadow border border-glass-border p-2 rounded-full hover:shadow-primary-glow transition-default"
+        className="z-2 absolute right-6 w-12 h-12 bg-glass-shadow border border-glass-border p-2 rounded-full hover:shadow-primary-glow transition-default"
       >
         <ArrowRightIcon size={"100%"} className="text-text-body" />
       </div>

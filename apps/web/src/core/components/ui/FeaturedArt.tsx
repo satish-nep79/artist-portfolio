@@ -19,9 +19,9 @@ const ArtPieceComponent = ({
       <img
         src={artwork.imageUrl}
         alt={artwork.title}
-        className={`max-w-full  ${isFeatured ? 'max-h-[60vh]' : ''} object-fit group-hover:scale-105 transition-default w-full h-fit`}
+        className={`max-w-full  ${isFeatured ? "max-h-[60vh]" : ""} object-fit group-hover:scale-105 transition-default w-full h-fit`}
       />
-      <div className="absolute inset-0 h-full w-full bg-overlay-horizontal flex-col justify-between items-end px-6 py-6 flex md:opacity-0 group-hover:opacity-100 transition-default">
+      <div className="absolute inset-0 h-full w-full bg-overlay-vertical flex-col justify-between items-end px-6 py-6 flex md:opacity-0 group-hover:opacity-100 transition-default">
         <ArrowCircleUpRightIcon
           height={32}
           width={32}

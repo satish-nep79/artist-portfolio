@@ -48,7 +48,7 @@ const Button = ({
   return (
     <button
       data-cursor={disabled ? "" : "hover"}
-      className={`transition-all duration-300 ease-in-out px-4 py-2 md:py-3.5 md:px-6 text-[16px]  flex flex-row justify-center items-center gap-1.5 ${base} ${hoverEffect} ${className}`}
+      className={`w-fit transition-all duration-300 ease-in-out px-4 py-2 md:py-3.5 md:px-6 text-[16px]  flex flex-row justify-center items-center gap-1.5 ${base} ${hoverEffect} ${className}`}
       onClick={onClick}
       disabled={disabled}
     >
