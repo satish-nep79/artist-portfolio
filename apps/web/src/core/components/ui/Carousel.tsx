@@ -7,6 +7,7 @@ interface CarouselProps {
   items: React.ReactNode[];
   autoPlay?: boolean;
   loop?: boolean;
+  autoPlayDurationInSeconds?: number;
 }
 
 const Carousel = ({
@@ -14,13 +15,14 @@ const Carousel = ({
   items,
   autoPlay = true,
   loop = true,
+  autoPlayDurationInSeconds = 3,
 }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
-  const autoScrollDurationInSeconds = useRef(5); // Set the auto scroll duration in seconds
+  const autoScrollDurationInSeconds = useRef(autoPlayDurationInSeconds); // Set the auto scroll duration in seconds
 
   const updateTimer = (timeInSeconds?: number) => {
-    autoScrollDurationInSeconds.current = timeInSeconds ?? 5; // Reset the timer to 5 seconds
+    autoScrollDurationInSeconds.current = timeInSeconds ?? 3; // Reset the timer to 3 seconds
   };
 
   const scrollToIndex = (index: number) => {
@@ -30,7 +32,7 @@ const Carousel = ({
       behavior: "auto",
     });
     setCurrentIndex(index);
-    updateTimer(5); // Reset the timer to 5 seconds
+    updateTimer(autoPlayDurationInSeconds); // Reset the timer to 3 seconds
   };
 
   const handlePrevClick = () => {
@@ -58,7 +60,7 @@ const Carousel = ({
     );
     if (idx !== currentIndex) {
       setCurrentIndex(idx);
-      updateTimer(5); // Reset the timer to 5 seconds
+      updateTimer(autoPlayDurationInSeconds); // Reset the timer to the specified durationx
     }
   };
 
