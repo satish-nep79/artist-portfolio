@@ -1,8 +1,7 @@
 import ArtPieceComponent from "@/core/components/ui/FeaturedArt";
 import { galleryArtworks } from "@/core/data/dummy_data/gallery_artworks";
 import Container from "../../../core/components/ui/Container";
-import Button from "@/core/components/ui/Button";
-import ButtonType from "@/core/data/enums/ButonTypes";
+import Button, {ButtonType} from "@/core/components/ui/Button";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import CategoryBar from "../components/CategoryBar";
 import { useState } from "react";

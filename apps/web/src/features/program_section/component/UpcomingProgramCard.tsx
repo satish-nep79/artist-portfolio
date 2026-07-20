@@ -1,5 +1,4 @@
-import Button from "@/core/components/ui/Button";
-import ButtonType from "@/core/data/enums/ButonTypes";
+import Button, {ButtonType} from "@/core/components/ui/Button";
 import { DateHelper } from "@/core/utils/date_helper";
 import type { ProgramModel } from "@/features/program_section/types/program_model";
 import {

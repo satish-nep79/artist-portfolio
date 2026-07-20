@@ -1,6 +1,5 @@
 import Container from "@/core/components/ui/Container";
-import ButtonType from "@/core/data/enums/ButonTypes";
-import Button from "@/core/components/ui/Button";
+import Button, { ButtonType } from "@/core/components/ui/Button";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import SocialLink from "@/core/components/ui/SocialLink";
 import {

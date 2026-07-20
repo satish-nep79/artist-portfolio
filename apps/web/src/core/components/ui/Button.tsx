@@ -1,5 +1,12 @@
-import ButtonType from "@/core/data/enums/ButonTypes";
 import type { Icon } from "@phosphor-icons/react/dist/lib/index";
+
+export const ButtonType = {
+  PRIMARY: 1,
+  SECONDARY: 2,
+  OUTLINED: 3,
+} as const;
+
+type ButtonType = (typeof ButtonType)[keyof typeof ButtonType];
 
 interface ButtonProps {
   label: string;
@@ -53,11 +60,11 @@ const Button = ({
       disabled={disabled}
     >
       {label}
-      {Icon ? 
-      <div className="h-5 aspect-square flex items-center justify-center">
-        <Icon height="100%" width="100%" />
-      </div>
-      : null}
+      {Icon ? (
+        <div className="h-5 aspect-square flex items-center justify-center">
+          <Icon height="100%" width="100%" />
+        </div>
+      ) : null}
     </button>
   );
 };
