@@ -12,7 +12,6 @@ import {
   BankIcon,
   ArrowDownIcon,
 } from "@phosphor-icons/react";
-import { title } from "framer-motion/m";
 
 const WorkWithMeSection = () => {
   return (
