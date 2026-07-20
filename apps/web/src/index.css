@@ -66,6 +66,11 @@
     --color-bg-secondary: var(--color-bg-secondary);
     --color-bg-surface: var(--color-bg-surface);
 
+    --color-overlay-10: var(--color-overlay-10);
+    --color-overlay-25: var(--color-overlay-25);
+    --color-overlay-50: var(--color-overlay-50);
+    --color-overlay-75: var(--color-overlay-75);
+
     /* Text */
     --color-text-primary: var(--color-text-primary);
     --color-text-body: var(--color-text-body);

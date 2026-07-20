@@ -89,9 +89,9 @@ const Carousel = ({
     >
       <div
         onClick={handlePrevClick}
-        className="z-2 absolute left-6 w-12 h-12 bg-glass-shadow border border-glass-border p-2 rounded-full hover:shadow-primary-glow transition-default"
+        className="z-2 absolute left-6 w-12 h-12 bg-glass-bg border border-glass-border p-2 rounded-full hover:shadow-primary-glow transition-default"
       >
-        <ArrowLeftIcon size={"100%"} className="text-text-body" />
+        <ArrowLeftIcon size={"100%"} className="text-glass-glow" />
       </div>
       <div
         ref={carouselRef}
@@ -110,9 +110,9 @@ const Carousel = ({
       </div>
       <div
         onClick={handleNextClick}
-        className="z-2 absolute right-6 w-12 h-12 bg-glass-shadow border border-glass-border p-2 rounded-full hover:shadow-primary-glow transition-default"
+        className="z-2 absolute right-6 w-12 h-12 bg-glass-bg border border-glass-border p-2 rounded-full hover:shadow-primary-glow transition-default"
       >
-        <ArrowRightIcon size={"100%"} className="text-text-body" />
+        <ArrowRightIcon size={"100%"} className="text-glass-glow" />
       </div>
       <Indicators
         activeIndex={currentIndex}

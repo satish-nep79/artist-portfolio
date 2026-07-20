@@ -94,6 +94,34 @@ export class DateHelper {
         }
     };
 
+    static prettyDuration(date1: Date, date2: Date): string {
+        // 1. Strip time boundaries to focus purely on calendar dates (UTC avoids timezone shifts)
+        const d1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+        const d2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+
+        // 2. Calculate the absolute day difference and add 1 to make it inclusive
+        const diffDays = Math.abs(Math.floor((d2 - d1) / (1000 * 60 * 60 * 24))) + 1;
+
+        const diffMonths = Math.floor(diffDays / 30.44);
+        const diffYears = Math.floor(diffDays / 365.25);
+
+        // 3. Evaluate breaking points using the inclusive day count
+        if (diffYears >= 1) {
+            return diffYears === 1 ? "1 year" : `${diffYears} years`;
+        }
+
+        if (diffMonths >= 1) {
+            return diffMonths === 1 ? "1 month" : `${diffMonths} months`;
+        }
+
+        if (diffDays >= 7) {
+            const diffWeeks = Math.floor(diffDays / 7);
+            return diffWeeks === 1 ? "1 week" : `${diffWeeks} weeks`;
+        }
+
+        return diffDays === 1 ? "1 day" : `${diffDays} days`;
+    }
+
     /**
      * Calculates human-readable time remaining until the target date.
      */
