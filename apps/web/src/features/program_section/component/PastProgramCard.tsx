@@ -7,7 +7,7 @@ interface PastProgramCardProps {
 
 const PastProgramCard = ({ program }: PastProgramCardProps) => {
   return (
-    <div className="w-87.5 h-87.5 bg-bg-surface  shrink-0 snap-center overflow-hidden relative group hover:shadow-primary-glow">
+    <div className="w-72 md:w-87.5 aspect-square bg-bg-surface  shrink-0 snap-center overflow-hidden relative group hover:shadow-primary-glow">
       <img
         src={program.imageUrl}
         alt={program.title}

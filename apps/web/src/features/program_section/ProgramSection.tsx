@@ -32,7 +32,7 @@ const ProgramSection = () => {
         Browse workshops, exhibitions and creative experiences from previous
         years.
       </p>
-      <div className="flex overflow-x-auto snap-x mandatory gap-6 scroll-auto scrollbar-hide scrollbar-none px-6 py-6">
+      <div className="flex overflow-x-auto snap-x mandatory gap-6 scroll-auto scrollbar-hide scrollbar-none px-3 py-3 md:px-6 md:py-6">
         {PastProgramData.map((program) => (
           <PastProgramCard program={program} key={program.id} />
         ))}
