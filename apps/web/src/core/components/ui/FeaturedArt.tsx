@@ -14,12 +14,17 @@ const ArtPieceComponent = ({
 }: ArtPieceComponent) => {
   return (
     <div
-      className={`group overflow-hidden m-auto w-fit h-fit relative ${className || ""}`}
+      className={`group overflow-hidden m-auto ${isFeatured ? "w-fit" : "w-full"} relative flex flex-col items-start ${className || ""}`}
     >
       <img
+        key={artwork.imageUrl}
         src={artwork.imageUrl}
         alt={artwork.title}
-        className={`max-w-full  ${isFeatured ? "max-h-[60vh]" : ""} object-fit group-hover:scale-105 transition-default w-full h-fit`}
+        loading="lazy"
+        decoding="async"
+        className={`w-full h-auto max-w-full ${
+          isFeatured ? "max-h-[60vh] object-cover" : ""
+        } group-hover:scale-105 transition-default`}
       />
       <div className="absolute inset-0 h-full w-full bg-overlay-vertical flex-col justify-between items-end px-6 py-6 flex md:opacity-0 group-hover:opacity-100 transition-default">
         <ArrowCircleUpRightIcon

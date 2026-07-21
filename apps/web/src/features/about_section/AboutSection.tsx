@@ -9,7 +9,7 @@ const AboutSection = () => {
         <div className="flex-1 h-full p-4">
           <div className="group  w-full h-full p-6 overflow-hidden bg-glass-bg-2 border border-glass-border-2 hover:shadow-primary-glow transition-default">
             <img
-              src="https://res.cloudinary.com/ioltw4a4/image/upload/v1784217051/fauzan-saari-CWNXlkekBeA-unsplash_tummaf.jpg"
+              src="https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217051/fauzan-saari-CWNXlkekBeA-unsplash_tummaf.jpg"
               alt="Artist Portrait"
               className="w-full h-full object-cover group-hover:scale-105 transition-default"
             />

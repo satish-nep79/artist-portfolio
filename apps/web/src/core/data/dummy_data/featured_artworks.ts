@@ -7,7 +7,7 @@ export const artworks: Artwork[] = [
         "category": "Painting",
         "medium": "Oil on Canvas",
         "year": 2025,
-        "imageUrl": "https://res.cloudinary.com/ioltw4a4/image/upload/v1784216976/gallery-angels_oyd5my.png"
+        "imageUrl": "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216976/gallery-angels_oyd5my"
     },
 
     {
@@ -16,7 +16,7 @@ export const artworks: Artwork[] = [
         "category": "Photography",
         "medium": "Digital Print",
         "year": 2023,
-        "imageUrl": "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217061/dan-farrell-fT49QnFucQ8-unsplash_1_gtchyi.png"
+        "imageUrl": "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217061/dan-farrell-fT49QnFucQ8-unsplash_1_gtchyi"
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@ export const artworks: Artwork[] = [
         "category": "Painting",
         "medium": "Oil on Canvas",
         "year": 2024,
-        "imageUrl": "https://res.cloudinary.com/ioltw4a4/image/upload/v1784216980/gallery-meadow_ljq4re.png"
+        "imageUrl": "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216980/gallery-meadow_ljq4re"
     },
     {
         "id": 4,
@@ -32,6 +32,6 @@ export const artworks: Artwork[] = [
         "category": "Abstract Art",
         "medium": "Acrylic on Canvas",
         "year": 2025,
-        "imageUrl": "https://res.cloudinary.com/ioltw4a4/image/upload/v1784216966/gallery-abstract-2_qmumwh.png"
+        "imageUrl": "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216966/gallery-abstract-2_qmumwh"
     }
 ];

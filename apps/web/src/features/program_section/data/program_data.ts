@@ -13,7 +13,7 @@ export const ProgramData: ProgramModel[] = [
         location: "Pokhara, Nepal",
         description: "Spend three inspiring days exploring botanical illustration through watercolor techniques, guided by observation, creativity, and the beauty of nature.",
         buttonText: "Reserve Your Spot",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217073/art-institute-of-chicago-w9njMDJJ3c4-unsplash_pjok5g.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217073/art-institute-of-chicago-w9njMDJJ3c4-unsplash_pjok5g.jpg"
     },
     {
         id: "2",
@@ -26,7 +26,7 @@ export const ProgramData: ProgramModel[] = [
         location: "Pokhara Art Gallery",
         description: "A solo exhibition featuring landscapes and contemporary paintings inspired by Nepal's mountains, culture, and quiet moments of everyday life.",
         buttonText: "View Exhibition",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217066/raimond-klavins-L6jxljMeUoo-unsplash_kundbn.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217066/raimond-klavins-L6jxljMeUoo-unsplash_kundbn.jpg"
     },
     {
         id: "3",
@@ -39,7 +39,7 @@ export const ProgramData: ProgramModel[] = [
         location: "Lakeside, Pokhara",
         description: "A weekend of hands-on painting, storytelling, and collaborative art activities designed to encourage creativity in children and young artists.",
         buttonText: "Join the Program",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217056/clayton-cardinalli-lGVqqwogRJY-unsplash_kuh65l.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217056/clayton-cardinalli-lGVqqwogRJY-unsplash_kuh65l.jpg"
     },
     {
         id: "4",
@@ -53,6 +53,6 @@ export const ProgramData: ProgramModel[] = [
         location: "Phewa Lakeside, Pokhara",
         description: "Experience a live painting session inspired by the changing colors of Phewa Lake, where visitors can watch the creative process unfold and engage with the artist throughout the day.",
         buttonText: "Learn More",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217058/sasha-matveeva-WLeoQKCFQUw-unsplash_yyviri.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217058/sasha-matveeva-WLeoQKCFQUw-unsplash_yyviri.jpg"
     }
 ]

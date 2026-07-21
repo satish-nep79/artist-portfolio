@@ -13,7 +13,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Pokhara Art Gallery",
         description: "A comprehensive look at early oil paintings and plein air sketches capturing the Annapurna range over the last five years.",
         buttonText: "View Gallery Archive",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784216976/gallery-angels_oyd5my.png"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216976/gallery-angels_oyd5my"
     },
     {
         id: "past-2",
@@ -27,7 +27,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Lakeside Studio, Pokhara",
         description: "An intensive three-day workshop focusing on structural forms, value structure, and dynamic tonal ranges using willow charcoal.",
         buttonText: "See Workshop Review",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217073/art-institute-of-chicago-w9njMDJJ3c4-unsplash_pjok5g.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217073/art-institute-of-chicago-w9njMDJJ3c4-unsplash_pjok5g.jpg"
     },
     {
         id: "past-3",
@@ -41,7 +41,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Phewa Cultural Center",
         description: "A collaborative showcase exploring the moody atmospheres, rain-slicked streets, and vibrant flora of Pokhara's monsoon season.",
         buttonText: "View Exhibition Catalog",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217061/dan-farrell-fT49QnFucQ8-unsplash_1_gtchyi.png"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217061/dan-farrell-fT49QnFucQ8-unsplash_1_gtchyi"
     },
     {
         id: "past-4",
@@ -54,7 +54,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Phewa Lakeside",
         description: "A live, real-time abstract capture of the golden hour shifting into twilight over the water, accompanied by ambient soundscapes.",
         buttonText: "Watch Recap Video",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217058/sasha-matveeva-WLeoQKCFQUw-unsplash_yyviri.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217058/sasha-matveeva-WLeoQKCFQUw-unsplash_yyviri.jpg"
     },
     {
         id: "past-5",
@@ -68,7 +68,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Old Pokhara Streets",
         description: "Bringing together neighborhood youth and professional artists to breathe life into public walls through collaborative storytelling.",
         buttonText: "View Project Photos",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217056/clayton-cardinalli-lGVqqwogRJY-unsplash_kuh65l.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217056/clayton-cardinalli-lGVqqwogRJY-unsplash_kuh65l.jpg"
     },
     {
         id: "past-6",
@@ -82,7 +82,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Pokhara Art Gallery Studio",
         description: "Demystifying oil mediums, surface preparation, color mixing, and the classic 'fat over lean' application rules for beginners.",
         buttonText: "Read Class Summary",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784216980/gallery-meadow_ljq4re.png"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216980/gallery-meadow_ljq4re"
     },
     {
         id: "past-7",
@@ -96,7 +96,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Pokhara Art Gallery",
         description: "An immersion into complex, large-scale acrylic works exploring texture, geometry, visual rhythm, and structural emotional balance.",
         buttonText: "View Collection",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784216966/gallery-abstract-2_qmumwh.png"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216966/gallery-abstract-2_qmumwh"
     },
     {
         id: "past-8",
@@ -110,7 +110,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Sarangkot, Nepal",
         description: "Braving the crisp morning air to study alpine light, snow highlights, and deep valley shadow contrasts directly on canvas.",
         buttonText: "See Highlights",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217066/raimond-klavins-L6jxljMeUoo-unsplash_kundbn.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217066/raimond-klavins-L6jxljMeUoo-unsplash_kundbn.jpg"
     },
     {
         id: "past-9",
@@ -124,7 +124,7 @@ export const PastProgramData: ProgramModel[] = [
         location: "Lakeside Cultural Hub",
         description: "A moody, striking digital print exhibit capturing fleeting structural geometry and architectural symmetry across changing cityscapes.",
         buttonText: "Browse Prints",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217061/dan-farrell-fT49QnFucQ8-unsplash_1_gtchyi.png"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217061/dan-farrell-fT49QnFucQ8-unsplash_1_gtchyi"
     },
     {
         id: "past-10",
@@ -138,6 +138,6 @@ export const PastProgramData: ProgramModel[] = [
         location: "Lakeside, Pokhara",
         description: "An introductory weekend introducing multimedia collage, basic color theory, and interactive drawing games to children.",
         buttonText: "See Event Review",
-        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/v1784217056/clayton-cardinalli-lGVqqwogRJY-unsplash_kuh65l.jpg"
+        imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217056/clayton-cardinalli-lGVqqwogRJY-unsplash_kuh65l.jpg"
     }
 ];

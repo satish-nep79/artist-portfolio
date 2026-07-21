@@ -16,27 +16,35 @@ const CategoryBar = ({
   );
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const tabsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const activeTab = tabsRef.current[activeCategory];
-    if (activeTab) {
+    const container = containerRef.current;
+
+    if (activeTab && container) {
       setIndicatorStyle({
         left: activeTab.offsetLeft,
         width: activeTab.offsetWidth,
       });
-      // Todo: Fix the scrollIntoView issue where the page jumps vertically when clicking on a tab.
-      // The following code is commented out because it causes the page to jump vertically, which is not the desired behavior.
-      // We need to find an alternative way to ensure the active tab is visible without causing the page to jump.
-      // tabsRef.current[activeCategory]?.scrollIntoView({
-      //   behavior: "smooth",
-      //   block: "nearest", // Prevents the whole page from jumping vertically
-      //   inline: "center", // Centers the clicked tab inside the scrollable container
-      // });
+
+      const tabOffsetLeft = activeTab.offsetLeft;
+      const tabWidth = activeTab.offsetWidth;
+      const containerWidth = container.clientWidth;
+
+      const targetScrollLeft = tabOffsetLeft - containerWidth / 2 + tabWidth / 2;
+
+      container.scrollTo({
+        left: targetScrollLeft,
+        behavior: "smooth",
+      });
     }
   }, [activeCategory, categories]);
 
   return (
-    <div className="relative my-8 overflow-x-auto whitespace-nowrap scrollbar-hide scrollbar-none">
+    <div
+      ref={containerRef}
+      className="relative my-8 overflow-x-auto whitespace-nowrap scrollbar-hide scrollbar-none">
       <div className="min-w-full w-fit  flex items-center gap-5 relative  border-b-4 border-glass-border">
         {categories.map((category, index) => (
           <div

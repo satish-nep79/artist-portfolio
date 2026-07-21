@@ -1,11 +1,10 @@
 import ArtPieceComponent from "@/core/components/ui/FeaturedArt";
 import { galleryArtworks } from "@/core/data/dummy_data/gallery_artworks";
 import Container from "../../../core/components/ui/Container";
-import Button, {ButtonType} from "@/core/components/ui/Button";
+import Button, { ButtonType } from "@/core/components/ui/Button";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import CategoryBar from "../components/CategoryBar";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useMemo, useState } from "react";
 
 const FeaturedGallerySection = () => {
   const categories = [
@@ -19,11 +18,14 @@ const FeaturedGallerySection = () => {
 
   const [activeCategory, setActiveCategory] = useState<string>(categories[0]);
 
-  const filteredArtworks = galleryArtworks.filter(
-    (artwork) =>
-      activeCategory === "All Categories" ||
-      artwork.category === activeCategory,
-  );
+  // Memoize filtered items to prevent recalculating on every frame/render
+  const filteredArtworks = useMemo(() => {
+    return galleryArtworks.filter(
+      (artwork) =>
+        activeCategory === "All Categories" ||
+        artwork.category === activeCategory,
+    );
+  }, [activeCategory]);
 
   return (
     <Container id="gallery" className="pt-28 md:pt-44">
@@ -41,21 +43,13 @@ const FeaturedGallerySection = () => {
         id="gallery"
         className="columns-1 sm:columns-2 md:columns-2 lg:columns-3 justify-center gap-5 transition-default"
       >
-        <AnimatePresence mode="popLayout">
-          {filteredArtworks.map((artwork) => (
-            <motion.div
-              key={artwork.id}
-              layout // Smoothly animates position changes when other elements disappear
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.92 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
-              className="inline-block w-full mb-5 break-inside-avoid" // Essential for CSS columns
-            >
-              <ArtPieceComponent artwork={artwork} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {filteredArtworks.map((artwork, _) => (
+          <ArtPieceComponent
+            key={artwork.id}
+            artwork={artwork}
+            className="inline-block w-full h-auto mb-5 break-inside-avoid align-top"
+          />
+        ))}
       </div>
       <Button
         label="Explore All Artworks"
