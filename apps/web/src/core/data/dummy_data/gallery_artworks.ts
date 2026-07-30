@@ -8,6 +8,13 @@ export const galleryArtworks: Artwork[] = [
     medium: "Oil on Canvas",
     year: 2025,
     imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216976/gallery-angels_oyd5my",
+    width: 120,
+    height: 80,
+    measurementUnit: "cm",
+    description: "A mesmerizing depiction of the cosmos, blending vibrant colors and intricate details to create a symphony of celestial beauty.",
+    price: 5000,
+    currency: "USD",
+    status: "available"
   },
   {
     id: 2,
@@ -16,6 +23,13 @@ export const galleryArtworks: Artwork[] = [
     medium: "Oil on Canvas",
     year: 2025,
     imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216975/gallery-forest_sy6fh9",
+    width: 100,
+    height: 70,
+    measurementUnit: "cm",
+    description: "An enchanting portrayal of a mystical forest, where light and shadow dance among ancient trees, evoking a sense of wonder and tranquility.",
+    price: 4500,
+    currency: "USD",
+    status: "available"
   },
   {
     id: 3,
@@ -24,6 +38,13 @@ export const galleryArtworks: Artwork[] = [
     medium: "Oil on Canvas",
     year: 2024,
     imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216980/gallery-meadow_ljq4re",
+    width: 100,
+    height: 70,
+    measurementUnit: "cm",
+    description: "A serene landscape capturing the gentle whispers of nature, with soft hues and delicate brushstrokes that evoke a sense of peace and harmony.",
+    price: 4000,
+    currency: "USD",
+    status: "available"
   },
   {
     id: 4,
@@ -32,6 +53,13 @@ export const galleryArtworks: Artwork[] = [
     medium: "Acrylic on Canvas",
     year: 2025,
     imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216966/gallery-abstract-2_qmumwh",
+    width: 80,
+    height: 60,
+    measurementUnit: "cm",
+    description: "A dynamic composition of shapes and colors, exploring the balance between chaos and order, inviting viewers to interpret their own meaning.",
+    price: 3500,
+    currency: "USD",
+    status: "available"
   },
   {
     id: 5,
@@ -40,6 +68,13 @@ export const galleryArtworks: Artwork[] = [
     medium: "Digital Print",
     year: 2023,
     imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784217061/dan-farrell-fT49QnFucQ8-unsplash_1_gtchyi",
+    width: 60,
+    height: 40,
+    measurementUnit: "cm",
+    description: "A captivating photograph capturing the reflective surfaces of urban architecture, highlighting the interplay of light and shadow in a bustling cityscape.",
+    price: 3000,
+    currency: "USD",
+    status: "available"
   },
   {
     id: 6,
@@ -48,6 +83,13 @@ export const galleryArtworks: Artwork[] = [
     medium: "Oil on Canvas",
     year: 2025,
     imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216975/gallery-portrait-2_mzt8e2",
+    width: 80,
+    height: 60,
+    measurementUnit: "cm",
+    description: "A thought-provoking portrait that captures the complexity of human emotion, with expressive brushwork and a rich color palette that draws viewers into the subject's inner world.",
+    price: 4500,
+    currency: "USD",
+    status: "available"
   },
   {
     id: 7,
@@ -56,6 +98,13 @@ export const galleryArtworks: Artwork[] = [
     medium: "Oil on Canvas",
     year: 2024,
     imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216974/gallery-face_echbj8",
+    width: 100,
+    height: 70,
+    measurementUnit: "cm",
+    description: "A vibrant exploration of human expression, capturing the nuances of emotion through bold colors and dynamic brushstrokes that convey a sense of movement and energy.",
+    price: 4000,
+    currency: "USD",
+    status: "available"
   },
   {
     id: 8,
@@ -64,5 +113,12 @@ export const galleryArtworks: Artwork[] = [
     medium: "Graphite on Paper",
     year: 2024,
     imageUrl: "https://res.cloudinary.com/ioltw4a4/image/upload/f_auto,q_60,w_600/v1784216962/gallery-sketch_qc1m0v",
+    width: 60,
+    height: 40,
+    measurementUnit: "cm",
+    description: "A detailed graphite sketch capturing the essence of a subject with precision and subtlety, showcasing the artist's skill in rendering form and texture.",
+    price: 2500,
+    currency: "USD",
+    status: "available"
   },
 ];

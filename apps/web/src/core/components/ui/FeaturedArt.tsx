@@ -5,16 +5,19 @@ interface ArtPieceComponent {
   artwork: Artwork;
   className?: string;
   isFeatured?: boolean;
+  onClick?: () => void;
 }
 
 const ArtPieceComponent = ({
   artwork,
   className,
   isFeatured,
+  onClick,
 }: ArtPieceComponent) => {
   return (
     <div
       className={`group overflow-hidden m-auto ${isFeatured ? "w-fit" : "w-full"} relative flex flex-col items-start ${className || ""}`}
+      onClick={onClick}
     >
       <img
         key={artwork.imageUrl}
