@@ -11,6 +11,7 @@ export interface Artwork {
     description?: string;
     price?: number;
     currency?: string;
+    isFeatured?: boolean;
     status: "available" | "sold" | "not for sale";
 
 }

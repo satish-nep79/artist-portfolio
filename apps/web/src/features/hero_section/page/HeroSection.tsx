@@ -11,12 +11,25 @@ import {
 } from "@phosphor-icons/react";
 import ArtPieceComponent from "@/core/components/ui/FeaturedArt";
 import Carousel from "@/core/components/ui/Carousel";
-import { artworks } from "@/core/data/dummy_data/featured_artworks";
+import { ArtworkApi } from "@/core/data/artwork_api";
+import type { Artwork } from "@/core/types/artwork";
+import { useEffect, useState } from "react";
 
 const HeroSection = () => {
-  const featuredArtworks = Array.from({ length: artworks.length }, (_, i) => (
-    <ArtPieceComponent artwork={artworks[i]} isFeatured={true} />
-  )); // Get the first 3 artworks
+  const [loading, setLoading] = useState(true);
+  const [featuredArtworks, setFeaturedArtworks] = useState<Artwork[]>([]);
+
+  useEffect(() => {
+    const fetchFeaturedArtworks = async () => {
+      setLoading(true);
+      const artworks = await ArtworkApi.getFeatured();
+      setFeaturedArtworks(artworks);
+      setLoading(false);
+    };
+
+    fetchFeaturedArtworks();
+  }, []);
+
   return (
     <Container id="hero">
       <div className="hidden md:block absolute right-0 top-0 w-200 h-200 rounded-full bg-radial-glow blur-400 p-0 m-0 mr-0 items-end justify-end"></div>
@@ -78,7 +91,16 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="z-2 flex-1 max-h-full m-auto text-center items-center justtify-center">
-          <Carousel items={featuredArtworks} autoPlay={true} />
+          {loading ? (
+            <div></div>
+          ) : (
+            <Carousel
+              items={featuredArtworks.map((artwork) => (
+                <ArtPieceComponent artwork={artwork} isFeatured={true} />
+              ))}
+              autoPlay={true}
+            />
+          )}
         </div>
       </div>
     </Container>

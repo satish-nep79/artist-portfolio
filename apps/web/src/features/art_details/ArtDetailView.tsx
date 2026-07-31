@@ -1,20 +1,28 @@
 import Button, { ButtonType } from "@/core/components/ui/Button";
 import type { Artwork } from "@/core/types/artwork";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 interface ArtDetailViewProps {
   artwork: Artwork;
 }
 
 const ArtDetailView = ({ artwork }: ArtDetailViewProps) => {
+  const navigate = useNavigate();
+
+  const handleRequestPurchase = () => {
+    navigate("/purchase-inquiry", { state: { artwork } });
+  }
+  
+
   return (
     <div className="flex flex-col lg:flex-row gap-8 md:gap-11 lg:items-stretch">
-      <div className="p-4 flex flex-col items-center justify-center">
+      <div className="p-4 flex-1 flex-col items-center justify-center">
         <div className=" w-fit group p-6 bg-glass-bg-2 border border-glass-border-2 hover:shadow-primary-glow transition-default">
           <img
             src={`${artwork.imageUrl}`}
             alt="Artist Portrait"
-            className="max-h-[40vh] lg:max-h-[70vh] object-cover group-hover:scale-105 transition-default"
+            className="max-h-[70vh] lg:max-h-[70vh] object-cover group-hover:scale-105 transition-default"
           />
         </div>
       </div>
@@ -53,7 +61,7 @@ const ArtDetailView = ({ artwork }: ArtDetailViewProps) => {
             <Button
               label="Request Purchase"
               icon={ArrowCircleRightIcon}
-              onClick={() => {}}
+              onClick={handleRequestPurchase}
               className="w-full lg:w-fit"
             />
             <Button

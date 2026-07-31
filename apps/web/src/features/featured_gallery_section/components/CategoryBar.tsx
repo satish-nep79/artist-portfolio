@@ -1,19 +1,24 @@
 import { useState, useEffect, useRef } from "react";
-
+import type { Category } from "@/core/types/category_type";
 interface CategoryBarProps {
-  categories: string[];
-  initialCategory?: string;
+  categories: Category[];
+  initialCategory?: Category | null;
   onCategoryClick: (index: number) => void;
 }
 
 const CategoryBar = ({
   categories,
-  initialCategory = categories[0],
+  initialCategory,
   onCategoryClick,
 }: CategoryBarProps) => {
-  const [activeCategory, setActiveCategory] = useState<number>(
-    initialCategory ? categories.indexOf(initialCategory) : 0,
-  );
+  const getInitialIndex = () => {
+    if (!initialCategory || categories.length === 0) return 0;
+    const index = categories.findIndex((c) => c.id === initialCategory.id);
+    return index !== -1 ? index : 0;
+  };
+
+  const [activeCategory, setActiveCategory] =
+    useState<number>(getInitialIndex());
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const tabsRef = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -32,7 +37,8 @@ const CategoryBar = ({
       const tabWidth = activeTab.offsetWidth;
       const containerWidth = container.clientWidth;
 
-      const targetScrollLeft = tabOffsetLeft - containerWidth / 2 + tabWidth / 2;
+      const targetScrollLeft =
+        tabOffsetLeft - containerWidth / 2 + tabWidth / 2;
 
       container.scrollTo({
         left: targetScrollLeft,
@@ -44,11 +50,12 @@ const CategoryBar = ({
   return (
     <div
       ref={containerRef}
-      className="relative my-8 overflow-x-auto whitespace-nowrap scrollbar-hide scrollbar-none">
+      className="relative my-8 overflow-x-auto whitespace-nowrap scrollbar-hide scrollbar-none"
+    >
       <div className="min-w-full w-fit  flex items-center gap-5 relative  border-b-4 border-glass-border">
         {categories.map((category, index) => (
           <div
-            key={category}
+            key={category.id}
             ref={(el: HTMLDivElement | null) => {
               tabsRef.current[index] = el;
             }}
@@ -62,7 +69,7 @@ const CategoryBar = ({
                 : "text-muted"
             }`}
           >
-            {category}
+            {category.title}
           </div>
         ))}
       </div>

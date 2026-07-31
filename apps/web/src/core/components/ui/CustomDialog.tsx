@@ -51,10 +51,10 @@ const CustomDialog = ({
         }
       }}
     >
-      <div className="px-6 py-6 bg-bg-surface flex flex-col max-h-[90vh] max-w-[90vw] ">
-        <div className="min-h-8 relative flex flex-row justify-center items-start px-12 text-center ">
+      <div className=" px-1 md:px-3 lg:px-6 py-1 md:py-3 lg:py-6 bg-bg-surface flex flex-col max-h-[90vh] max-w-[90vw] ">
+        <div className="min-h-8  relative flex flex-row justify-center items-start px-12 text-center ">
           {title && <h4 className="font-display font-semibold">{title}</h4>}
-          <div autoFocus tabIndex={-1} className="p-1 absolute -right-1 cursor-pointer focus:outline-none ">
+          <div autoFocus tabIndex={-1} className="p-1 absolute  right-1 lg:-right-1 cursor-pointer focus:outline-none ">
             <XCircleIcon
               size={32}
               onClick={onClose}
