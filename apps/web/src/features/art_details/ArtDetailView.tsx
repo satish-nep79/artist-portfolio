@@ -2,6 +2,7 @@ import Button, { ButtonType } from "@/core/components/ui/Button";
 import type { Artwork } from "@/core/types/artwork";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/core/router/routes";
 
 interface ArtDetailViewProps {
   artwork: Artwork;
@@ -11,9 +12,8 @@ const ArtDetailView = ({ artwork }: ArtDetailViewProps) => {
   const navigate = useNavigate();
 
   const handleRequestPurchase = () => {
-    navigate("/purchase-inquiry", { state: { artwork } });
-  }
-  
+    navigate(ROUTES.PURCHASE_INQUIRY(artwork.id));
+  };
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 md:gap-11 lg:items-stretch">
@@ -53,9 +53,7 @@ const ArtDetailView = ({ artwork }: ArtDetailViewProps) => {
         </div>
         <div className="h-4" />
         <div>
-          <h3 className="font-bold ">
-            ${artwork.price?.toFixed(2)}
-          </h3>
+          <h3 className="font-bold ">${artwork.price?.toFixed(2)}</h3>
           <div className="h-12" />
           <div className="flex flex-col lg:flex-row w-full gap-4 items-start lg:items-center">
             <Button

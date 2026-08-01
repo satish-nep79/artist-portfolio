@@ -16,7 +16,7 @@ const TextField = ({
   placeholder,
 }: TextFieldProps) => {
   return (
-    <div className="relative mt-6">
+    <div className="relative w-full">
       <input
         id={id}
         name={name}
@@ -24,7 +24,7 @@ const TextField = ({
         required={isRequired}
         placeholder={placeholder || " "}
         className="peer w-full p-3 pt-5 pl-0 border-b border-glass-border text-text-primary bg-transparent placeholder:text-transparent
-            focus:outline-none focus:border-primary transition-all duration-200"
+            focus:outline-none focus:border-primary focus:placeholder:text-text-secondary transition-all duration-200"
       />
       <label
         htmlFor={id}

@@ -13,7 +13,7 @@ interface DropdownProps {
 
 const Dropdown = ({ id, name, label, options, isRequired }: DropdownProps) => {
   return (
-    <div className="relative mt-6">
+    <div className="relative">
       <select
         id={id}
         name={name}

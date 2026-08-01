@@ -1,4 +1,4 @@
-import { createBrowserRouter, Routes } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "@/core/router/routes";
 
 import AppLayout from "@/core/layouts/AppLayout";
@@ -19,19 +19,19 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: ROUTES.GALLERYPage,
+        path: ROUTES.GALLERYPage(),
         element: <GalleryPage />,
       },
       {
-        path: ROUTES.PROGRAMSPage,
+        path: ROUTES.PROGRAMSPage(),
         element: <ProgramsPage />,
       },
       {
-        path: ROUTES.PURCHASE_INQUIRY,
+        path: ROUTES.PURCHASE_INQUIRY(),
         element: <PurchaseInquiryScreen />,
       },
       {
-        path: ROUTES.NOT_FOUND,
+        path: ROUTES.NOT_FOUND(),
         element: <NotFoundPage />,
       },
     ],

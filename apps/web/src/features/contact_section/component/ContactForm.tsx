@@ -28,7 +28,7 @@ const ContactForm = () => {
       </p>
       <div className="h-6" />
       <form
-        className="flex flex-col gap-4"
+        className="flex flex-col gap-4 flex-1 justify-between"
         onSubmit={(e) => e.preventDefault()}
         action=""
         method="post"
@@ -66,7 +66,6 @@ const ContactForm = () => {
           I personally review every inquiry and usually reply within 2–3
           business days.
         </p>
-        <div className="h-12" />
         <Button
           label="Send Message"
           buttonType={ButtonType.PRIMARY}
