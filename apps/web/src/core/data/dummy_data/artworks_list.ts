@@ -3,6 +3,7 @@ import type { Artwork } from "@/core/types/artwork";
 export const artworks: Artwork[] = [
     {
         id: 1,
+        slug: "the-creation-of-adam",
         title: "The Creation of Adam",
         category: "classical-historic",
         medium: "Fresco / Oil on Canvas",
@@ -19,6 +20,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 2,
+        slug: "emerald-canopy",
         title: "Emerald Canopy",
         category: "landscape",
         medium: "Oil on Canvas",
@@ -34,6 +36,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 3,
+        slug: "reader-in-the-meadow",
         title: "Reader in the Meadow",
         category: "figurative-landscape",
         medium: "Oil on Canvas",
@@ -49,6 +52,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 4,
+        slug: "primary-motion",
         title: "Primary Motion",
         category: "abstract",
         medium: "Acrylic on Canvas",
@@ -64,6 +68,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 5,
+        slug: "eyes-on-the-street",
         title: "Eyes on the Street",
         category: "urban-street-art",
         medium: "Mixed Media & Spray Paint",
@@ -79,6 +84,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 6,
+        slug: "portrait-of-auburn",
         title: "Portrait of Auburn",
         category: "portrait",
         medium: "Oil on Canvas",
@@ -94,6 +100,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 7,
+        slug: "patterned-gaze",
         title: "Patterned Gaze",
         category: "illustration-fine-art",
         medium: "Mixed Media on Canvas",
@@ -109,6 +116,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 8,
+        slug: "monochrome-expression",
         title: "Monochrome Expression",
         category: "drawing-sketch",
         medium: "Charcoal & Graphite on Paper",
@@ -124,6 +132,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 9,
+        slug: "hands-of-creation-study",
         title: "Hands of Creation Study",
         category: "abstract-expressionism",
         medium: "Ink & Acrylic on Canvas",
@@ -140,6 +149,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 10,
+        slug: "mist-over-the-ridge",
         title: "Mist over the Ridge",
         category: "landscape",
         medium: "Oil on Linen",
@@ -156,6 +166,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 11,
+        slug: "pop-kaleidoscope",
         title: "Pop Kaleidoscope",
         category: "pop-street-art",
         medium: "Mixed Media & Collage",
@@ -172,6 +183,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 12,
+        slug: "neon-horizon",
         title: "Neon Horizon",
         category: "digital-abstract",
         medium: "Digital Render / HD Print",
@@ -188,6 +200,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 13,
+        slug: "dutch-baroque-still-life",
         title: "Dutch Baroque Still Life",
         category: "classical-historic",
         medium: "Oil on Panel",
@@ -204,6 +217,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 14,
+        slug: "vibrant-impasto",
         title: "Vibrant Impasto",
         category: "abstract",
         medium: "Acrylic & Oil on Canvas",
@@ -220,6 +234,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 15,
+        slug: "cottage-by-the-river",
         title: "Cottage by the River",
         category: "classical-historic",
         medium: "Oil on Canvas",
@@ -236,6 +251,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 16,
+        slug: "pastoral-homestead",
         title: "Pastoral Homestead",
         category: "classical-historic",
         medium: "Oil on Canvas",
@@ -252,6 +268,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 17,
+        slug: "mist-over-alpine-valleys",
         title: "Mist over Alpine Valleys",
         category: "landscape",
         medium: "Oil on Canvas",
@@ -268,6 +285,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 18,
+        slug: "fluid-geometry",
         title: "Fluid Geometry",
         category: "digital-modern",
         medium: "Digital Fine Art Print",
@@ -284,6 +302,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 19,
+        slug: "highland-valley",
         title: "Highland Valley",
         category: "landscape",
         medium: "Oil on Canvas",
@@ -300,6 +319,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 20,
+        slug: "solitude-at-dusk",
         title: "Solitude at Dusk",
         category: "digital-anime",
         medium: "Digital Illustration",
@@ -316,6 +336,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 21,
+        slug: "golden-hour-ridge",
         title: "Golden Hour Ridge",
         category: "landscape",
         medium: "Oil on Canvas",
@@ -332,6 +353,7 @@ export const artworks: Artwork[] = [
     },
     {
         id: 22,
+        slug: "watercolor-bloom",
         title: "Watercolor Bloom",
         category: "abstract",
         medium: "Watercolor & Ink on Paper",

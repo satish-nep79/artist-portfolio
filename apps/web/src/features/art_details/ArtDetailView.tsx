@@ -12,7 +12,11 @@ const ArtDetailView = ({ artwork }: ArtDetailViewProps) => {
   const navigate = useNavigate();
 
   const handleRequestPurchase = () => {
-    navigate(ROUTES.PURCHASE_INQUIRY(artwork.id));
+    navigate(ROUTES.PURCHASE_INQUIRY(artwork.slug));
+  };
+
+  const handleRequestCustomArtwork = () => {
+    navigate(ROUTES.CUSTOM_ARTWORK_INQUIRY(artwork.slug));
   };
 
   return (
@@ -63,9 +67,9 @@ const ArtDetailView = ({ artwork }: ArtDetailViewProps) => {
               className="w-full lg:w-fit"
             />
             <Button
-              label="Commission Similar"
+              label="Custom Artwork"
               buttonType={ButtonType.SECONDARY}
-              onClick={() => {}}
+              onClick={handleRequestCustomArtwork}
               className="w-full lg:w-fit"
             />
           </div>

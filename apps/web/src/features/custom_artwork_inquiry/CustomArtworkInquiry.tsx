@@ -10,16 +10,25 @@ import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 
 import TextArea from "@/core/components/ui/TextArea";
 import Button, { ButtonType } from "@/core/components/ui/Button";
+import CustomDateField from "@/core/components/ui/CustomDateField";
 
 type RouteParams = {
   artId: string;
 };
 
-const PurchaseInquiryScreen = () => {
+const CustomArtworkInquiry = () => {
   const [loading, setLoading] = useState(true);
   const [artwork, setArtwork] = useState<Artwork>();
 
   const { artId } = useParams<RouteParams>();
+
+  // 1. Min Date: Today + 14 days
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 14);
+
+  // 2. Max Date: Today + 3 months
+  const maxDate = new Date();
+  maxDate.setMonth(maxDate.getMonth() + 3);
 
   useEffect(() => {
     const fetchArtwork = async () => {
@@ -68,11 +77,13 @@ const PurchaseInquiryScreen = () => {
         </div>
       </div>
       <div className="flex flex-1 w-full flex-col gap-2">
-        <p className="text-primary font-bold">INTERESTED</p>
-        <h3>Purchase Inquiry</h3>
+        <p className="text-primary font-bold">MAKE IT YOURS</p>
+        <h3>Custom Artwork Inquiry</h3>
         <p className="text-text-body">
-          Complete the form below to inquire about this artwork. <br />
-          The artist will get back to you with availability and next steps.
+          Tell us about your vision and{" "}
+          <span className="text-primary">
+            we'll create something unique together.
+          </span>
         </p>
         <div className="h-4" />
         <form
@@ -116,12 +127,49 @@ const PurchaseInquiryScreen = () => {
               placeholder="+977 9812345678"
             />
           </div>
+          <div className="flex flex-row w-full gap-6">
+            <CustomDateField
+              id="completionDate"
+              name="completionDate"
+              label="Preferred Completion Date"
+              placeholder="When do you need the artwork?"
+              isRequired={true}
+              minDate={minDate}
+              maxDate={maxDate}
+            />
+            <TextField
+              id="budget"
+              name="budget"
+              type="currency"
+              label="Budget"
+              isRequired={true}
+              placeholder="What is your budget?"
+            />
+          </div>
+          <div className="flex flex-row w-full gap-6">
+            <TextField
+              id="height"
+              name="height"
+              type="number"
+              label="Height (cm)"
+              placeholder="Height of the artwork"
+              isRequired={true}
+            />
+            <TextField
+              id="width"
+              name="width"
+              type="number"
+              label="Width (cm)"
+              placeholder="Width of the artwork"
+              isRequired={true}
+            />
+          </div>
           <div>
             <TextArea
-              id="message"
-              name="message"
-              label="Message"
-              placeholder="Provide Addtional Details or Questions"
+              id="description"
+              name="description"
+              label="Description"
+              placeholder="Describe your idea, preferred style, colors, size, and any other details that will help the artist understand your vision."
             />
             <p className="text-text-body text-caption mt-4">
               I personally review every inquiry and usually reply within 2–3
@@ -140,4 +188,4 @@ const PurchaseInquiryScreen = () => {
   );
 };
 
-export default PurchaseInquiryScreen;
+export default CustomArtworkInquiry;

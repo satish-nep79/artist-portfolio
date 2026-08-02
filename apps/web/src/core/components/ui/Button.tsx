@@ -13,6 +13,7 @@ interface ButtonProps {
   onClick: () => void;
   icon?: Icon;
   disabled?: boolean;
+  autofocus?: boolean;
   className?: string;
   buttonType?: ButtonType;
 }
@@ -24,6 +25,7 @@ const Button = ({
   disabled = false,
   className = "",
   buttonType,
+  autofocus = false,
 }: ButtonProps) => {
   let base: string =
     "font-bold  rounded-full transition-all duration-300 ease-in-out ";
@@ -58,6 +60,7 @@ const Button = ({
       className={`w-fit transition-all duration-300 ease-in-out px-4 py-2 md:py-3.5 md:px-6 text-[16px]  flex flex-row justify-center items-center gap-1.5 ${base} ${hoverEffect} ${className}`}
       onClick={onClick}
       disabled={disabled}
+      autoFocus={autofocus}
     >
       {label}
       {Icon ? (

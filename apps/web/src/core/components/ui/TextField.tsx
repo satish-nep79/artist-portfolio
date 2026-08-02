@@ -5,6 +5,11 @@ interface TextFieldProps {
   label: string;
   isRequired?: boolean;
   placeholder?: string;
+  min?: string;
+  max?: string;
+  error?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }
 
 const TextField = ({
@@ -14,6 +19,13 @@ const TextField = ({
   label,
   isRequired,
   placeholder,
+  min,
+  max,
+  error,
+  onChange,
+  value,
+
+  
 }: TextFieldProps) => {
   return (
     <div className="relative w-full">
@@ -21,10 +33,17 @@ const TextField = ({
         id={id}
         name={name}
         type={type}
+        value={value}
+        onChange={onChange}
         required={isRequired}
         placeholder={placeholder || " "}
+        min={type === "date" ? min : undefined}
+        max={type === "date" ? max : undefined}
+        aria-invalid={!!error}
+        aria-describedby={error ? `${id}-error` : undefined}
         className="peer w-full p-3 pt-5 pl-0 border-b border-glass-border text-text-primary bg-transparent placeholder:text-transparent
-            focus:outline-none focus:border-primary focus:placeholder:text-text-secondary transition-all duration-200"
+            focus:outline-none focus:border-primary focus:placeholder:text-text-secondary transition-all duration-200 
+            "
       />
       <label
         htmlFor={id}

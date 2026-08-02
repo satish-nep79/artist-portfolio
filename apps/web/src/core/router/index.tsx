@@ -7,6 +7,7 @@ import GalleryPage from "@/features/gallery_page/GalleryPage";
 import ProgramsPage from "@/features/ProgramsPage";
 import NotFoundPage from "@/features/NotFoundPage";
 import PurchaseInquiryScreen from "@/features/purchase_inquiry/PurchaseInquiryScreen";
+import CustomArtworkInquiry from "@/features/custom_artwork_inquiry/CustomArtworkInquiry";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.PURCHASE_INQUIRY(),
         element: <PurchaseInquiryScreen />,
+      },
+      {
+        path: ROUTES.CUSTOM_ARTWORK_INQUIRY(),
+        element: <CustomArtworkInquiry />,
       },
       {
         path: ROUTES.NOT_FOUND(),

@@ -1,5 +1,6 @@
 export interface Artwork {
     id: number;
+    slug: string;
     title: string;
     category: string;
     medium: string;

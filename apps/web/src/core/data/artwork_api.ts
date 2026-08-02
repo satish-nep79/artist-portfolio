@@ -30,6 +30,11 @@ export const ArtworkApi = {
         return artworks.find((artwork) => artwork.id === id);
     },
 
+    async getBySlug(slug: string): Promise<Artwork | undefined> {
+        await delay(API_DELAY);
+        return artworks.find((artwork) => artwork.slug === slug);
+    },
+
     async getByCategory(category: string): Promise<Artwork[]> {
         await delay(API_DELAY);
 

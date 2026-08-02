@@ -8,7 +8,8 @@ export const ROUTES = {
     CONTACT: () => "/#contact",
     GALLERYPage: () => "/gallery",
     PROGRAMSPage: () => "/programs",
-    PURCHASE_INQUIRY: (artId: string | number = ":artId") => `/purchase-inquiry/${artId}`,
+    PURCHASE_INQUIRY: (artId: string = ":artId") => `/purchase-inquiry/${artId}`,
+    CUSTOM_ARTWORK_INQUIRY: (artId: string = ":artId") => `/custom-artwork-inquiry/${artId}`,
     NOT_FOUND: () => "*",
 } as const;
 
