@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
+import { purchaseInquirySchema } from "@/core/utils/custom_validator";
+import type { PurchaseInquiryValues } from "@/core/utils/custom_validator";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import Container from "@/core/components/ui/Container";
 import TextField from "@/core/components/ui/TextField";
@@ -16,7 +20,26 @@ type RouteParams = {
 };
 
 const PurchaseInquiryScreen = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PurchaseInquiryValues>({
+    resolver: zodResolver(purchaseInquirySchema),
+  });
+
+  const onSubmit = (data: PurchaseInquiryValues) => {
+    setSubmittingForm(true);
+    // Simulate form submission delay
+    setTimeout(() => {
+      console.log("Form submitted:", data);
+      setSubmittingForm(false);
+      alert("Your inquiry has been submitted successfully!");
+    }, 2000);
+  };
+
   const [loading, setLoading] = useState(true);
+  const [submittingForm, setSubmittingForm] = useState(false);
   const [artwork, setArtwork] = useState<Artwork>();
 
   const screenRef = useRef<HTMLDivElement | null>(null);
@@ -88,14 +111,17 @@ const PurchaseInquiryScreen = () => {
               className="flex flex-col gap-4 w-full h-full justify-between"
               action="#"
               method="POST"
+              onSubmit={handleSubmit(onSubmit)}
             >
               <div className="flex flex-row w-full gap-6">
                 <TextField
-                  id="name"
-                  name="name"
+                  id="fullName"
+                  name="fullName"
                   type="text"
                   label="Full Name"
                   placeholder="Your Full Name"
+                  validator={register("fullName")}
+                  error={errors.fullName?.message}
                   isRequired={true}
                 />
                 <TextField
@@ -104,6 +130,8 @@ const PurchaseInquiryScreen = () => {
                   type="email"
                   label="Email Address"
                   placeholder="you@example.com"
+                  validator={register("email")}
+                  error={errors.email?.message}
                   isRequired={true}
                 />
               </div>
@@ -114,6 +142,8 @@ const PurchaseInquiryScreen = () => {
                   type="text"
                   label="Country"
                   placeholder="Country of Residence"
+                  validator={register("country")}
+                  error={errors.country?.message}
                   isRequired={true}
                 />
                 <TextField
@@ -121,8 +151,10 @@ const PurchaseInquiryScreen = () => {
                   name="phone"
                   type="tel"
                   label="Phone Number"
-                  isRequired={true}
                   placeholder="+977 9812345678"
+                  validator={register("phone")}
+                  error={errors.phone?.message}
+                  isRequired={true}
                 />
               </div>
               <div>
@@ -131,6 +163,10 @@ const PurchaseInquiryScreen = () => {
                   name="message"
                   label="Message"
                   placeholder="Provide Addtional Details or Questions"
+                  min={10}
+                  max={500}
+                  validator={register("message")}
+                  error={errors.message?.message}
                 />
                 <p className="text-text-body text-caption mt-4">
                   I personally review every inquiry and usually reply within 2–3
@@ -140,8 +176,9 @@ const PurchaseInquiryScreen = () => {
               <Button
                 label="Send Message"
                 buttonType={ButtonType.PRIMARY}
-                onClick={() => {}}
                 icon={ArrowCircleRightIcon}
+                type="submit"
+                isLoading={submittingForm}
               />
             </form>
           </div>

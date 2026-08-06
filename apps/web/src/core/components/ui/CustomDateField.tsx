@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import TextField from "@/core/components/ui/TextField";
+import type { UseFormRegisterReturn } from "react-hook-form";
 
 const toInputDate = (date: Date): string => {
   const year = date.getFullYear();
@@ -16,16 +17,24 @@ interface CustomDateFieldProps {
   label?: string;
   placeholder?: string;
   isRequired?: boolean;
+  error?: string;
+  onChange?: (date: Date) => void;
+  value?: Date;
+  validator?: UseFormRegisterReturn; // Replace with the appropriate type for your validator
 }
 
 const CustomDateField = ({
-  minDate,
-  maxDate,
   id,
   name,
   label,
   placeholder,
   isRequired,
+  minDate,
+  maxDate,
+  error,
+  onChange,
+  value,
+  validator,
 }: CustomDateFieldProps) => {
   const today = useMemo(() => new Date(), []);
 
@@ -42,6 +51,13 @@ const CustomDateField = ({
       isRequired={isRequired}
       min={computedMin?.toISOString().split("T")[0]}
       max={computedMax?.toISOString().split("T")[0]}
+      error={error}
+      onChange={(e) => {
+        const selectedDate = new Date(e.target.value);
+        onChange?.(selectedDate);
+      }}
+      value={value ? toInputDate(value) : ""}
+      validator={validator}
     />
   );
 };

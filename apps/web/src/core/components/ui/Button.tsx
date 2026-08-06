@@ -1,4 +1,5 @@
 import type { Icon } from "@phosphor-icons/react/dist/lib/index";
+import Loader from "../layout/Loader";
 
 export const ButtonType = {
   PRIMARY: 1,
@@ -10,12 +11,14 @@ type ButtonType = (typeof ButtonType)[keyof typeof ButtonType];
 
 interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   icon?: Icon;
   disabled?: boolean;
   autofocus?: boolean;
   className?: string;
   buttonType?: ButtonType;
+  type?: "button" | "submit" | "reset";
+  isLoading?: boolean;
 }
 
 const Button = ({
@@ -26,6 +29,8 @@ const Button = ({
   className = "",
   buttonType,
   autofocus = false,
+  type = "button",
+  isLoading = false,
 }: ButtonProps) => {
   let base: string =
     "font-bold  rounded-full transition-all duration-300 ease-in-out ";
@@ -56,15 +61,20 @@ const Button = ({
   }
   return (
     <button
+      type={type}
       data-cursor={disabled ? "" : "hover"}
-      className={`w-fit transition-all duration-300 ease-in-out px-4 py-2 md:py-3.5 md:px-6 text-[16px]  flex flex-row justify-center items-center gap-1.5 ${base} ${hoverEffect} ${className}`}
+      className={`w-fit transition-all duration-300 ease-in-out px-4 py-2 md:py-3.5 md:px-6 text-[16px]  flex flex-row justify-center items-center gap-1.5 ${base} ${isLoading ? "" : hoverEffect} ${className}`}
       onClick={onClick}
       disabled={disabled}
       autoFocus={autofocus}
     >
       {label}
-      {Icon ? (
-        <div className="h-5 aspect-square flex items-center justify-center">
+      {isLoading ? (
+        <div className="h-5 aspect-square flex items-center justify-center shrink-0">
+          <Loader customSize={16} />
+        </div>
+      ) : Icon ? (
+        <div className="h-5 aspect-square flex items-center justify-center shrink-0">
           <Icon height="100%" width="100%" />
         </div>
       ) : null}
