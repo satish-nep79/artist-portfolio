@@ -1,5 +1,7 @@
 import Container from "@/core/components/ui/Container";
 import Button, { ButtonType } from "@/core/components/ui/Button";
+import CustomDialog from "@/core/components/ui/CustomDialog";
+import ArtDetailView from "@/features/art_details/ArtDetailView";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import SocialLink from "@/core/components/ui/SocialLink";
 import {
@@ -17,6 +19,8 @@ import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const [loading, setLoading] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
   const [featuredArtworks, setFeaturedArtworks] = useState<Artwork[]>([]);
 
   useEffect(() => {
@@ -96,13 +100,31 @@ const HeroSection = () => {
           ) : (
             <Carousel
               items={featuredArtworks.map((artwork) => (
-                <ArtPieceComponent artwork={artwork} isFeatured={true} />
+                <ArtPieceComponent
+                  key={artwork.id}
+                  artwork={artwork}
+                  isFeatured={true}
+                  onClick={() => {
+                    setSelectedArtwork(artwork);
+                    setIsDialogOpen(true);
+                  }}
+                />
               ))}
               autoPlay={true}
             />
           )}
         </div>
       </div>
+      <CustomDialog
+        isOpen={isDialogOpen}
+        onClose={() => {
+          console.log("Dialog closed");
+          setIsDialogOpen(false);
+          setSelectedArtwork(null);
+        }}
+      >
+        {selectedArtwork && <ArtDetailView artwork={selectedArtwork} />}
+      </CustomDialog>
     </Container>
   );
 };

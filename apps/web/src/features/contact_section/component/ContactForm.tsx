@@ -3,7 +3,13 @@ import TextArea from "@/core/components/ui/TextArea";
 import Dropdown from "@/core/components/ui/DropDown";
 import type { DropdownOption } from "@/core/components/ui/DropDown";
 import Button, { ButtonType } from "@/core/components/ui/Button";
-import {ArrowCircleRightIcon} from "@phosphor-icons/react";
+import { ArrowCircleRightIcon } from "@phosphor-icons/react";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod/src/index.js";
+import type { GeneralInquiryValues } from "@/core/utils/custom_validator";
+import { generalInquirySchema } from "@/core/utils/custom_validator";
+import { useState } from "react";
 
 const purposeOptions: DropdownOption[] = [
   { value: "creative-collaboration", label: "Creative Collaboration" },
@@ -16,6 +22,26 @@ const purposeOptions: DropdownOption[] = [
 ];
 
 const ContactForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<GeneralInquiryValues>({
+    resolver: zodResolver(generalInquirySchema),
+  });
+
+  const onSubmit = (data: GeneralInquiryValues) => {
+    setSubmittingForm(true);
+    // Simulate form submission delay
+    setTimeout(() => {
+      console.log("Form submitted:", data);
+      setSubmittingForm(false);
+      alert("Your inquiry has been submitted successfully!");
+    }, 2000);
+  };
+
+  const [submittingForm, setSubmittingForm] = useState(false);
+
   return (
     <div className="h-full w-full flex flex-col justify-between">
       <p className="text-primary font-bold">INQUIRE</p>
@@ -29,7 +55,7 @@ const ContactForm = () => {
       <div className="h-6" />
       <form
         className="flex flex-col gap-4 flex-1 justify-between"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmit(onSubmit)}
         action=""
         method="post"
       >
@@ -40,6 +66,8 @@ const ContactForm = () => {
             type="text"
             label="Full Name"
             isRequired={true}
+            validator={register("fullName")}
+            error={errors.fullName?.message}
           />
           <TextField
             id="email"
@@ -47,20 +75,26 @@ const ContactForm = () => {
             type="email"
             label="Email Address"
             isRequired={true}
+            validator={register("email")}
+            error={errors.email?.message}
           />
         </div>
         <Dropdown
           id="purpose"
           name="purpose"
           label="Purpose of Inquiry"
-          options={purposeOptions}
           isRequired={true}
+          options={purposeOptions}
+          validator={register("purpose")}
+          error={errors.purpose?.message}
         />
         <TextArea
           id="message"
           name="message"
           label="Message"
           placeholder="Tell me a little about your idea..."
+          validator={register("message")}
+          error={errors.message?.message}
         />
         <p className="text-text-body text-caption">
           I personally review every inquiry and usually reply within 2–3
@@ -69,7 +103,8 @@ const ContactForm = () => {
         <Button
           label="Send Message"
           buttonType={ButtonType.PRIMARY}
-          onClick={() => {}}
+          type="submit"
+          isLoading={submittingForm}
           icon={ArrowCircleRightIcon}
         />
       </form>

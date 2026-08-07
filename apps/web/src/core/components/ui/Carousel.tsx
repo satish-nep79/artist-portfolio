@@ -77,7 +77,6 @@ const Carousel = ({
         handleNextClick();
         return;
       }
-      console.log("Duration:", autoScrollDurationInSeconds.current);
       updateTimer(autoScrollDurationInSeconds.current - 1);
     }, 1000);
     return () => clearInterval(timer);

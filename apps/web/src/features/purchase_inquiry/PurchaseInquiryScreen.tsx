@@ -14,6 +14,7 @@ import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 
 import TextArea from "@/core/components/ui/TextArea";
 import Button, { ButtonType } from "@/core/components/ui/Button";
+import Loader from "@/core/components/ui/Loader";
 
 type RouteParams = {
   artId: string;
@@ -74,8 +75,8 @@ const PurchaseInquiryScreen = () => {
       className="pb-7.5 md:pb-15  pt-28 md:pt-44 min-h-screen"
     >
       {loading ? (
-        <div className="bg-amber-50 min-h-[70vh] ">
-          <h3 className="text-text-body text-caption">Loading artwork...</h3>
+        <div className="flex flex-col items-center justify-center h-[60vh]">
+          <Loader size="large" />
         </div>
       ) : (
         <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">

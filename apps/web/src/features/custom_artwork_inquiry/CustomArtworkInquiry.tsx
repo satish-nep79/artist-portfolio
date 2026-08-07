@@ -11,13 +11,37 @@ import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import TextArea from "@/core/components/ui/TextArea";
 import Button, { ButtonType } from "@/core/components/ui/Button";
 import CustomDateField from "@/core/components/ui/CustomDateField";
+import Loader from "@/core/components/ui/Loader";
 
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod/src/index.js";
+import type { CustomArtworkInquiryValues } from "@/core/utils/custom_validator";
+import { customArtworkInquirySchema } from "@/core/utils/custom_validator";
 type RouteParams = {
   artId: string;
 };
 
 const CustomArtworkInquiry = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CustomArtworkInquiryValues>({
+    resolver: zodResolver(customArtworkInquirySchema),
+  });
+
+  const onSubmit = (data: CustomArtworkInquiryValues) => {
+    setSubmittingForm(true);
+    // Simulate form submission delay
+    setTimeout(() => {
+      console.log("Form submitted:", data);
+      setSubmittingForm(false);
+      alert("Your inquiry has been submitted successfully!");
+    }, 2000);
+  };
+
   const [loading, setLoading] = useState(true);
+  const [submittingForm, setSubmittingForm] = useState(false);
   const [artwork, setArtwork] = useState<Artwork>();
 
   const { artId } = useParams<RouteParams>();
@@ -53,7 +77,9 @@ const CustomArtworkInquiry = () => {
 
   return loading ? (
     <Container className="flex flex-col items-center justify-center min-h-screen">
-      <h3>Loading...</h3>
+      <div className="flex flex-col items-center justify-center h-[60vh]">
+        <Loader size="large" />
+      </div>
     </Container>
   ) : (
     <Container className="pb-7.5 md:pb-15  pt-28 md:pt-44 min-h-screen flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">
@@ -90,6 +116,7 @@ const CustomArtworkInquiry = () => {
           className="flex flex-col gap-4 w-full h-full justify-between"
           action="#"
           method="POST"
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-row w-full gap-6">
             <TextField
@@ -99,6 +126,8 @@ const CustomArtworkInquiry = () => {
               label="Full Name"
               placeholder="Your Full Name"
               isRequired={true}
+              validator={register("fullName")}
+              error={errors.fullName?.message}
             />
             <TextField
               id="email"
@@ -107,6 +136,8 @@ const CustomArtworkInquiry = () => {
               label="Email Address"
               placeholder="you@example.com"
               isRequired={true}
+              validator={register("email")}
+              error={errors.email?.message}
             />
           </div>
           <div className="flex flex-row w-full gap-6">
@@ -117,6 +148,8 @@ const CustomArtworkInquiry = () => {
               label="Country"
               placeholder="Country of Residence"
               isRequired={true}
+              validator={register("country")}
+              error={errors.country?.message}
             />
             <TextField
               id="phone"
@@ -125,6 +158,8 @@ const CustomArtworkInquiry = () => {
               label="Phone Number"
               isRequired={true}
               placeholder="+977 9812345678"
+              validator={register("phone")}
+              error={errors.phone?.message}
             />
           </div>
           <div className="flex flex-row w-full gap-6">
@@ -136,6 +171,8 @@ const CustomArtworkInquiry = () => {
               isRequired={true}
               minDate={minDate}
               maxDate={maxDate}
+              validator={register("completionDate")}
+              error={errors.completionDate?.message}
             />
             <TextField
               id="budget"
@@ -144,6 +181,8 @@ const CustomArtworkInquiry = () => {
               label="Budget"
               isRequired={true}
               placeholder="What is your budget?"
+              validator={register("budget", {setValueAs: (value) => (value === "" ? undefined : Number(value))})}
+              error={errors.budget?.message}
             />
           </div>
           <div className="flex flex-row w-full gap-6">
@@ -154,6 +193,8 @@ const CustomArtworkInquiry = () => {
               label="Height (cm)"
               placeholder="Height of the artwork"
               isRequired={true}
+              validator={register("height", {setValueAs: (value) => (value === "" ? undefined : Number(value))})}
+              error={errors.height?.message}
             />
             <TextField
               id="width"
@@ -162,6 +203,8 @@ const CustomArtworkInquiry = () => {
               label="Width (cm)"
               placeholder="Width of the artwork"
               isRequired={true}
+              validator={register("width", {setValueAs: (value) => (value === "" ? undefined : Number(value))})}
+              error={errors.width?.message}
             />
           </div>
           <div>
@@ -170,6 +213,8 @@ const CustomArtworkInquiry = () => {
               name="description"
               label="Description"
               placeholder="Describe your idea, preferred style, colors, size, and any other details that will help the artist understand your vision."
+              validator={register("description")}
+              error={errors.description?.message}
             />
             <p className="text-text-body text-caption mt-4">
               I personally review every inquiry and usually reply within 2–3
@@ -179,7 +224,8 @@ const CustomArtworkInquiry = () => {
           <Button
             label="Send Message"
             buttonType={ButtonType.PRIMARY}
-            onClick={() => {}}
+            type="submit"
+            isLoading={submittingForm}
             icon={ArrowCircleRightIcon}
           />
         </form>

@@ -1,6 +1,20 @@
 import { z } from "zod";
 
-const emptyMsg = (title: string) => `Please Enter ${title}`;
+// ── Centralized Message Helpers ─────────────────────────────
+const messages = {
+  empty: (title: string) => `Please enter ${title.toLowerCase()}`,
+  required: (title: string) => `Please Enter ${title}`,
+  select: (title: string) => `Please select a ${title}`,
+  minChar: (title: string, min: number) =>
+    `${title} must be at least ${min} characters`,
+  invalidFormat: (title: string) => `Enter a valid ${title}`,
+  minVal: (title: string, min: number) => `${title} must be at least ${min}`,
+  maxVal: (title: string, max: number) => `${title} must be at most ${max}`,
+  phoneFormat: (title: string) =>
+    `${title} must include a country code, digits only (e.g. +358401234567)`,
+  lettersOnly: (title: string) =>
+    `${title} must contain only letters and spaces`,
+};
 
 export const customValidator = {
   field: ({
@@ -15,12 +29,13 @@ export const customValidator = {
     const base = z
       .string()
       .trim()
-      .min(1, emptyMsg(title))
-      .min(min, `${title} must be at least ${min} characters`);
+      .min(1, messages.empty(title))
+      .min(min, messages.minChar(title, min));
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please Enter ${title}`);
+    return base.min(1, messages.required(title));
   },
 
   name: ({
@@ -35,13 +50,14 @@ export const customValidator = {
     const base = z
       .string()
       .trim()
-      .min(1, emptyMsg(title))
-      .min(min, `${title} must be at least ${min} characters`)
-      .regex(/^[a-zA-Z\s]+$/, `${title} must contain only letters and spaces`);
+      .min(1, messages.empty(title))
+      .min(min, messages.minChar(title, min))
+      .regex(/^[a-zA-Z\s]+$/, messages.lettersOnly(title));
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please Enter ${title}`);
+    return base.min(1, messages.required(title));
   },
 
   fullName: ({
@@ -56,15 +72,17 @@ export const customValidator = {
     const base = z
       .string()
       .trim()
-      .min(min, `${title} must be at least ${min} characters`)
+      .min(1, messages.empty(title))
+      .min(min, messages.minChar(title, min))
       .regex(
         /^\p{L}+(?:['-]\p{L}+)*(?:\s+\p{L}+(?:['-]\p{L}+)*)+$/u,
-        `Enter a valid ${title}`,
+        messages.invalidFormat(title),
       );
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please Enter ${title}`);
+    return base.min(1, messages.required(title));
   },
 
   email: ({
@@ -77,17 +95,16 @@ export const customValidator = {
     const base = z
       .string()
       .trim()
-      .min(1, emptyMsg(title))
+      .min(1, messages.empty(title))
       .toLowerCase()
-      .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, `Enter a valid ${title}`);
+      .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, messages.invalidFormat(title));
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please Enter ${title}`);
+    return base.min(1, messages.required(title));
   },
 
-  // Strict E.164 format: '+' + country code + digits, no spaces/dashes.
-  // e.g. +358401234567
   phoneNumber: ({
     title,
     required = true,
@@ -98,15 +115,13 @@ export const customValidator = {
     const base = z
       .string()
       .trim()
-      .min(1, emptyMsg(title))
-      .regex(
-        /^\+[1-9]\d{7,14}$/,
-        `${title} must include a country code, digits only (e.g. +358401234567)`,
-      );
+      .min(1, messages.empty(title))
+      .regex(/^\+[1-9]\d{7,14}$/, messages.phoneFormat(title));
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please Enter ${title}`);
+    return base.min(1, messages.required(title));
   },
 
   message: ({
@@ -121,14 +136,14 @@ export const customValidator = {
     const base = z
       .string()
       .trim()
-      .min(min, `${title} must be at least ${min} characters`);
+      .min(min, messages.minChar(title, min));
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please Enter ${title}`);
+    return base.min(1, messages.required(title));
   },
 
-  // Unicode-aware, allows spaces/hyphens/apostrophes: "Côte d'Ivoire", "Guinea-Bissau"
   country: ({
     title,
     required = true,
@@ -141,18 +156,16 @@ export const customValidator = {
     const base = z
       .string()
       .trim()
-      .min(1, emptyMsg(title))
-      .min(min, `${title} must be at least ${min} characters`)
-      .regex(/^\p{L}+(?:[\s'-]\p{L}+)*$/u, `Enter a valid ${title}`);
+      .min(1, messages.empty(title))
+      .min(min, messages.minChar(title, min))
+      .regex(/^\p{L}+(?:[\s'-]\p{L}+)*$/u, messages.invalidFormat(title));
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please Enter ${title}`);
+    return base.min(1, messages.required(title));
   },
 
-  // Dropdown / select fields, e.g. "Purpose of Inquiry".
-  // The <select> element itself already constrains the value to a valid
-  // option, so this just checks something was picked.
   select: ({
     title,
     required = true,
@@ -160,37 +173,41 @@ export const customValidator = {
     title: string;
     required?: boolean;
   }) => {
-    const base = z.string().trim().min(1, `Please select a ${title}`);
+    const base = z.string().trim().min(1, messages.select(title));
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please select a ${title}`);
+    return base.min(1, messages.select(title));
   },
 
-  // Date fields, e.g. "Preferred Completion Date". Expects a yyyy-mm-dd
-  // string (the native value of an <input type="date">), which the browser
-  // already guarantees is well-formed — this just checks it's not empty.
   date: ({ title, required = true }: { title: string; required?: boolean }) => {
-    const base = z.string().trim().min(1, emptyMsg(title));
+    const base = z.string().trim().min(1, messages.empty(title));
+
     if (!required) {
       return base.optional().or(z.literal(""));
     }
-    return base.min(1, `Please Enter ${title}`);
+    return base.min(1, messages.required(title));
   },
 
-  // Numeric fields, e.g. "Budget", "Height (cm)", "Width (cm)"
   number: ({
     title,
     required = true,
     min = 0,
+    max,
   }: {
     title: string;
     required?: boolean;
     min?: number;
+    max?: number;
   }) => {
-    const base = z.coerce
-      .number({ message: `${title} must be a number` })
-      .min(min, `${title} must be at least ${min}`);
+    const base = z
+      .number(messages.empty(title))
+      .min(min, messages.minVal(title, min))
+      .refine((value) => (max !== undefined ? value <= max : true), {
+        message: max !== undefined ? messages.maxVal(title, max) : undefined,
+      });
+
     if (!required) {
       return base.optional();
     }
@@ -198,28 +215,28 @@ export const customValidator = {
   },
 };
 
-// ── 1. "Let's Start a Conversation" — general inquiry ───────
+// ── 1. General Inquiry Schema ────────────────────────────────
 export const generalInquirySchema = z.object({
   fullName: customValidator.fullName({ title: "Full Name" }),
   email: customValidator.email({ title: "Email Address" }),
   purpose: customValidator.select({ title: "Purpose of Inquiry" }),
-  message: customValidator.message({ title: "Message" }), // optional
+  message: customValidator.message({ title: "Message" }),
 });
 
 export type GeneralInquiryValues = z.infer<typeof generalInquirySchema>;
 
-// ── 2. "Purchase Inquiry" ────────────────────────────────────
+// ── 2. Purchase Inquiry Schema ───────────────────────────────
 export const purchaseInquirySchema = z.object({
   fullName: customValidator.fullName({ title: "Full Name" }),
   email: customValidator.email({ title: "Email Address" }),
   country: customValidator.country({ title: "Country" }),
   phone: customValidator.phoneNumber({ title: "Phone Number" }),
-  message: customValidator.message({ title: "Message" }), // optional
+  message: customValidator.message({ title: "Message" }),
 });
 
 export type PurchaseInquiryValues = z.infer<typeof purchaseInquirySchema>;
 
-// ── 3. "Custom Artwork Inquiry" ──────────────────────────────
+// ── 3. Custom Artwork Inquiry Schema ─────────────────────────
 export const customArtworkInquirySchema = z.object({
   fullName: customValidator.fullName({ title: "Full Name" }),
   email: customValidator.email({ title: "Email Address" }),
@@ -227,9 +244,9 @@ export const customArtworkInquirySchema = z.object({
   phone: customValidator.phoneNumber({ title: "Phone Number" }),
   completionDate: customValidator.date({ title: "Preferred Completion Date" }),
   budget: customValidator.number({ title: "Budget", min: 1 }),
-  height: customValidator.number({ title: "Height (cm)", min: 1 }),
-  width: customValidator.number({ title: "Width (cm)", min: 1 }),
-  description: customValidator.message({ title: "Description" }), // optional
+  height: customValidator.number({ title: "Height (cm)", min: 1, required: false }),
+  width: customValidator.number({ title: "Width (cm)", min: 1, required: false }),
+  description: customValidator.message({ title: "Description" }),
 });
 
 export type CustomArtworkInquiryValues = z.infer<

@@ -1,5 +1,5 @@
 import type { Icon } from "@phosphor-icons/react/dist/lib/index";
-import Loader from "../layout/Loader";
+import Loader from "@/core/components/ui/Loader";
 
 export const ButtonType = {
   PRIMARY: 1,
