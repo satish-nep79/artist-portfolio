@@ -1,7 +1,7 @@
 import Container from "@/core/components/ui/Container";
 import MonoLogo from "@/assets/logos/mono_logo.svg";
 import NavLinks from "@/core/components/ui/NavLinks";
-import Button from "../ui/Button";
+import Button from "@/core/components/ui/Button";
 import { ListIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import { MobileDrawer } from "./MobileDrawer";

@@ -1,5 +1,6 @@
 import Container from "@/core/components/ui/Container";
-import Button, { ButtonType } from "@/core/components/ui/Button";
+import Button from "@/core/components/ui/Button";
+import { ButtonType } from "@/core/components/ui/buttonTypes";
 import CustomDialog from "@/core/components/ui/CustomDialog";
 import ArtDetailView from "@/features/art_details/ArtDetailView";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";

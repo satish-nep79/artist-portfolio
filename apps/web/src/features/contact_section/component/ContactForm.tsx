@@ -2,7 +2,8 @@ import TextField from "@/core/components/ui/TextField";
 import TextArea from "@/core/components/ui/TextArea";
 import Dropdown from "@/core/components/ui/DropDown";
 import type { DropdownOption } from "@/core/components/ui/DropDown";
-import Button, { ButtonType } from "@/core/components/ui/Button";
+import Button from "@/core/components/ui/Button";
+import { ButtonType } from "@/core/components/ui/buttonTypes";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 
 import { useForm } from "react-hook-form";

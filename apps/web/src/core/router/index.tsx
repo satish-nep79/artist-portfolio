@@ -1,13 +1,25 @@
+import { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "@/core/router/routes";
 
 import AppLayout from "@/core/layouts/AppLayout";
-import HomePage from "@/features/home/HomePage";
-import GalleryPage from "@/features/gallery_page/GalleryPage";
-import ProgramsPage from "@/features/ProgramsPage";
-import NotFoundPage from "@/features/NotFoundPage";
-import PurchaseInquiryScreen from "@/features/purchase_inquiry/PurchaseInquiryScreen";
-import CustomArtworkInquiry from "@/features/custom_artwork_inquiry/CustomArtworkInquiry";
+
+const HomePage = lazy(() => import("@/features/home/HomePage"));
+const GalleryPage = lazy(() => import("@/features/gallery_page/GalleryPage"));
+const ProgramsPage = lazy(() => import("@/features/ProgramsPage"));
+const NotFoundPage = lazy(() => import("@/features/NotFoundPage"));
+const PurchaseInquiryScreen = lazy(
+  () => import("@/features/purchase_inquiry/PurchaseInquiryScreen"),
+);
+const CustomArtworkInquiry = lazy(
+  () => import("@/features/custom_artwork_inquiry/CustomArtworkInquiry"),
+);
+
+const withSuspense = (Component: React.ComponentType) => (
+  <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+    <Component />
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -17,27 +29,27 @@ export const router = createBrowserRouter([
       {
         index: true,
         path: "/",
-        element: <HomePage />,
+        element: withSuspense(HomePage),
       },
       {
         path: ROUTES.GALLERYPage(),
-        element: <GalleryPage />,
+        element: withSuspense(GalleryPage),
       },
       {
         path: ROUTES.PROGRAMSPage(),
-        element: <ProgramsPage />,
+        element: withSuspense(ProgramsPage),
       },
       {
         path: ROUTES.PURCHASE_INQUIRY(),
-        element: <PurchaseInquiryScreen />,
+        element: withSuspense(PurchaseInquiryScreen),
       },
       {
         path: ROUTES.CUSTOM_ARTWORK_INQUIRY(),
-        element: <CustomArtworkInquiry />,
+        element: withSuspense(CustomArtworkInquiry),
       },
       {
         path: ROUTES.NOT_FOUND(),
-        element: <NotFoundPage />,
+        element: withSuspense(NotFoundPage),
       },
     ],
   },

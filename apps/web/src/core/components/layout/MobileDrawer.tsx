@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import MonoLogo from "@/assets/logos/mono_logo.svg";
 import { XCircleIcon } from "@phosphor-icons/react";
 import NavLinks from "@/core/components/ui/NavLinks";
-import Button from "../ui/Button";
+import Button from "@/core/components/ui/Button";
 import SocialLink from "@/core/components/ui/SocialLink";
 import {
   InstagramLogoIcon,

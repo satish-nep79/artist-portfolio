@@ -15,32 +15,35 @@ interface ToastProps {
   toastData: ToastData;
 }
 
+// Visual configurations mapped directly to ToastType
+const TOAST_CONFIG = {
+  [ToastType.SUCCESS]: {
+    color: "text-success",
+    shadowGlow: "shadow-success-glow",
+    Icon: CheckCircleIcon,
+  },
+  [ToastType.ERROR]: {
+    color: "text-error",
+    shadowGlow: "shadow-error-glow",
+    Icon: GearIcon,
+  },
+  [ToastType.INFO]: {
+    color: "text-primary",
+    shadowGlow: "shadow-primary-glow",
+    Icon: InfoIcon,
+  },
+  [ToastType.WARNING]: {
+    color: "text-warning",
+    shadowGlow: "shadow-warning-glow",
+    Icon: WarningOctagonIcon,
+  },
+};
+
 const Toast = ({ toastData }: ToastProps) => {
   const { id, type, title, message } = toastData;
 
-  let color = "text-primary";
-  let shadowGlow = "shadow-primary-glow";
-
-    switch (type) {
-    case ToastType.SUCCESS:
-      color = "text-success";
-      shadowGlow = "shadow-success-glow";
-      break;
-    case ToastType.ERROR:
-      color = "text-error";
-      shadowGlow = "shadow-error-glow";
-      break;
-    case ToastType.INFO:
-      color = "text-primary";
-      shadowGlow = "shadow-primary-glow";
-      break;
-    case ToastType.WARNING:
-      color = "text-warning";
-      shadowGlow = "shadow-warning-glow";
-      break;
-    default:
-      break;
-  }
+  const { color, shadowGlow, Icon } =
+    TOAST_CONFIG[type] ?? TOAST_CONFIG[ToastType.INFO];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -52,18 +55,10 @@ const Toast = ({ toastData }: ToastProps) => {
 
   return (
     <div
-      className={`bg-glass-bg-2 border border-glass-border-2 py-3 px-4 flex flex-row gap-2.5 h-fit items-center  ${shadowGlow} backdrop-blur-sm`}
+      className={`bg-glass-bg-2 border border-glass-border-2 py-3 px-4 flex flex-row gap-2.5 h-fit items-center ${shadowGlow} backdrop-blur-sm`}
     >
       <div>
-        {type === ToastType.SUCCESS ? (
-          <CheckCircleIcon size={32} className={color} />
-        ) : type === ToastType.ERROR ? (
-          <GearIcon size={32} className={color} />
-        ) : type === ToastType.INFO ? (
-          <InfoIcon size={32} className={color} />
-        ) : (
-          <WarningOctagonIcon size={32} className={color} />
-        )}
+        <Icon size={32} className={color} />
       </div>
       <div className="flex flex-col">
         <p className="text-lg font-bold text-text-primary">{title}</p>

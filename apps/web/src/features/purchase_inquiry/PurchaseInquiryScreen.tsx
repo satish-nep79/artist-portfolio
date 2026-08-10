@@ -13,7 +13,8 @@ import { useParams } from "react-router-dom";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 
 import TextArea from "@/core/components/ui/TextArea";
-import Button, { ButtonType } from "@/core/components/ui/Button";
+import Button from "@/core/components/ui/Button";
+import { ButtonType } from "@/core/components/ui/buttonTypes";
 import Loader from "@/core/components/ui/Loader";
 
 type RouteParams = {

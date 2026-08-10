@@ -1,4 +1,5 @@
-import Button, { ButtonType } from "@/core/components/ui/Button";
+import Button from "@/core/components/ui/Button";
+import { ButtonType } from "@/core/components/ui/buttonTypes";
 import type { Artwork } from "@/core/types/artwork";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
