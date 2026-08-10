@@ -1,93 +1,77 @@
 # 🎨 Artist Portfolio Platform
 
-A modern, responsive artist portfolio built with React, TypeScript, Tailwind CSS, and Spring Boot.
+A responsive React and TypeScript portfolio site for showcasing artwork, artist services, and inquiry flows. The frontend is now structured as a multi-section single-page experience with dedicated routes for gallery and inquiry pages.
 
-The project showcases artwork through an elegant gallery experience while serving as a production-focused learning project for modern frontend and backend development.
+## ✅ Current Status
 
----
+The frontend is largely implemented and organized into feature-based sections. The main experience includes:
 
-## ✨ Features
+- a polished home page with hero, gallery preview, about, programs, work-with-me, and contact sections
+- a gallery page with category filtering and artwork detail modal views
+- dedicated inquiry routes for purchase and custom artwork requests
+- responsive navigation, footer, and shared UI components
 
-- Responsive design
-- Artwork gallery
-- Artwork detail pages
-- Artist profile
-- Contact form
-- Programs & Workshops
-- Future CMS support
-- Future e-commerce support
+### What is completed
 
----
+- Project setup with Vite + React + TypeScript
+- Tailwind-based styling and shared component structure
+- Route-based navigation for home, gallery, programs, and inquiry pages
+- Responsive layout and section-based page composition
+
+### What is still pending
+
+- backend/API integration for live artwork and category data
+- CMS or admin management flow
+- production deployment setup
+- automated tests
 
 ## 🛠 Tech Stack
 
 ### Frontend
 
-- React
+- React 19
 - TypeScript
 - Vite
 - Tailwind CSS
-- React Router
+- React Router DOM
+- React Hook Form + Zod
 
-### Backend (Planned)
-
-- Spring Boot
-- PostgreSQL
-- JPA
-- REST API
-
----
-
-## 📂 Project Structure
+### Project Structure
 
 ```text
 apps/
-├── web/
-└── server/
-
-docs/
+└── web/
+    ├── src/
+    │   ├── core/              # layout, router, shared UI, types, data
+    │   ├── features/          # page-level feature modules
+    │   └── main.tsx           # app entry point
 ```
-
----
 
 ## 🚀 Getting Started
 
-### Install
+### Install dependencies
 
 ```bash
 pnpm install
 ```
 
-### Run frontend
+### Run the development server
 
 ```bash
 cd apps/web
 pnpm dev
 ```
 
----
+### Build for production
 
-## 📋 Roadmap
+```bash
+cd apps/web
+pnpm build
+```
 
-- [x] Project setup
-- [x] Tailwind configuration
-- [ ] React Router
-- [ ] Layout
-- [ ] Home page
-- [ ] Gallery
-- [ ] Artwork detail page
-- [ ] Contact page
-- [ ] Backend API
-- [ ] Admin dashboard
-- [ ] Deployment
+## 📋 Frontend Review Summary
 
----
-
-## 📸 Screenshots
-
-Coming soon.
-
----
+The project is in a solid state structurally, with a clear separation between shared app infrastructure and feature modules. The main frontend work is mostly complete, but it still needs backend connectivity and a few production-readiness improvements before it can be considered fully finished.
 
 ## 📝 Commit Convention
 
@@ -95,24 +79,12 @@ Use the following commit types:
 
 | Type | Use when... | Example |
 |------|-------------|---------|
-| `feat` | Adding a new feature or functionality | `feat: add artwork gallery` |
-| `fix` | Fixing a bug or incorrect behavior | `fix: prevent navbar overlap` |
-| `refactor` | Improving code without changing functionality | `refactor: extract gallery card component` |
-| `chore` | Tooling, configuration, dependencies, or maintenance tasks | `chore: configure Tailwind CSS` |
+| `feat` | Adding a new feature | `feat: add artwork gallery` |
+| `fix` | Fixing a bug | `fix: resolve navbar overlap` |
+| `refactor` | Improving structure without changing behavior | `refactor: split gallery logic` |
+| `chore` | Maintenance and tooling | `chore: update Vite config` |
 | `docs` | Updating documentation | `docs: update README` |
-| `style` | Code formatting only (no functional changes) | `style: format code with Prettier` |
-| `test` | Adding or updating tests | `test: add gallery component tests` |
-| `perf` | Improving performance | `perf: optimize image loading` |
-| `build` | Build system or project configuration changes | `build: configure Vite aliases` |
-| `ci` | CI/CD workflow changes | `ci: add GitHub Actions workflow` |
-
-**Guidelines**
-- One logical change per commit.
-- Use the imperative mood (e.g., `add`, `fix`, `remove`, `update`).
-- Keep commit messages short and descriptive.
-
----
 
 ## 📄 License
 
-NONE
+No license has been set for this project yet.

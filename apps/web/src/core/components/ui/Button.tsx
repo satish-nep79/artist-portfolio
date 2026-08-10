@@ -1,13 +1,6 @@
 import type { Icon } from "@phosphor-icons/react/dist/lib/index";
 import Loader from "@/core/components/ui/Loader";
-
-export const ButtonType = {
-  PRIMARY: 1,
-  SECONDARY: 2,
-  OUTLINED: 3,
-} as const;
-
-type ButtonType = (typeof ButtonType)[keyof typeof ButtonType];
+import { ButtonType } from "./buttonTypes";
 
 interface ButtonProps {
   label: string;

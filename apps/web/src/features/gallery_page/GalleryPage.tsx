@@ -64,7 +64,7 @@ const GalleryPage = () => {
         {loading ? (
           <h1>Loading...</h1>
         ) : (
-          filteredArtworks.map((artwork, _) => (
+          filteredArtworks.map((artwork) => (
             <ArtPieceComponent
               key={artwork.id}
               artwork={artwork}

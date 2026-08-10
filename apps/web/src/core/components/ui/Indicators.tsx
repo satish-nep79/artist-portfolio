@@ -12,7 +12,7 @@ const Indicators = ({
   return (
     <div className="flex flex-row gap-2 mt-4 md:mt-6 justify-center items-center">
       {Array.from({ length: totalIndicators }, (_, i) => {
-        let isActive = i === activeIndex;
+        const isActive = i === activeIndex;
         return (
           <div
             key={i}

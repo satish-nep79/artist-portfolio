@@ -1,6 +1,6 @@
 import Indicators from "@/core/components/ui/Indicators";
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react";
-import { useRef, useState, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface CarouselProps {
   initialIndex?: number;
@@ -27,7 +27,7 @@ const Carousel = ({
     autoScrollDurationInSeconds.current = timeInSeconds ?? 3; // Reset the timer to 3 seconds
   };
 
-  const scrollToIndex = (index: number) => {
+  const scrollToIndex = useCallback((index: number) => {
     if (!carouselRef.current) return;
     carouselRef.current.scrollTo({
       left: carouselRef.current.clientWidth * index,
@@ -35,25 +35,25 @@ const Carousel = ({
     });
     setCurrentIndex(index);
     updateTimer(autoPlayDurationInSeconds); // Reset the timer to 3 seconds
-  };
+  }, [autoPlayDurationInSeconds]);
 
-  const handlePrevClick = () => {
+  const handlePrevClick = useCallback(() => {
     if (currentIndex === 0 && !loop) return;
     let newIndex = currentIndex - 1;
     if (currentIndex === 0 && loop) {
-      newIndex = items!.length - 1;
+      newIndex = items.length - 1;
     }
     scrollToIndex(newIndex);
-  };
+  }, [currentIndex, items, loop, scrollToIndex]);
 
-  const handleNextClick = () => {
-    if (currentIndex === items!.length - 1 && !loop) return;
+  const handleNextClick = useCallback(() => {
+    if (currentIndex === items.length - 1 && !loop) return;
     let newIndex = currentIndex + 1;
-    if (currentIndex === items!.length - 1 && loop) {
+    if (currentIndex === items.length - 1 && loop) {
       newIndex = 0;
     }
     scrollToIndex(newIndex);
-  };
+  }, [currentIndex, items, loop, scrollToIndex]);
 
   const handleScroll = () => {
     if (!carouselRef.current) return;
@@ -80,7 +80,7 @@ const Carousel = ({
       updateTimer(autoScrollDurationInSeconds.current - 1);
     }, 1000);
     return () => clearInterval(timer);
-  }, [autoScrollDurationInSeconds, currentIndex]);
+  }, [autoPlay, handleNextClick]);
 
   return (
     <div
