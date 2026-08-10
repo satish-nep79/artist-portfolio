@@ -11,6 +11,8 @@ import type { GeneralInquiryValues } from "@/core/utils/custom_validator";
 import { generalInquirySchema } from "@/core/utils/custom_validator";
 import { useState } from "react";
 
+import { toast } from "@/core/components/ui/toast/toast.store";
+
 const purposeOptions: DropdownOption[] = [
   { value: "creative-collaboration", label: "Creative Collaboration" },
   { value: "exhibition-opportunity", label: "Exhibition Opportunity" },
@@ -36,7 +38,10 @@ const ContactForm = () => {
     setTimeout(() => {
       console.log("Form submitted:", data);
       setSubmittingForm(false);
-      alert("Your inquiry has been submitted successfully!");
+      toast.success({
+        title: "Inquiry submitted successfully!",
+        message: "Thank you for reaching out. I will get back to you soon.",
+      });
     }, 2000);
   };
 

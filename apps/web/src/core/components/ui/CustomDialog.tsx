@@ -6,6 +6,7 @@ interface CustomDialogProps {
   onClose: () => void;
   title?: string;
   children: React.ReactNode;
+  bgColor?: string;
 }
 
 const CustomDialog = ({
@@ -13,6 +14,7 @@ const CustomDialog = ({
   onClose,
   title,
   children,
+  bgColor = "bg-bg-surface",
 }: CustomDialogProps) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -51,7 +53,7 @@ const CustomDialog = ({
         }
       }}
     >
-      <div className=" px-1 md:px-3 lg:px-6 py-1 md:py-3 lg:py-6 bg-bg-surface flex flex-col max-h-[90vh] max-w-[90vw] ">
+      <div className={`px-1 md:px-3 lg:px-6 py-1 md:py-3 lg:py-6 ${bgColor} flex flex-col max-h-[90vh] max-w-[90vw] `}>
         <div className="min-h-8  relative flex flex-row justify-center items-start px-12 text-center ">
           {title && <h4 className="font-display font-semibold">{title}</h4>}
           <div autoFocus tabIndex={-1} className="p-1 absolute  right-1 lg:-right-1 cursor-pointer focus:outline-none ">

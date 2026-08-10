@@ -41,8 +41,19 @@
 
     /* ---------- Status ---------- */
     --color-success: #08a385;
+    --color-success-10: rgba(8, 163, 133, 0.10);
+    --color-success-25: rgba(8, 163, 133, 0.25);
+    --color-success-50: rgba(8, 163, 133, 0.50);
+
     --color-warning: #d9a441;
+    --color-warning-10: rgba(217, 164, 65, 0.10);
+    --color-warning-25: rgba(217, 164, 65, 0.25);
+    --color-warning-50: rgba(217, 164, 65, 0.50);
+
     --color-error: #b85c5c;
+    --color-error-10: rgba(184, 92, 92, 0.10);
+    --color-error-25: rgba(184, 92, 92, 0.25);
+    --color-error-50: rgba(184, 92, 92, 0.50);
 
     /* ---------- Layout ---------- */
     --container-width: 1440px;
@@ -97,8 +108,31 @@
 
     /* Shadow Effects */
     --shadow-nav-glow: 0 0 12px 0 var(--color-glass-glow);
-    --text-shadow-glow: 0 0 50px var(--color-primary-10), 0 0 25px var(--color-primary-25), 0 0 10px var(--color-primary-50), 0 0 2px var(--color-primary);
-    --shadow-primary-glow: 0 0 50px var(--color-primary-10), 0 0 25px var(--color-primary-25), 0 0 10px var(--color-primary-50), 0 0 2px var(--color-primary);
+    --text-shadow-glow:
+        0 0 50px var(--color-primary-10),
+        0 0 25px var(--color-primary-25),
+        0 0 10px var(--color-primary-50),
+        0 0 2px var(--color-primary);
+    --shadow-primary-glow:
+        0 0 50px var(--color-primary-10),
+        0 0 25px var(--color-primary-25),
+        0 0 10px var(--color-primary-50),
+        0 0 2px var(--color-primary);
+    --shadow-success-glow:
+        0 0 35px var(--color-success-10),
+        0 0 18px var(--color-success-25),
+        0 0 8px var(--color-success-50),
+        0 0 1px var(--color-success);
+    --shadow-warning-glow:
+        0 0 35px var(--color-warning-10),
+        0 0 18px var(--color-warning-25),
+        0 0 8px var(--color-warning-50),
+        0 0 1px var(--color-warning);
+    --shadow-error-glow:
+        0 0 35px var(--color-error-10),
+        0 0 18px var(--color-error-25),
+        0 0 8px var(--color-error-50),
+        0 0 1px var(--color-error);
 
     /* Gradients & Blurs */
     --background-image-radial-glow: radial-gradient(circle, var(--color-primary) 0%, var(--color-primary-50) 25%, var(--color-primary-10) 100%);
@@ -238,5 +272,5 @@
         font: inherit;
     }
 
-    
+
 }

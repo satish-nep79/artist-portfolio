@@ -16,6 +16,7 @@ import Carousel from "@/core/components/ui/Carousel";
 import { ArtworkApi } from "@/core/data/artwork_api";
 import type { Artwork } from "@/core/types/artwork";
 import { useEffect, useState } from "react";
+import Loader from "@/core/components/ui/Loader";
 
 const HeroSection = () => {
   const [loading, setLoading] = useState(true);
@@ -96,7 +97,9 @@ const HeroSection = () => {
         </div>
         <div className="z-2 flex-1 max-h-full m-auto text-center items-center justtify-center">
           {loading ? (
-            <div></div>
+            <div className="flex flex-col items-center justify-center h-full">
+              <Loader size="large" />
+            </div>
           ) : (
             <Carousel
               items={featuredArtworks.map((artwork) => (
