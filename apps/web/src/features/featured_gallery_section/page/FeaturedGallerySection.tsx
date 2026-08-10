@@ -1,6 +1,7 @@
 import ArtPieceComponent from "@/core/components/ui/FeaturedArt";
 import Container from "../../../core/components/ui/Container";
-import Button, { ButtonType } from "@/core/components/ui/Button";
+import Button from "@/core/components/ui/Button";
+import { ButtonType } from "@/core/components/ui/buttonTypes";
 import { ArrowCircleRightIcon } from "@phosphor-icons/react";
 import CategoryBar from "../components/CategoryBar";
 import { useEffect, useMemo, useState } from "react";
