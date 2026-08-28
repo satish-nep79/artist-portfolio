@@ -7,28 +7,22 @@ export interface AppOptions extends FastifyServerOptions, Partial<AutoloadPlugin
 }
 // Pass --options via CLI arguments in command to enable these options.
 const options: AppOptions = {
+  logger: true,  
 }
 
 const app: FastifyPluginAsync<AppOptions> = async (
   fastify,
   opts
 ): Promise<void> => {
-  // Place here your custom code!
 
-  // Do not touch the following lines
 
-  // This loads all plugins defined in plugins
-  // those should be support plugins that are reused
-  // through your application
-  // eslint-disable-next-line no-void
+  // This loads all plugins defined in plugins folder
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'plugins'),
     options: opts
   })
 
-  // This loads all plugins defined in routes
-  // define your routes in one of these
-  // eslint-disable-next-line no-void
+  // Loads all routes defined in the routes folder
   void fastify.register(AutoLoad, {
     dir: join(__dirname, 'routes'),
     options: opts
