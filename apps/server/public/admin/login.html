@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sign in - Admin Dashboard</title>
+    <!-- Tabler CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+</head>
+
+<body class="d-flex flex-column">
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+
+            <!-- Brand Logo / Heading -->
+            <div class="text-center mb-4">
+                <a href="." class="navbar-brand navbar-brand-autodark">
+                    <h1 class="m-0">Admin Panel</h1>
+                </a>
+            </div>
+
+            <!-- Login Form Card -->
+            <div class="card card-md">
+                <div class="card-body">
+                    <h2 class="h2 text-center mb-4">Login to your account</h2>
+
+                    <form action="/api/login" method="POST" autocomplete="off">
+                        <!-- Email Input -->
+                        <div class="mb-3">
+                            <label class="form-label">Email address</label>
+                            <input type="email" name="email" class="form-control" placeholder="your@email.com" required
+                                autocomplete="off">
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="mb-2">
+                            <label class="form-label">
+                                Password
+                                <span class="form-label-description">
+                                    <a href="#">I forgot password</a>
+                                </span>
+                            </label>
+                            <input type="password" name="password" class="form-control" placeholder="Your password"
+                                required autocomplete="off">
+                        </div>
+
+                        <!-- Remember Me -->
+                        <div class="mb-2">
+                            <label class="form-check">
+                                <input type="checkbox" class="form-check-input" name="remember" />
+                                <span class="form-check-label">Remember me on this device</span>
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Tabler JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+</body>
+
+</html>
