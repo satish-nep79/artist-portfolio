@@ -34,12 +34,12 @@ export default fp(async (fastify, opts) => {
     const fastifyError = error as FastifyError
     const statusCode = fastifyError.statusCode ?? 500
     return reply.status(statusCode).send(
-      buildErrorResponse(
-        statusCode,
-        statusCode === 400
+      buildErrorResponse({
+        status: statusCode,
+        message: statusCode === 400
           ? getValidationMessage(fastifyError)
           : 'Request failed'
-      )
+      })
     )
   })
 })

@@ -15,6 +15,17 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         required: ['email', 'password'],
     }
 
+
+    fastify.get('/login', {
+        schema: {
+            response: standardApiResponseSchema,
+        }, onRequest: [fastify.authenticate],
+    }, async function (request, reply) {
+        return reply.status(200).send(buildSuccessResponse({
+            status: 200, message: 'Login endpoint', data: null
+        }))
+    })
+
     fastify.post('/login', {
         schema: {
             body: bodySchema,
@@ -25,14 +36,17 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
         const user = await fastify.prisma.user.findUnique({ where: { email } })
 
+        fastify.log.info(`User login attempt: ${email}`)
+
         if (!user) {
-            return reply.status(404).send(buildErrorResponse(404, 'Invalid email or password'))
+            fastify.log.info(`User not found: ${email}`)
+            return reply.status(404).send(buildErrorResponse({ status: 404, message: 'Invalid email or password' }))
         }
 
         const isPasswordValid = await comparePassword(user.passwordHash, password)
 
         if (!isPasswordValid) {
-            return reply.status(401).send(buildErrorResponse(401, 'Invalid email or password'))
+            return reply.status(401).send(buildErrorResponse({ status: 401, message: 'Invalid email or password' }))
         }
 
         const tokenId = randomUUID()
@@ -40,10 +54,13 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         const tokenExpiration = new Date(Date.now() + 60 * 60 * 1000)
 
         await fastify.prisma.user.update({ where: { id: user.id }, data: { tokenId } })
+        fastify.log.info(`User logged in: ${user.email}`)
 
-        return reply.status(200).send(buildSuccessResponse(200, 'Login successful', {
-            token,
-            expires_at: tokenExpiration.toISOString(),
+        return reply.status(200).send(buildSuccessResponse({
+            status: 200, message: 'Login successful ada', data: {
+                token,
+                expires_at: tokenExpiration.toISOString(),
+            }
         }))
     })
 }

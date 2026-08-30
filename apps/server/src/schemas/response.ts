@@ -6,7 +6,10 @@ export const successResponseSchema = {
         message: { type: 'string' },
         data: {
             anyOf: [
-                { type: 'object' },
+                {
+                    type: 'object',
+                    additionalProperties: true,
+                },
                 { type: 'array' },
                 { type: 'null' },
             ],
@@ -39,14 +42,14 @@ export const standardApiResponseSchema = {
     500: errorResponseSchema,
 } as const
 
-export const buildSuccessResponse = <T>(status: number, message: string, data: T) => ({
+export const buildSuccessResponse = <T>({ status, message, data }: { status: number, message: string, data: T }) => ({
     status,
     success: true,
     message,
-    data,
+    data: data ?? null,
 })
 
-export const buildErrorResponse = (status: number, message: string, data: null = null) => ({
+export const buildErrorResponse = ({ status, message }: { status: number, message: string }) => ({
     status,
     success: false,
     message,
