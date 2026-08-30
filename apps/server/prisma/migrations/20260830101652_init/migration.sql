@@ -6,6 +6,7 @@ CREATE TABLE "User" (
     "tfa_secret" TEXT,
     "tfa_enabled" BOOLEAN NOT NULL DEFAULT false,
     "backup_codes" TEXT[],
+    "token_id" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 

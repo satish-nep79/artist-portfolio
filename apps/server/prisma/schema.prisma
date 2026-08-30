@@ -20,6 +20,7 @@ model User{
   tfaSecret String? @map("tfa_secret")
   tfaEnabled Boolean @map("tfa_enabled") @default(false)
   backupCodes String[] @map("backup_codes")
+  tokenId String? @map("token_id")
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
 }
