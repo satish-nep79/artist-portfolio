@@ -1,55 +1,50 @@
-import fastify, { type FastifyPluginAsync } from 'fastify'
+import { randomUUID } from 'node:crypto'
+import { type FastifyPluginAsync } from 'fastify'
+import { buildSuccessResponse, buildErrorResponse, standardApiResponseSchema } from '../../../schemas/response'
+import { comparePassword } from '../../../util/password.util'
+import { createAuthToken } from '../../../services/auth.service'
 
 const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
     const bodySchema = {
         type: 'object',
         properties: {
-            username: { type: 'string' },
+            email: { type: 'string' },
             password: { type: 'string' },
         },
-        required: ['username', 'password'],
+        required: ['email', 'password'],
     }
 
-    const responseSchema = {
-        200: {
-            type: 'object',
-            properties: {
-                status: { type: 'string' },
-                success: { type: 'boolean' },
-                token: { type: 'string' },
-            },
-        },
-        401: {
-            type: 'object',
-            properties: {
-                status: { type: 'string' },
-                success: { type: 'boolean' },
-                error: { type: 'string' },
-            },
-        },
-        500: {
-            type: 'object',
-            properties: {
-                status: { type: 'string' },
-                success: { type: 'boolean' },
-                error: { type: 'string' },
-            },
-        },
-    }
-
-    fastify.post('/auth', {
+    fastify.post('/login', {
         schema: {
             body: bodySchema,
-            response: responseSchema,
+            response: standardApiResponseSchema,
         }
     }, async function (request, reply) {
+        const { email, password } = request.body as { email: string, password: string }
 
-        return reply.send({ token: 'fake-jwt-token' })
-    })
+        const user = await fastify.prisma.user.findUnique({ where: { email } })
 
-    fastify.get('/auth', { schema: { response: responseSchema } }, async function (request, reply) {
-        return reply.send({})
+        if (!user) {
+            return reply.status(404).send(buildErrorResponse(404, 'Invalid email or password'))
+        }
+
+        const isPasswordValid = await comparePassword(user.passwordHash, password)
+
+        if (!isPasswordValid) {
+            return reply.status(401).send(buildErrorResponse(401, 'Invalid email or password'))
+        }
+
+        const tokenId = randomUUID()
+        const token = await createAuthToken(fastify, { id: user.id, email: user.email, tokenId })
+        const tokenExpiration = new Date(Date.now() + 60 * 60 * 1000)
+
+        await fastify.prisma.user.update({ where: { id: user.id }, data: { tokenId } })
+
+        return reply.status(200).send(buildSuccessResponse(200, 'Login successful', {
+            token,
+            expires_at: tokenExpiration.toISOString(),
+        }))
     })
 }
 
