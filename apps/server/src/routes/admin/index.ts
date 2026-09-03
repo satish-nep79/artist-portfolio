@@ -1,18 +1,15 @@
-import { readFile } from 'node:fs/promises'
-import path from 'node:path'
-import { type FastifyPluginAsync } from 'fastify'
+import { type FastifyPluginAsync } from 'fastify';
+import { PublicRoutes, PublicHtmlFiles } from '../../constants/public-routes';
 
-const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const AdminDashboard: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     fastify.get('/',
         { onRequest: [fastify.authenticate] },
         async function (request, reply) {
-            const html = await readFile(
-                path.join(process.cwd(), 'public/admin/login.html'),
-                'utf8'
-            )
 
+            fastify.log.info(`Serving dashboard HTML for request to ${request.url}`);
+            const html = await PublicHtmlFiles.getHtml(PublicRoutes.DASHBOARD, { cache: true });
             return reply.type('text/html').send(html)
         })
 }
 
-export default example
+export default AdminDashboard

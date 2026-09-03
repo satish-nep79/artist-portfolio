@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <h2 class="h2 text-center mb-4">Login to your account</h2>
 
-                    <form action="/api/login" method="POST" autocomplete="off">
+                    <form action="/api/v1/auth/login" method="POST" autocomplete="off">
                         <!-- Email Input -->
                         <div class="mb-3">
                             <label class="form-label">Email address</label>
@@ -44,15 +44,6 @@
                             <input type="password" name="password" class="form-control" placeholder="Your password"
                                 required autocomplete="off">
                         </div>
-
-                        <!-- Remember Me -->
-                        <div class="mb-2">
-                            <label class="form-check">
-                                <input type="checkbox" class="form-check-input" name="remember" />
-                                <span class="form-check-label">Remember me on this device</span>
-                            </label>
-                        </div>
-
                         <!-- Submit Button -->
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary w-100">Sign in</button>

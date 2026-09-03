@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Error - Admin Dashboard</title>
+
+    <!-- Tabler CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+</head>
+
+<body class="d-flex flex-column">
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+
+            <!-- Brand Logo / Heading -->
+            <div class="text-center mb-4">
+                <a href="/admin/login" class="navbar-brand navbar-brand-autodark">
+                    <h1 class="m-0">Admin Panel</h1>
+                </a>
+            </div>
+
+            <!-- Error Card -->
+            <div class="card card-md">
+                <div class="card-body text-center py-5">
+
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icon-tabler-alert-circle text-danger">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <circle cx="12" cy="12" r="9" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </div>
+
+                    <h2 class="h2 mb-2">Unable to Load Page</h2>
+
+                    <p class="text-secondary mb-4">
+                        The requested page could not be loaded. Please try again later.
+                    </p>
+
+                    <div>
+                        <a href="/admin/login" class="btn btn-primary">
+                            Back to Login
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Error Information -->
+            <div class="text-center text-secondary mt-3">
+                <small>
+                    If the problem persists, please contact the administrator.
+                </small>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Tabler JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+</body>
+
+</html>

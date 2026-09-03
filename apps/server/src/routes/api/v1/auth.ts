@@ -15,17 +15,6 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         required: ['email', 'password'],
     }
 
-
-    fastify.get('/login', {
-        schema: {
-            response: standardApiResponseSchema,
-        }, onRequest: [fastify.authenticate],
-    }, async function (request, reply) {
-        return reply.status(200).send(buildSuccessResponse({
-            status: 200, message: 'Login endpoint', data: null
-        }))
-    })
-
     fastify.post('/login', {
         schema: {
             body: bodySchema,
@@ -55,6 +44,19 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
         await fastify.prisma.user.update({ where: { id: user.id }, data: { tokenId } })
         fastify.log.info(`User logged in: ${user.email}`)
+
+        // Set the token in cookie with HttpOnly and Secure flags
+        reply.setCookie(
+            'auth_token', token,
+            {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                expires: tokenExpiration,
+                maxAge: 60 * 60, // 1 hour in seconds
+                path: '/',
+            },
+        );
 
         return reply.status(200).send(buildSuccessResponse({
             status: 200, message: 'Login successful ada', data: {
