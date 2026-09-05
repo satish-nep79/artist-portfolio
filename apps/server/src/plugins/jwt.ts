@@ -70,7 +70,7 @@ export default fp(async (fastify) => {
                 fastify.log.info(`Authenticating request for ${request.url}`);
                 await request.jwtVerify();
             } catch (err) {
-                const tokenFromCookie = request.cookies?.token;
+                const tokenFromCookie = request.cookies?.auth_token;
                 if (!tokenFromCookie) {
                     fastify.log.info(`No token found in cookies for request to ${request.url}`);
                     throw err;

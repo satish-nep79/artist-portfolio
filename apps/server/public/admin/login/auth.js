@@ -1,5 +1,6 @@
 import { setButtonLoading } from "../shared/js/loading-indicator.js";
 import { showToast } from "../shared/js/toast.js";
+import { apiRequest } from "../shared/js/api_request.js";
 
 const passwordInput = document.getElementById("password");
 const togglePasswordButton = document.getElementById("togglePassword");
@@ -38,21 +39,49 @@ function togglePassword() {
 }
 
 async function onSubmit(event) {
-  event.preventDefault();
-  console.log("Form submitted");
-  const loginForm = document.getElementById("loginForm");
-  const submitButton = loginForm.querySelector('button[type="submit"]');
-  setButtonLoading(submitButton, true, "Signing in...");
-  await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a delay for demonstration purposes
+  try {
+    event.preventDefault();
+    console.log("Form submitted");
+    const loginForm = document.getElementById("loginForm");
+    const submitButton = loginForm.querySelector('button[type="submit"]');
+    setButtonLoading(submitButton, true, "Signing in...");
 
-  const email = loginForm.email.value;
-  const password = loginForm.password.value;
-  console.log("Email:", email);
-  console.log("Password:", password);
+    const email = loginForm.email.value;
+    const password = loginForm.password.value;
 
-  // Simulate a successful login
-  setButtonLoading(submitButton, false);
-  showToast("Everything worked successfully.", "success");
+    const response = await apiRequest({
+      url: "/api/v1/login",
+      method: "POST",
+      body: {
+        email,
+        password,
+      },
+    });
+
+    setButtonLoading(submitButton, false);
+    console.log("Login response:", response);
+
+    if (response.success) {
+
+        
+
+      showToast("Login successful!", "success", "Success");
+      window.location.href = "/admin";
+    } else {
+      showToast(
+        response.message || "Invalid email or password.",
+        "danger",
+        "Login Failed",
+      );
+    }
+  } catch (error) {
+    console.error("Error during login:", error);
+    showToast(
+      "An error occurred during login. Please try again.",
+      "error",
+      "Unexpected Error",
+    );
+  }
 }
 
 init();
