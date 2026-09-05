@@ -43,7 +43,7 @@ async function onSubmit(event) {
   const loginForm = document.getElementById("loginForm");
   const submitButton = loginForm.querySelector('button[type="submit"]');
   setButtonLoading(submitButton, true, "Signing in...");
-  await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate a delay for demonstration purposes
+  await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a delay for demonstration purposes
 
   const email = loginForm.email.value;
   const password = loginForm.password.value;
@@ -52,7 +52,7 @@ async function onSubmit(event) {
 
   // Simulate a successful login
   setButtonLoading(submitButton, false);
-  showToast("Login successful!", "success");
+  showToast("Everything worked successfully.", "success");
 }
 
 init();

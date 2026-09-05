@@ -1,6 +1,18 @@
 const TOAST_DURATION = 5000;
+const TOAST_TYPES = new Set(["success", "danger", "warning", "info"]);
 
+/**
+ * @param {string} message
+ * @param {"success" | "danger" | "warning" | "info"} type
+ * @param {string | null} title
+ */
 export function showToast(message, type = "info", title = null) {
+    if (!TOAST_TYPES.has(type)) {
+        throw new TypeError(
+            `Invalid toast type "${type}". Expected: success, danger, warning, or info.`
+        );
+    }
+
     const container = getToastContainer();
 
     const toast = document.createElement("div");

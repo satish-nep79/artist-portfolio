@@ -12,181 +12,23 @@
 
     <!-- Shared Admin Styles -->
     <link rel="stylesheet" href="/admin/shared/css/admin.css">
+
+    <!-- Shared Components -->
+    <script src="/admin/shared/components/admin-sidebar.js" defer></script>
+    <script src="/admin/shared/components/admin-header.js" defer></script>
 </head>
 
 <body class="admin-shell">
     <div class="page">
 
         <!-- Sidebar -->
-        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
-            <div class="container-fluid">
-
-                <!-- Logo -->
-                <h1 class="navbar-brand navbar-brand-autodark">
-                    <a href="/">
-                        Admin Panel
-                    </a>
-                </h1>
-
-                <!-- Mobile menu button -->
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#sidebar-menu"
-                        aria-controls="sidebar-menu"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Sidebar navigation -->
-                <div class="collapse navbar-collapse" id="sidebar-menu">
-                    <ul class="navbar-nav pt-lg-3">
-
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/admin">
-                                <span class="nav-link-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         width="24"
-                                         height="24"
-                                         viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor"
-                                         stroke-width="2"
-                                         stroke-linecap="round"
-                                         stroke-linejoin="round">
-                                        <path d="M3 13h8V3H3z" />
-                                        <path d="M13 21h8V11h-8z" />
-                                        <path d="M3 21h8v-4H3z" />
-                                        <path d="M13 3h8v4h-8z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-title">
-                                    Dashboard
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/users">
-                                <span class="nav-link-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         width="24"
-                                         height="24"
-                                         viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor"
-                                         stroke-width="2"
-                                         stroke-linecap="round"
-                                         stroke-linejoin="round">
-                                        <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                        <path d="M21 21v-2a4 4 0 0 0 -3 -3.87" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-title">
-                                    Users
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/artworks">
-                                <span class="nav-link-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         width="24"
-                                         height="24"
-                                         viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor"
-                                         stroke-width="2"
-                                         stroke-linecap="round"
-                                         stroke-linejoin="round">
-                                        <path d="M4 5a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1H5a1 1 0 0 1 -1 -1z" />
-                                        <path d="M4 15l4 -4c.928 -.893 2.072 -.893 3 0l5 5" />
-                                        <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l2 2" />
-                                        <path d="M14 8h.01" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-title">
-                                    Artworks
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/settings">
-                                <span class="nav-link-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         width="24"
-                                         height="24"
-                                         viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor"
-                                         stroke-width="2"
-                                         stroke-linecap="round"
-                                         stroke-linejoin="round">
-                                        <path d="M12 15a3 3 0 1 0 0 -6a3 3 0 0 0 0 6z" />
-                                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1 -2.83 2.83l-.06-.06a1.65 1.65 0 0 0 -1.82-.33a1.65 1.65 0 0 0 -1 1.51V21a2 2 0 1 1 -4 0v-.09a1.65 1.65 0 0 0 -1-1.51a1.65 1.65 0 0 0 -1.82.33l-.06.06a2 2 0 1 1 -2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0 -1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.14.6.67 1 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0 -1.51 1z" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-title">
-                                    Settings
-                                </span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </aside>
+        <admin-sidebar active="dashboard"></admin-sidebar>
 
         <!-- Main page -->
         <div class="page-wrapper">
 
             <!-- Top navbar -->
-            <header class="navbar navbar-expand-md d-print-none">
-                <div class="container-xl">
-
-                    <div class="navbar-nav flex-row order-md-last">
-                        <div class="nav-item dropdown">
-                            <a href="#"
-                               class="nav-link d-flex lh-1 text-reset p-0"
-                               data-bs-toggle="dropdown">
-
-                                <span class="avatar avatar-sm">
-                                    A
-                                </span>
-
-                                <div class="d-none d-xl-block ps-2">
-                                    <div>Admin</div>
-                                    <div class="mt-1 small text-secondary">
-                                        Administrator
-                                    </div>
-                                </div>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="/admin/profile">
-                                    Profile
-                                </a>
-
-                                <a class="dropdown-item" href="/admin/settings">
-                                    Settings
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="/logout">
-                                    Logout
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </header>
+            <admin-header user-name="Sarah Johnson"></admin-header>
 
             <!-- Page content -->
             <div class="page-body">
@@ -196,45 +38,48 @@
                     <!-- Page header -->
                     <div class="page-header d-print-none mb-4">
                         <div class="row align-items-center">
-
                             <div class="col">
-                                <h2 class="page-title">
-                                    Dashboard
-                                </h2>
-
+                                <h2 class="page-title">Dashboard</h2>
                                 <div class="text-secondary mt-1">
-                                    Welcome back, Admin.
+                                    Welcome back, Sarah. Here's what's happening today.
                                 </div>
                             </div>
-
+                            <div class="col-auto ms-auto d-print-none">
+                                <div class="btn-list">
+                                    <a href="/admin/reports" class="btn btn-outline-primary">
+                                        <i class="ti ti-file-download me-1"></i>
+                                        Export Report
+                                    </a>
+                                    <a href="/admin/artworks/new" class="btn btn-primary">
+                                        <i class="ti ti-plus me-1"></i>
+                                        Add Artwork
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Statistics -->
-                    <div class="row row-deck row-cards">
+                    <div class="row row-deck row-cards mb-4">
 
                         <div class="col-sm-6 col-lg-3">
                             <div class="card">
                                 <div class="card-body">
-
                                     <div class="d-flex align-items-center">
-                                        <div>
-                                            <div class="text-secondary">
-                                                Total Users
-                                            </div>
-
-                                            <div class="h1 mb-0">
-                                                1,248
-                                            </div>
-                                        </div>
-
+                                        <div class="subheader">Total Users</div>
                                         <div class="ms-auto">
-                                            <span class="badge bg-green-lt">
-                                                +12%
+                                            <span class="badge bg-green text-green-fg">
+                                                <i class="ti ti-trending-up"></i> +12.5%
                                             </span>
                                         </div>
                                     </div>
-
+                                    <div class="h1 mb-1">2,847</div>
+                                    <div class="d-flex mb-2">
+                                        <div class="text-secondary">
+                                            <i class="ti ti-user-plus me-1"></i>
+                                            186 this month
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -242,19 +87,21 @@
                         <div class="col-sm-6 col-lg-3">
                             <div class="card">
                                 <div class="card-body">
-
-                                    <div class="text-secondary">
-                                        Artworks
+                                    <div class="d-flex align-items-center">
+                                        <div class="subheader">Artworks</div>
+                                        <div class="ms-auto">
+                                            <span class="badge bg-blue text-blue-fg">
+                                                <i class="ti ti-plus"></i> 23 new
+                                            </span>
+                                        </div>
                                     </div>
-
-                                    <div class="h1 mb-0">
-                                        342
+                                    <div class="h1 mb-1">1,456</div>
+                                    <div class="d-flex mb-2">
+                                        <div class="text-secondary">
+                                            <i class="ti ti-photo me-1"></i>
+                                            842 published
+                                        </div>
                                     </div>
-
-                                    <div class="text-secondary mt-2">
-                                        18 added this month
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -262,19 +109,21 @@
                         <div class="col-sm-6 col-lg-3">
                             <div class="card">
                                 <div class="card-body">
-
-                                    <div class="text-secondary">
-                                        Purchase Requests
+                                    <div class="d-flex align-items-center">
+                                        <div class="subheader">Orders</div>
+                                        <div class="ms-auto">
+                                            <span class="badge bg-yellow text-yellow-fg">
+                                                <i class="ti ti-clock"></i> 8 pending
+                                            </span>
+                                        </div>
                                     </div>
-
-                                    <div class="h1 mb-0">
-                                        27
+                                    <div class="h1 mb-1">127</div>
+                                    <div class="d-flex mb-2">
+                                        <div class="text-secondary">
+                                            <i class="ti ti-shopping-cart me-1"></i>
+                                            34 this month
+                                        </div>
                                     </div>
-
-                                    <div class="text-secondary mt-2">
-                                        5 pending
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -282,175 +131,368 @@
                         <div class="col-sm-6 col-lg-3">
                             <div class="card">
                                 <div class="card-body">
-
-                                    <div class="text-secondary">
-                                        Revenue
+                                    <div class="d-flex align-items-center">
+                                        <div class="subheader">Revenue</div>
+                                        <div class="ms-auto">
+                                            <span class="badge bg-green text-green-fg">
+                                                <i class="ti ti-trending-up"></i> +18.2%
+                                            </span>
+                                        </div>
                                     </div>
-
-                                    <div class="h1 mb-0">
-                                        €24,580
+                                    <div class="h1 mb-1">€47,892</div>
+                                    <div class="d-flex mb-2">
+                                        <div class="text-secondary">
+                                            <i class="ti ti-currency-euro me-1"></i>
+                                            This month
+                                        </div>
                                     </div>
-
-                                    <div class="text-secondary mt-2">
-                                        This month
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Recent activity -->
+                    </div>
+
+                    <div class="row row-deck row-cards">
+
+                        <!-- Recent Orders -->
                         <div class="col-lg-8">
-
                             <div class="card">
-
                                 <div class="card-header">
-                                    <h3 class="card-title">
-                                        Recent Activity
-                                    </h3>
+                                    <h3 class="card-title">Recent Orders</h3>
+                                    <div class="card-actions">
+                                        <a href="/admin/orders" class="btn btn-sm">
+                                            View all
+                                        </a>
+                                    </div>
                                 </div>
-
                                 <div class="table-responsive">
-
-                                    <table class="table table-vcenter card-table">
-
+                                    <table class="table table-vcenter card-table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>User</th>
-                                                <th>Action</th>
+                                                <th>Order ID</th>
+                                                <th>Customer</th>
+                                                <th>Artwork</th>
                                                 <th>Date</th>
+                                                <th>Amount</th>
                                                 <th>Status</th>
+                                                <th class="w-1"></th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
-
                                             <tr>
+                                                <td class="text-secondary">#ORD-2847</td>
                                                 <td>
-                                                    John Doe
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">ME</span>
+                                                        <div>
+                                                            <div>Michael Evans</div>
+                                                            <div class="small text-secondary">michael@example.com</div>
+                                                        </div>
+                                                    </div>
                                                 </td>
-
+                                                <td>Sunset Over Mountains</td>
+                                                <td class="text-secondary">Sep 5, 2026</td>
+                                                <td>€1,249</td>
                                                 <td>
-                                                    Added a new artwork
+                                                    <span class="badge bg-yellow-lt">Pending</span>
                                                 </td>
-
-                                                <td class="text-secondary">
-                                                    5 minutes ago
-                                                </td>
-
                                                 <td>
-                                                    <span class="badge bg-green-lt">
-                                                        Completed
-                                                    </span>
+                                                    <a href="#">View</a>
                                                 </td>
                                             </tr>
-
                                             <tr>
+                                                <td class="text-secondary">#ORD-2846</td>
                                                 <td>
-                                                    Jane Smith
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">LC</span>
+                                                        <div>
+                                                            <div>Laura Chen</div>
+                                                            <div class="small text-secondary">laura.chen@example.com</div>
+                                                        </div>
+                                                    </div>
                                                 </td>
-
+                                                <td>Abstract Composition #42</td>
+                                                <td class="text-secondary">Sep 4, 2026</td>
+                                                <td>€850</td>
                                                 <td>
-                                                    Submitted purchase request
+                                                    <span class="badge bg-green-lt">Completed</span>
                                                 </td>
-
-                                                <td class="text-secondary">
-                                                    20 minutes ago
-                                                </td>
-
                                                 <td>
-                                                    <span class="badge bg-yellow-lt">
-                                                        Pending
-                                                    </span>
+                                                    <a href="#">View</a>
                                                 </td>
                                             </tr>
-
                                             <tr>
+                                                <td class="text-secondary">#ORD-2845</td>
                                                 <td>
-                                                    Alex Johnson
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">JM</span>
+                                                        <div>
+                                                            <div>James Miller</div>
+                                                            <div class="small text-secondary">james.m@example.com</div>
+                                                        </div>
+                                                    </div>
                                                 </td>
-
+                                                <td>Urban Landscape Series</td>
+                                                <td class="text-secondary">Sep 3, 2026</td>
+                                                <td>€2,100</td>
                                                 <td>
-                                                    Updated profile
+                                                    <span class="badge bg-blue-lt">Processing</span>
                                                 </td>
-
-                                                <td class="text-secondary">
-                                                    1 hour ago
-                                                </td>
-
                                                 <td>
-                                                    <span class="badge bg-blue-lt">
-                                                        Updated
-                                                    </span>
+                                                    <a href="#">View</a>
                                                 </td>
                                             </tr>
-
                                             <tr>
+                                                <td class="text-secondary">#ORD-2844</td>
                                                 <td>
-                                                    Sarah Wilson
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">SD</span>
+                                                        <div>
+                                                            <div>Sophie Dubois</div>
+                                                            <div class="small text-secondary">sophie.d@example.com</div>
+                                                        </div>
+                                                    </div>
                                                 </td>
-
+                                                <td>Watercolor Dreams</td>
+                                                <td class="text-secondary">Sep 2, 2026</td>
+                                                <td>€675</td>
                                                 <td>
-                                                    Added a new artwork
+                                                    <span class="badge bg-green-lt">Completed</span>
                                                 </td>
-
-                                                <td class="text-secondary">
-                                                    2 hours ago
-                                                </td>
-
                                                 <td>
-                                                    <span class="badge bg-green-lt">
-                                                        Completed
-                                                    </span>
+                                                    <a href="#">View</a>
                                                 </td>
                                             </tr>
-
+                                            <tr>
+                                                <td class="text-secondary">#ORD-2843</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="avatar avatar-sm me-2">AR</span>
+                                                        <div>
+                                                            <div>Alex Rodriguez</div>
+                                                            <div class="small text-secondary">alex.r@example.com</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Digital Art Collection</td>
+                                                <td class="text-secondary">Sep 1, 2026</td>
+                                                <td>€1,450</td>
+                                                <td>
+                                                    <span class="badge bg-green-lt">Completed</span>
+                                                </td>
+                                                <td>
+                                                    <a href="#">View</a>
+                                                </td>
+                                            </tr>
                                         </tbody>
-
                                     </table>
-
                                 </div>
+                            </div>
+                        </div>
 
+                        <!-- Recent Activity & Quick Stats -->
+                        <div class="col-lg-4">
+
+                            <!-- System Status -->
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h3 class="card-title">System Status</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row align-items-center mb-3">
+                                        <div class="col-auto">
+                                            <span class="avatar bg-green text-white">
+                                                <i class="ti ti-check"></i>
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="font-weight-medium">All systems operational</div>
+                                            <div class="text-secondary small">Last checked 2 min ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="row">
+                                            <div class="col">Storage</div>
+                                            <div class="col-auto">67% used</div>
+                                        </div>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-blue" style="width: 67%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="row">
+                                            <div class="col">Bandwidth</div>
+                                            <div class="col-auto">42% used</div>
+                                        </div>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-green" style="width: 42%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col">API Quota</div>
+                                            <div class="col-auto">28% used</div>
+                                        </div>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-cyan" style="width: 28%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Recent Activity</h3>
+                                </div>
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <span class="avatar avatar-sm">LC</span>
+                                            </div>
+                                            <div class="col text-truncate">
+                                                <div class="text-reset d-block">Laura Chen</div>
+                                                <div class="text-secondary text-truncate mt-n1">
+                                                    Purchased artwork
+                                                </div>
+                                            </div>
+                                            <div class="col-auto text-secondary">2m</div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <span class="avatar avatar-sm">EW</span>
+                                            </div>
+                                            <div class="col text-truncate">
+                                                <div class="text-reset d-block">Emma Wilson</div>
+                                                <div class="text-secondary text-truncate mt-n1">
+                                                    Registered new account
+                                                </div>
+                                            </div>
+                                            <div class="col-auto text-secondary">15m</div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <span class="avatar avatar-sm">DL</span>
+                                            </div>
+                                            <div class="col text-truncate">
+                                                <div class="text-reset d-block">David Lee</div>
+                                                <div class="text-secondary text-truncate mt-n1">
+                                                    Added 3 new artworks
+                                                </div>
+                                            </div>
+                                            <div class="col-auto text-secondary">1h</div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <span class="avatar avatar-sm">MH</span>
+                                            </div>
+                                            <div class="col text-truncate">
+                                                <div class="text-reset d-block">Maria Hernandez</div>
+                                                <div class="text-secondary text-truncate mt-n1">
+                                                    Updated profile settings
+                                                </div>
+                                            </div>
+                                            <div class="col-auto text-secondary">2h</div>
+                                        </div>
+                                    </div>
+                                    <div class="list-group-item">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <span class="avatar avatar-sm">TB</span>
+                                            </div>
+                                            <div class="col text-truncate">
+                                                <div class="text-reset d-block">Tom Brown</div>
+                                                <div class="text-secondary text-truncate mt-n1">
+                                                    Left a review
+                                                </div>
+                                            </div>
+                                            <div class="col-auto text-secondary">3h</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
 
-                        <!-- Quick actions -->
-                        <div class="col-lg-4">
-
+                        <!-- Top Artworks -->
+                        <div class="col-12">
                             <div class="card">
-
                                 <div class="card-header">
-                                    <h3 class="card-title">
-                                        Quick Actions
-                                    </h3>
-                                </div>
-
-                                <div class="card-body">
-
-                                    <div class="d-grid gap-2">
-
-                                        <a href="/admin/artworks/create"
-                                           class="btn btn-primary">
-                                            Add Artwork
+                                    <h3 class="card-title">Top Performing Artworks</h3>
+                                    <div class="card-actions">
+                                        <a href="/admin/analytics" class="btn btn-sm">
+                                            View Analytics
                                         </a>
-
-                                        <a href="/admin/users"
-                                           class="btn btn-outline-secondary">
-                                            Manage Users
-                                        </a>
-
-                                        <a href="/admin/purchases"
-                                           class="btn btn-outline-secondary">
-                                            View Purchase Requests
-                                        </a>
-
                                     </div>
-
                                 </div>
-
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="mb-3">
+                                                <div class="ratio ratio-16x9 rounded bg-light mb-2">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <i class="ti ti-photo" style="font-size: 3rem; color: #ccc;"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="font-weight-medium">Sunset Over Mountains</div>
+                                                <div class="text-secondary small">342 views · 28 likes</div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-green-lt">€1,249</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="mb-3">
+                                                <div class="ratio ratio-16x9 rounded bg-light mb-2">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <i class="ti ti-photo" style="font-size: 3rem; color: #ccc;"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="font-weight-medium">Abstract Composition</div>
+                                                <div class="text-secondary small">287 views · 45 likes</div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-green-lt">€850</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="mb-3">
+                                                <div class="ratio ratio-16x9 rounded bg-light mb-2">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <i class="ti ti-photo" style="font-size: 3rem; color: #ccc;"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="font-weight-medium">Urban Landscape</div>
+                                                <div class="text-secondary small">198 views · 32 likes</div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-green-lt">€2,100</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="mb-3">
+                                                <div class="ratio ratio-16x9 rounded bg-light mb-2">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <i class="ti ti-photo" style="font-size: 3rem; color: #ccc;"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="font-weight-medium">Watercolor Dreams</div>
+                                                <div class="text-secondary small">156 views · 21 likes</div>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-green-lt">€675</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
 
                     </div>
@@ -462,17 +504,26 @@
             <!-- Footer -->
             <footer class="footer footer-transparent d-print-none">
                 <div class="container-xl">
-
                     <div class="row text-center align-items-center">
-
-                        <div class="col-12">
+                        <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                            <ul class="list-inline list-inline-dots mb-0">
+                                <li class="list-inline-item">
+                                    <a href="/docs" class="link-secondary">Documentation</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="/support" class="link-secondary">Support</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="/changelog" class="link-secondary">Changelog</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-auto ms-lg-auto">
                             <div class="text-secondary">
-                                Admin Dashboard © 2026
+                                © 2026 Artist Portfolio Admin. All rights reserved.
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </footer>
 

@@ -1,0 +1,251 @@
+/**
+ * Admin Header Styles
+ *
+ * Theme-aware header component with CSS variables for seamless dark/light mode support.
+ */
+
+/* ============================================
+   CSS Custom Properties (Theme Variables)
+   ============================================ */
+:root {
+    /* Light Theme (Default) */
+    --bg-header: #ffffff;
+    --border-header: #e5e7eb;
+    --text-header: #374151;
+    --text-header-hover: #111827;
+    --shadow-header: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --focus-ring: #3b82f6;
+}
+
+[data-bs-theme="dark"],
+.dark-theme {
+    /* Dark Theme */
+    --bg-header: #1f2937;
+    --border-header: #374151;
+    --text-header: #d1d5db;
+    --text-header-hover: #f9fafb;
+    --shadow-header: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+    --focus-ring: #60a5fa;
+}
+
+/* ============================================
+   Dashboard Header
+   ============================================ */
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0 1.5rem;
+    background-color: var(--bg-header);
+    border-bottom: 1px solid var(--border-header);
+    box-shadow: var(--shadow-header);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Menu Toggle Button (Left Side) */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-header);
+    transition: color 0.2s ease, transform 0.15s ease;
+    border-radius: 6px;
+}
+
+.menu-toggle:hover {
+    color: var(--text-header-hover);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="dark"] .menu-toggle:hover,
+.dark-theme .menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-toggle:active {
+    transform: scale(0.95);
+}
+
+.menu-toggle:focus {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* Header Spacer (Pushes content to edges) */
+.header-spacer {
+    flex: 1;
+}
+
+/* Header Actions Container (Right Side) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-header);
+    transition: color 0.2s ease, transform 0.15s ease;
+    border-radius: 6px;
+}
+
+.theme-toggle:hover {
+    color: var(--text-header-hover);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="dark"] .theme-toggle:hover,
+.dark-theme .theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle:focus {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.theme-toggle .hidden {
+    display: none;
+}
+
+/* Header Logo */
+.header-logo {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease;
+}
+
+.header-logo:hover {
+    opacity: 0.8;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+/* ============================================
+   Simple Header (Centered Logo)
+   ============================================ */
+.simple-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    padding: 0 1.5rem;
+    background-color: var(--bg-header);
+    border-bottom: 1px solid var(--border-header);
+    box-shadow: var(--shadow-header);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.header-logo-simple {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease;
+}
+
+.header-logo-simple:hover {
+    opacity: 0.8;
+}
+
+.logo-img-simple {
+    height: 40px;
+    width: auto;
+}
+
+/* Theme toggle in simple header (positioned absolutely to the right) */
+.simple-header .theme-toggle {
+    position: absolute;
+    right: 1.5rem;
+}
+
+/* ============================================
+   Responsive Styles
+   ============================================ */
+@media (max-width: 768px) {
+    .dashboard-header,
+    .simple-header {
+        height: 56px;
+        padding: 0 1rem;
+    }
+
+    .logo-img,
+    .logo-img-simple {
+        height: 32px;
+    }
+
+    .header-actions {
+        gap: 0.5rem;
+    }
+
+    .simple-header .theme-toggle {
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header,
+    .simple-header {
+        padding: 0 0.75rem;
+    }
+
+    .logo-img,
+    .logo-img-simple {
+        height: 28px;
+    }
+
+    .menu-toggle,
+    .theme-toggle {
+        padding: 0.375rem;
+    }
+
+    .simple-header .theme-toggle {
+        right: 0.75rem;
+    }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .dashboard-header,
+    .simple-header,
+    .menu-toggle,
+    .theme-toggle,
+    .header-logo,
+    .header-logo-simple {
+        transition: none;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+.menu-toggle:focus-visible,
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}

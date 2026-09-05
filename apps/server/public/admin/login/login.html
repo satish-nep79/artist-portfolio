@@ -12,11 +12,17 @@
     <!-- Shared Admin Styles -->
     <link rel="stylesheet" href="/admin/shared/css/admin.css">
 
+    <!-- Shared Components -->
+    <script src="/admin/shared/components/admin-header.js" defer></script>
+
     <!-- Co-located Compiled Page Logic -->
     <script src="/admin/login/auth.js" type="module"></script>
+
 </head>
 
 <body class="admin-shell d-flex flex-column bg-body-tertiary">
+
+    <admin-header type="simple"></admin-header>
     <div class="page page-center">
         <div class="container container-tight py-4">
             <div class="card card-md">

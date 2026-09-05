@@ -13,6 +13,15 @@
     --admin-shadow: 0 0.25rem 1rem rgba(31, 41, 51, 0.08);
 }
 
+/* Dark theme variables */
+[data-bs-theme="dark"] {
+    --admin-page-bg: #1d2125;
+    --admin-surface: #282e33;
+    --admin-border: #3e444a;
+    --admin-text: #e4e5e7;
+    --admin-muted: #9ca3af;
+}
+
 body.admin-shell {
     min-width: 320px;
     color: var(--admin-text);
@@ -96,6 +105,89 @@ body.admin-shell {
     color: var(--admin-accent-dark);
 }
 
+/* ============================================
+   Admin Header Enhancements
+   ============================================ */
+
+/* Ensure navbar background is theme-aware */
+.navbar[data-bs-theme=""] {
+    background-color: var(--admin-surface);
+    border-bottom: 1px solid var(--admin-border);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Theme toggle button styling */
+.navbar .nav-link {
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.navbar .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="dark"] .navbar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Profile dropdown enhancements */
+.navbar .avatar {
+    background-color: var(--admin-accent);
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar .dropdown-menu {
+    border: 1px solid var(--admin-border);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+}
+
+[data-bs-theme="dark"] .navbar .dropdown-menu {
+    background-color: var(--admin-surface);
+}
+
+.navbar .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.15s ease;
+    color: var(--admin-text);
+    text-decoration: none;
+}
+
+.navbar .dropdown-item i {
+    font-size: 1.125rem;
+    width: 1.5rem;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+    background-color: rgba(32, 107, 196, 0.1);
+    color: var(--admin-accent);
+}
+
+[data-bs-theme="dark"] .navbar .dropdown-item:hover,
+[data-bs-theme="dark"] .navbar .dropdown-item:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .navbar .navbar-brand-image {
+        height: 28px;
+    }
+
+    .navbar .avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 0.875rem;
+    }
+}
+
+/* Toast container */
 .admin-toast-container {
     position: fixed;
     z-index: 1080;
