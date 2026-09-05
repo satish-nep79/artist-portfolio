@@ -2,61 +2,58 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Sign in - Admin Dashboard</title>
-    <!-- Tabler CSS CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+
+    <!-- Shared Tabler Config -->
+    <script src="/admin/shared/js/tabler-config.js" defer></script>
+
+    <!-- Shared Admin Styles -->
+    <link rel="stylesheet" href="/admin/shared/css/admin.css">
+
+    <!-- Co-located Compiled Page Logic -->
+    <script src="/admin/login/auth.js" type="module"></script>
 </head>
 
-<body class="d-flex flex-column">
+<body class="admin-shell d-flex flex-column bg-body-tertiary">
     <div class="page page-center">
         <div class="container container-tight py-4">
-
-            <!-- Brand Logo / Heading -->
-            <div class="text-center mb-4">
-                <a href="." class="navbar-brand navbar-brand-autodark">
-                    <h1 class="m-0">Admin Panel</h1>
-                </a>
-            </div>
-
-            <!-- Login Form Card -->
             <div class="card card-md">
                 <div class="card-body">
-                    <h2 class="h2 text-center mb-4">Login to your account</h2>
+                    <h2 class="h2 text-center mb-4">Login to Admin Panel</h2>
 
-                    <form action="/api/v1/auth/login" method="POST" autocomplete="off">
-                        <!-- Email Input -->
+                    <form id="loginForm" autocomplete="off">
                         <div class="mb-3">
-                            <label class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" placeholder="your@email.com" required
-                                autocomplete="off">
+                            <label class="form-label" for="email">Email address</label>
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="admin@example.com" value="admin@example.com" required>
                         </div>
 
-                        <!-- Password Input -->
-                        <div class="mb-2">
-                            <label class="form-label">
-                                Password
-                                <span class="form-label-description">
-                                    <a href="#">I forgot password</a>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <div class="input-group input-group-flat">
+                                <input type="password" id="password" name="password" class="form-control"
+                                    placeholder="Your password" value="adminpassword" required>
+                                <span class="input-group-text">
+                                    <button type="button" id="togglePassword"
+                                        class="link-secondary border-0 bg-transparent p-0" title="Show password"
+                                        aria-label="Show password">
+                                        <i class="ti ti-eye-off fs-2 stroke-1.5 icon-muted" id="togglePasswordIcon"
+                                            size="24"></i>
+                                    </button>
                                 </span>
-                            </label>
-                            <input type="password" name="password" class="form-control" placeholder="Your password"
-                                required autocomplete="off">
+                            </div>
                         </div>
-                        <!-- Submit Button -->
+
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary w-100">Sign in</button>
                         </div>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
-
-    <!-- Tabler JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 </body>
 
 </html>

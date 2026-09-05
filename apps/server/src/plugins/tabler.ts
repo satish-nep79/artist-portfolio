@@ -8,6 +8,12 @@ const staticPlugin: FastifyPluginAsync = async (fastify) => {
         prefix: '/assets/tabler/',
         decorateReply: false,
     })
+
+    await fastify.register(fastifyStatic, {
+        root: path.join(process.cwd(), 'public'),
+        prefix: '/',
+        decorateReply: false,
+    })
 }
 
 export default staticPlugin
