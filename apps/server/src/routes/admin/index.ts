@@ -7,7 +7,7 @@ const AdminDashboard: FastifyPluginAsync = async (fastify, opts): Promise<void> 
         async function (request, reply) {
 
             fastify.log.info(`Serving dashboard HTML for request to ${request.url}`);
-            const html = await PublicHtmlFiles.getHtml(PublicRoutes.DASHBOARD, { cache: true });
+            const html = await PublicHtmlFiles.getHtml(PublicRoutes.DASHBOARD, { cache: false });
             return reply.type('text/html').send(html)
         })
 }

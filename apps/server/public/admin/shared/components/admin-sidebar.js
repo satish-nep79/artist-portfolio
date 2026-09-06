@@ -14,33 +14,23 @@ class AdminSidebar extends HTMLElement {
     connectedCallback() {
         const activePage = this.getAttribute('active') || 'dashboard';
         this.render(activePage);
+        this.initSidebarToggle();
     }
 
     render(activePage) {
         this.innerHTML = `
-            <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
-                <div class="container-fluid">
-                    <!-- Logo -->
-                    <h1 class="navbar-brand navbar-brand-autodark">
-                        <a href="/admin">
-                            <img src="/admin/assets/logo_white.png" alt="Admin Panel" height="32">
-                        </a>
-                    </h1>
-
-                    <!-- Mobile menu button -->
-                    <button class="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#sidebar-menu"
-                            aria-controls="sidebar-menu"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <!-- Sidebar navigation -->
-                    <div class="collapse navbar-collapse" id="sidebar-menu">
-                        <ul class="navbar-nav pt-lg-3">
+            <button class="sidebar-toggle" type="button" id="sidebarToggle"
+                    aria-expanded="true" aria-label="Hide sidebar" title="Hide sidebar">
+                <i class="ti ti-layout-sidebar-left-collapse"></i>
+            </button>
+            <aside class="admin-sidebar-panel" aria-label="Admin sidebar">
+                <div class="sidebar-brand">
+                    <a href="/admin" aria-label="Artist Portfolio Admin home">
+                        <img src="/admin/assets/logo_white.png" alt="Artist Portfolio Admin" height="32">
+                    </a>
+                </div>
+                <nav class="navbar-collapse" id="sidebar-menu" aria-label="Admin navigation">
+                    <ul class="navbar-nav">
                             <li class="nav-item ${activePage === 'dashboard' ? 'active' : ''}">
                                 <a class="nav-link" href="/admin/dashboard">
                                     <span class="nav-link-icon">
@@ -105,12 +95,27 @@ class AdminSidebar extends HTMLElement {
                                     <span class="nav-link-title">Settings</span>
                                 </a>
                             </li>
-                        </ul>
-                    </div>
-                </div>
+                    </ul>
+                </nav>
             </aside>
         `;
     }
+
+    initSidebarToggle() {
+        const toggle = this.querySelector('#sidebarToggle');
+        const layout = document.querySelector('.dashboard-layout');
+        if (!toggle || !layout) return;
+
+        toggle.addEventListener('click', (event) => {
+            event.preventDefault();
+            const isCollapsed = layout.classList.toggle('sidebar-collapsed');
+            toggle.setAttribute('aria-expanded', String(!isCollapsed));
+            toggle.setAttribute('aria-label', isCollapsed ? 'Show sidebar' : 'Hide sidebar');
+            toggle.setAttribute('title', isCollapsed ? 'Show sidebar' : 'Hide sidebar');
+            toggle.querySelector('i').className = `ti ti-layout-sidebar-left-${isCollapsed ? 'expand' : 'collapse'}`;
+        });
+    }
+
 }
 
 // Register the custom element

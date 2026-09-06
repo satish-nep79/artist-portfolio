@@ -41,7 +41,12 @@ class AdminHeader extends HTMLElement {
         this.initThemeToggle();
         if (type !== 'simple') {
             this.initProfileDropdown();
+            this.initNotificationDropdown();
         }
+
+        window.addEventListener('themeChanged', (event) => {
+            this.updateBrandLogo(event.detail.effectiveTheme);
+        });
     }
 
     /**
@@ -75,6 +80,7 @@ class AdminHeader extends HTMLElement {
 
         const effectiveTheme = this.getEffectiveTheme();
         document.documentElement.setAttribute('data-bs-theme', effectiveTheme);
+        this.querySelector('.admin-topbar')?.setAttribute('data-bs-theme', effectiveTheme);
 
         // Update icon if already rendered
         this.updateThemeIcon();
@@ -124,6 +130,13 @@ class AdminHeader extends HTMLElement {
 
         themeToggle.setAttribute('title', iconData.title);
         themeToggle.setAttribute('aria-label', iconData.title);
+    }
+
+    updateBrandLogo(theme = this.getEffectiveTheme()) {
+        const logo = this.querySelector('.navbar-brand-image');
+        if (logo) {
+            logo.src = theme === 'dark' ? '/admin/assets/logo_white.png' : '/admin/assets/logo_normal.png';
+        }
     }
 
     /**
@@ -179,6 +192,7 @@ class AdminHeader extends HTMLElement {
 
             const isOpen = dropdown.classList.contains('show');
             this.closeDropdown();
+            this.closeNotificationDropdown();
 
             if (!isOpen) {
                 dropdown.classList.add('show');
@@ -233,6 +247,38 @@ class AdminHeader extends HTMLElement {
         }
     }
 
+    closeNotificationDropdown() {
+        const button = this.querySelector('#notificationDropdownBtn');
+        const dropdown = this.querySelector('#notificationDropdown');
+
+        if (dropdown && button) {
+            dropdown.classList.remove('show');
+            button.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    initNotificationDropdown() {
+        const button = this.querySelector('#notificationDropdownBtn');
+        const dropdown = this.querySelector('#notificationDropdown');
+        if (!button || !dropdown) return;
+
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            const isOpen = dropdown.classList.contains('show');
+            this.closeDropdown();
+            dropdown.classList.toggle('show', !isOpen);
+            button.setAttribute('aria-expanded', String(!isOpen));
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!this.contains(event.target)) {
+                dropdown.classList.remove('show');
+                button.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
     /**
      * Render full header (logo + theme + profile)
      */
@@ -241,15 +287,9 @@ class AdminHeader extends HTMLElement {
         const iconData = this.getThemeIconData();
 
         this.innerHTML = `
-            <header class="navbar navbar-expand-md d-print-none" data-bs-theme="">
+            <header class="admin-topbar navbar navbar-expand-md d-print-none" data-bs-theme="${this.getEffectiveTheme()}">
                 <div class="container-xl">
-                    <!-- Logo -->
-                    <a href="/admin" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                        <img src="/admin/assets/logo_normal.png" alt="Admin Logo" height="32" class="navbar-brand-image">
-                    </a>
-
-                    <!-- Right side controls -->
-                    <div class="navbar-nav flex-row order-md-last">
+                    <div class="navbar-nav flex-row order-md-last ms-auto">
                         <!-- Theme Toggle -->
                         <div class="nav-item">
                             <a href="#"
@@ -259,6 +299,21 @@ class AdminHeader extends HTMLElement {
                                aria-label="${iconData.title}">
                                 <i class="ti ${iconData.icon}"></i>
                             </a>
+                        </div>
+
+                        <!-- Notifications -->
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link px-2 position-relative" id="notificationDropdownBtn"
+                               role="button" aria-haspopup="true" aria-expanded="false" title="Notifications">
+                                <i class="ti ti-bell"></i><span class="notification-dot"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notification-menu"
+                                 id="notificationDropdown" aria-labelledby="notificationDropdownBtn">
+                                <div class="dropdown-header d-flex justify-content-between"><strong>Notifications</strong><span class="badge bg-blue-lt">3 new</span></div>
+                                <a class="dropdown-item notification-item" href="/admin/inquiries"><i class="ti ti-mail text-red"></i><span><strong>New inquiry received</strong><small>Elena Rossi · 12 min ago</small></span></a>
+                                <a class="dropdown-item notification-item" href="/admin/programs"><i class="ti ti-calendar-event text-blue"></i><span><strong>Program update published</strong><small>Open Studio Weekend · 1 hr ago</small></span></a>
+                                <a class="dropdown-item notification-item" href="/admin/artworks"><i class="ti ti-photo text-green"></i><span><strong>Artwork approved</strong><small>Quiet Geometry · 2 hrs ago</small></span></a>
+                            </div>
                         </div>
 
                         <!-- User Profile Dropdown -->
@@ -306,7 +361,7 @@ class AdminHeader extends HTMLElement {
         const iconData = this.getThemeIconData();
 
         this.innerHTML = `
-            <header class="navbar navbar-expand-md d-print-none" data-bs-theme="">
+            <header class="admin-topbar navbar navbar-expand-md d-print-none" data-bs-theme="${this.getEffectiveTheme()}">
                 <div class="container-xl">
                     <!-- Logo on the left -->
                     <a href="/admin" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
@@ -328,6 +383,7 @@ class AdminHeader extends HTMLElement {
                 </div>
             </header>
         `;
+        this.updateBrandLogo();
     }
 }
 

@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { errorHtml } from './error_page';
 
-const BASE_ADMIN_DIR = path.join('public', 'admin');
+const BASE_ADMIN_DIR = path.join('public', 'admin', 'pages');
 const BASE_ERROR_DIR = path.join('public', 'error');
 
 /**

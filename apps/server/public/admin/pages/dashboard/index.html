@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard | Artist Portfolio Admin</title>
+    <link rel="stylesheet" href="/assets/tabler/css/tabler.min.css">
+    <link rel="stylesheet" href="/admin/shared/css/admin.css?v=20260906-11">
+    <script src="/admin/shared/components/admin-sidebar.js" defer></script>
+    <script src="/admin/shared/components/admin-header.js" defer></script>
+</head>
+
+<body class="admin-shell dashboard-page">
+    <div class="dashboard-layout">
+        <admin-sidebar active="dashboard"></admin-sidebar>
+        <div class="page-wrapper">
+            <admin-header user-name="Sarah Johnson"></admin-header>
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="page-header d-print-none mb-4">
+                        <div class="row align-items-center g-3">
+                            <div class="col">
+                                <h1 class="page-title">Dashboard</h1>
+                                <div class="text-secondary mt-1">A clear view of your collection, programs, and conversations.</div>
+                            </div>
+                            <div class="col-auto"><a href="/" class="btn btn-outline-primary" target="_blank" rel="noreferrer"><i class="ti ti-external-link me-1"></i> View Website</a></div>
+                        </div>
+                    </div>
+
+                    <div class="row row-deck row-cards mb-4">
+                        <div class="col-sm-6 col-xl-3"><div class="card dashboard-stat"><div class="card-body"><div class="d-flex align-items-center"><span class="dashboard-stat-icon bg-blue-lt"><i class="ti ti-palette"></i></span><span class="subheader ms-3">Total Artwork</span></div><div class="h1 mb-1 mt-3">128</div><div class="text-secondary"><span class="text-green fw-semibold"><i class="ti ti-trending-up"></i> 6 new</span> added this month</div></div></div></div>
+                        <div class="col-sm-6 col-xl-3"><div class="card dashboard-stat"><div class="card-body"><div class="d-flex align-items-center"><span class="dashboard-stat-icon bg-green-lt"><i class="ti ti-eye"></i></span><span class="subheader ms-3">Available Artwork</span></div><div class="h1 mb-1 mt-3">74</div><div class="text-secondary">57.8% of collection</div></div></div></div>
+                        <div class="col-sm-6 col-xl-3"><div class="card dashboard-stat"><div class="card-body"><div class="d-flex align-items-center"><span class="dashboard-stat-icon bg-orange-lt"><i class="ti ti-calendar-event"></i></span><span class="subheader ms-3">Active Programs</span></div><div class="h1 mb-1 mt-3">4</div><div class="text-secondary"><span class="text-orange fw-semibold">2 upcoming</span> this season</div></div></div></div>
+                        <div class="col-sm-6 col-xl-3"><div class="card dashboard-stat"><div class="card-body"><div class="d-flex align-items-center"><span class="dashboard-stat-icon bg-red-lt"><i class="ti ti-mail"></i></span><span class="subheader ms-3">New Inquiries</span></div><div class="h1 mb-1 mt-3">12</div><div class="text-secondary"><span class="text-red fw-semibold">5 require attention</span></div></div></div></div>
+                    </div>
+
+                    <section class="mb-4" aria-labelledby="quick-actions-title"><div class="section-heading"><h2 id="quick-actions-title">Quick Actions</h2></div><div class="quick-actions"><a class="quick-action" href="/admin/artworks/new"><i class="ti ti-plus"></i><span>Add Artwork</span></a><a class="quick-action" href="/admin/programs/new"><i class="ti ti-calendar-plus"></i><span>Add Program</span></a><a class="quick-action" href="/admin/inquiries"><i class="ti ti-inbox"></i><span>View Inquiries</span></a><a class="quick-action" href="/" target="_blank" rel="noreferrer"><i class="ti ti-world"></i><span>View Website</span></a></div></section>
+
+                    <div class="row row-deck row-cards mb-4">
+                        <div class="col-lg-8"><div class="card h-100"><div class="card-header flex-wrap gap-2"><div><h2 class="card-title">Recent Inquiries</h2><div class="text-secondary small">Keep conversations moving forward.</div></div><a href="/admin/inquiries" class="btn btn-sm btn-ghost-primary">View all <i class="ti ti-arrow-up-right ms-1"></i></a></div><div class="card-body pt-0"><div class="inquiry-filters" role="group" aria-label="Inquiry filters"><button class="active" type="button">All <span>12</span></button><button type="button">Purchase</button><button type="button">Commission</button><button type="button">Contact</button><button type="button">New <span>5</span></button></div><div class="table-responsive"><table class="table table-vcenter dashboard-table"><thead><tr><th>Type</th><th>Name</th><th>Related artwork</th><th>Status</th><th>Date</th><th></th></tr></thead><tbody>
+                            <tr><td><i class="ti ti-shopping-bag text-blue me-1"></i> Purchase</td><td class="fw-semibold">Elena Rossi</td><td class="text-secondary">Quiet Geometry</td><td><span class="badge bg-red-lt">New</span></td><td class="text-secondary">Today</td><td><a href="/admin/inquiries/1" aria-label="Open Elena Rossi inquiry"><i class="ti ti-chevron-right"></i></a></td></tr>
+                            <tr><td><i class="ti ti-brush text-orange me-1"></i> Commission</td><td class="fw-semibold">Marcus Lee</td><td class="text-secondary">Custom portrait</td><td><span class="badge bg-yellow-lt">In progress</span></td><td class="text-secondary">Sep 5</td><td><a href="/admin/inquiries/2" aria-label="Open Marcus Lee inquiry"><i class="ti ti-chevron-right"></i></a></td></tr>
+                            <tr><td><i class="ti ti-message text-green me-1"></i> Contact</td><td class="fw-semibold">Noah Williams</td><td class="text-secondary">General inquiry</td><td><span class="badge bg-blue-lt">New</span></td><td class="text-secondary">Sep 4</td><td><a href="/admin/inquiries/3" aria-label="Open Noah Williams inquiry"><i class="ti ti-chevron-right"></i></a></td></tr>
+                            <tr><td><i class="ti ti-shopping-bag text-blue me-1"></i> Purchase</td><td class="fw-semibold">Amelia Hart</td><td class="text-secondary">Blue Study No. 3</td><td><span class="badge bg-secondary-lt">Replied</span></td><td class="text-secondary">Sep 3</td><td><a href="/admin/inquiries/4" aria-label="Open Amelia Hart inquiry"><i class="ti ti-chevron-right"></i></a></td></tr>
+                        </tbody></table></div></div></div></div>
+                        <div class="col-lg-4"><div class="card h-100"><div class="card-header"><h2 class="card-title">Artwork Status</h2><a href="/admin/artworks" class="btn btn-sm btn-ghost-primary">Manage</a></div><div class="card-body"><div class="status-donut" aria-label="Artwork status: 74 available, 18 reserved, 36 sold"><div><strong>128</strong><span>total works</span></div></div><div class="status-list"><a href="/admin/artworks?status=available"><span class="status-dot bg-green"></span>Available <strong>74</strong><i class="ti ti-chevron-right"></i></a><a href="/admin/artworks?status=reserved"><span class="status-dot bg-yellow"></span>Reserved <strong>18</strong><i class="ti ti-chevron-right"></i></a><a href="/admin/artworks?status=sold"><span class="status-dot bg-blue"></span>Sold <strong>36</strong><i class="ti ti-chevron-right"></i></a></div></div></div></div>
+                    </div>
+
+                    <div class="row row-deck row-cards mb-4">
+                        <div class="col-xl-7"><div class="card h-100"><div class="card-header"><h2 class="card-title">Recent Artwork</h2><a href="/admin/artworks" class="btn btn-sm btn-ghost-primary">View all <i class="ti ti-arrow-up-right ms-1"></i></a></div><div class="card-body"><div class="artwork-grid"><a class="artwork-item" href="/admin/artworks/1"><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=480&amp;q=80" alt="Quiet Geometry"><div><strong>Quiet Geometry</strong><span>Abstract · 2026</span><em class="badge bg-green-lt">Available</em></div></a><a class="artwork-item" href="/admin/artworks/2"><img src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?w=480&amp;q=80" alt="Blue Study No. 3"><div><strong>Blue Study No. 3</strong><span>Mixed media · 2026</span><em class="badge bg-yellow-lt">Reserved</em></div></a><a class="artwork-item" href="/admin/artworks/3"><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=480&amp;q=80" alt="After the Rain"><div><strong>After the Rain</strong><span>Painting · 2025</span><em class="badge bg-green-lt">Available</em></div></a><a class="artwork-item" href="/admin/artworks/4"><img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=480&amp;q=80" alt="Soft Edges"><div><strong>Soft Edges</strong><span>Photography · 2025</span><em class="badge bg-blue-lt">Sold</em></div></a></div></div></div></div>
+                        <div class="col-xl-5"><div class="card h-100"><div class="card-header"><div><h2 class="card-title">Upcoming Programs</h2><div class="text-secondary small">The next moments on your calendar.</div></div><a href="/admin/programs" class="btn btn-sm btn-ghost-primary">View all</a></div><div class="card-body"><div class="program-list"><a href="/admin/programs/1"><span class="program-date"><b>18</b><small>SEP</small></span><span><strong>Open Studio Weekend</strong><small>Lisbon · Sep 18–20</small></span><span class="badge bg-green-lt">Confirmed</span></a><a href="/admin/programs/2"><span class="program-date"><b>02</b><small>OCT</small></span><span><strong>New Works Exhibition</strong><small>Porto · Oct 2–24</small></span><span class="badge bg-blue-lt">Upcoming</span></a><a href="/admin/programs/3"><span class="program-date"><b>14</b><small>NOV</small></span><span><strong>Artists in Conversation</strong><small>Online · Nov 14</small></span><span class="badge bg-secondary-lt">Draft</span></a></div></div></div></div>
+                    </div>
+
+                    <div class="card mb-4"><div class="card-header"><h2 class="card-title">Recent Activity</h2><a href="/admin/activity" class="btn btn-sm btn-ghost-primary">View history</a></div><div class="card-body"><div class="activity-line"><span class="activity-icon bg-blue-lt"><i class="ti ti-plus"></i></span><span><strong>Quiet Geometry</strong> was added to the collection<small>Sarah Johnson · 24 minutes ago</small></span></div><div class="activity-line"><span class="activity-icon bg-red-lt"><i class="ti ti-mail"></i></span><span>New purchase inquiry from <strong>Elena Rossi</strong><small>Today at 09:42</small></span></div><div class="activity-line"><span class="activity-icon bg-green-lt"><i class="ti ti-calendar-event"></i></span><span><strong>Open Studio Weekend</strong> program was updated<small>Yesterday at 16:18</small></span></div></div></div>
+                </div>
+            </div>
+            <footer class="footer footer-transparent d-print-none"><div class="container-xl"><div class="text-secondary">Artist Portfolio Admin · 2026</div></div></footer>
+        </div>
+    </div>
+    <script src="/assets/tabler/js/tabler.min.js"></script>
+    <script>
+        document.querySelectorAll('.inquiry-filters button').forEach((filter) => {
+            filter.addEventListener('click', () => {
+                document.querySelector('.inquiry-filters button.active')?.classList.remove('active');
+                filter.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
