@@ -24,3 +24,38 @@ model User{
   createdAt DateTime @map("created_at") @default(now())
   updatedAt DateTime @map("updated_at") @updatedAt
 }
+
+model SiteConfigs{
+  id String @id @default(uuid())
+  name String @default("Bikram Nepali")
+  profileImageUrl String? @map("profile_image_url")
+  quote String?
+  bioParagraphs String[] @map("bio_paragraphs")
+
+  // Highlight blocks
+  philosophyTitle String?  @map("philosophy_title")
+  philosophyText  String?  @map("philosophy_text")
+  inspirationTitle String? @map("inspiration_title")
+  inspirationText String?  @map("inspiration_text")
+  approachTitle   String?  @map("approach_title")
+  approachText    String?  @map("approach_text")
+  location        String
+  map_url String? @map("map_url")
+
+  // Contact Info
+  email           String
+  phone           String
+  responseTimeMessage    String   @map("response_time_message")
+
+  // Social Links
+  instagramUrl    String?  @map("instagram_url")
+  facebookUrl     String?  @map("facebook_url")
+  twitterUrl      String?  @map("twitter_url")
+  linkedinUrl     String?  @map("linkedin_url")
+
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("site_configs")
+
+}

@@ -60,7 +60,6 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
         return reply.status(200).send(buildSuccessResponse({
             status: 200, message: 'Login successful', data: {
-                token,
                 expires_at: tokenExpiration.toISOString(),
             }
         }))
