@@ -17,6 +17,7 @@ export class PublicRoutes {
 
     static readonly LOGIN = path.join(BASE_ADMIN_DIR, 'login', 'login.html')
     static readonly DASHBOARD = path.join(BASE_ADMIN_DIR, 'dashboard', 'index.html')
+    static readonly SITE_CONTENT = path.join(BASE_ADMIN_DIR, 'site_content', 'index.html')
 }
 
 /**
@@ -36,6 +37,7 @@ export class PublicHtmlFiles {
         options?: { cache?: boolean },
     ): Promise<string> {
         const useCache = options?.cache ?? true
+        console.info(`Request to read HTML file: ${filePath} (cache: ${useCache})`);
 
         if (useCache) {
             const cached = this.cache.get(filePath)
