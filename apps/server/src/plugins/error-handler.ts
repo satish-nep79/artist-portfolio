@@ -30,16 +30,21 @@ const getValidationMessage = (error: FastifyError): string => {
 }
 
 export default fp(async (fastify, opts) => {
-  fastify.setErrorHandler((error, request, reply) => {
-    const fastifyError = error as FastifyError
-    const statusCode = fastifyError.statusCode ?? 500
-    return reply.status(statusCode).send(
-      buildErrorResponse({
-        status: statusCode,
-        message: statusCode === 400
-          ? getValidationMessage(fastifyError)
-          : 'Request failed'
-      })
-    )
-  })
+  try {
+    fastify.setErrorHandler((error, request, reply) => {
+      const fastifyError = error as FastifyError
+      const statusCode = fastifyError.statusCode ?? 500
+      return reply.status(statusCode).send(
+        buildErrorResponse({
+          status: statusCode,
+          message: statusCode === 400
+            ? getValidationMessage(fastifyError)
+            : 'Request failed'
+        })
+      )
+    });
+  } catch (err) {
+    fastify.log.error(`Error registering error handler plugin: ${err}`);
+    throw err;
+  }
 })

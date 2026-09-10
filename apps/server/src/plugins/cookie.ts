@@ -10,6 +10,7 @@ export default fp(async (fastify, opts) => {
             parseOptions: {}
         })
     } catch (err) {
-        fastify.log.error(`Error registering cookie plugin: ${err}`)
+        fastify.log.error(`Error registering cookie plugin: ${err}`);
+        throw err;
     }
 })

@@ -56,60 +56,69 @@ const getJwtErrorMessage = (err: unknown): string => {
 // 3. Fastify JWT Plugin
 // ==========================================
 export default fp(async (fastify) => {
-    const secret = process.env.JWT_SECRET;
-    if (!secret) {
-        throw new Error('JWT_SECRET environment variable is not set');
-    }
+    try {
+        const secret = process.env.JWT_SECRET;
+        if (!secret) {
+            throw new Error('JWT_SECRET environment variable is not set');
+        }
 
-    await fastify.register(jwt, { secret });
+        await fastify.register(jwt, { secret });
+        fastify.log.info('JWT plugin registered successfully');
 
-    fastify.decorate('authenticate', async (request, reply) => {
-        try {
-            // Step A: Extract & verify JWT (Header first, fallback to Cookie)
+        fastify.decorate('authenticate', async (request, reply) => {
             try {
-                fastify.log.info(`Authenticating request for ${request.url}`);
-                await request.jwtVerify();
-            } catch (err) {
-                const tokenFromCookie = request.cookies?.auth_token;
-                if (!tokenFromCookie) {
-                    fastify.log.info(`No token found in cookies for request to ${request.url}`);
-                    throw err;
+                // Step A: Extract & verify JWT (Header first, fallback to Cookie)
+                try {
+                    fastify.log.info(`Authenticating request for ${request.url}`);
+                    await request.jwtVerify();
+                } catch (err) {
+                    const tokenFromCookie = request.cookies?.auth_token;
+                    if (!tokenFromCookie) {
+                        fastify.log.info(`No token found in cookies for request to ${request.url}`);
+                        throw err;
+                    }
+
+                    fastify.log.info(`Token found in cookies for request to ${request.url}, verifying...`);
+                    request.user = fastify.jwt.verify<FastifyJWT['user']>(tokenFromCookie);
                 }
 
-                fastify.log.info(`Token found in cookies for request to ${request.url}, verifying...`);
-                request.user = fastify.jwt.verify<FastifyJWT['user']>(tokenFromCookie);
+                fastify.log.info(`JWT verified for user: ${request.user.email}`);
+
+                // Step B: Validate user status and active session in database
+                const user = await fastify.prisma.user.findUnique({
+                    where: { id: request.user.id },
+                    select: { tokenId: true },
+                });
+
+                if (!user) {
+                    throw new Error('UserNotFound');
+                }
+
+                if (user.tokenId !== request.user.tokenId) {
+                    throw new Error('TokenRevoked');
+                }
+            } catch (err) {
+                fastify.log.info(`Authentication failed for request to ${request.url}: ${err}`);
+
+                // Step C: Handle authentication failure based on route type
+                const isApiRoute =
+                    request.url.startsWith('/api') ||
+                    request.headers.accept?.includes('application/json');
+
+                if (isApiRoute) {
+                    return reply
+                        .status(401)
+                        .send(buildErrorResponse({ status: 401, message: getJwtErrorMessage(err) }));
+                }
+
+                return reply.redirect('/admin/login').send();
             }
+        });
 
-            fastify.log.info(`JWT verified for user: ${request.user.email}`);
+        fastify.log.info('Authentication decorator registered successfully');
+    } catch (err) {
+        fastify.log.error(`Error registering JWT plugin: ${err}`);
+        throw err;
 
-            // Step B: Validate user status and active session in database
-            const user = await fastify.prisma.user.findUnique({
-                where: { id: request.user.id },
-                select: { tokenId: true },
-            });
-
-            if (!user) {
-                throw new Error('UserNotFound');
-            }
-
-            if (user.tokenId !== request.user.tokenId) {
-                throw new Error('TokenRevoked');
-            }
-        } catch (err) {
-            fastify.log.info(`Authentication failed for request to ${request.url}: ${err}`);
-
-            // Step C: Handle authentication failure based on route type
-            const isApiRoute =
-                request.url.startsWith('/api') ||
-                request.headers.accept?.includes('application/json');
-
-            if (isApiRoute) {
-                return reply
-                    .status(401)
-                    .send(buildErrorResponse({ status: 401, message: getJwtErrorMessage(err) }));
-            }
-            
-            return reply.redirect('/admin/login').send();
-        }
-    });
+    }
 });
