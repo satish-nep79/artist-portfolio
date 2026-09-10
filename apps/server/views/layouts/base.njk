@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Application{% endblock %}
+    </title>
+
+    <!-- Shared Tabler Config -->
+    <script src="/admin/shared/js/tabler-config.js" defer></script>
+
+    <!-- Shared Admin Styles -->
+    <link rel="stylesheet" href="/admin/shared/css/admin.css?v=20260906-5">
+
+    {% block meta %}
+    {% endblock %}
+
+    {% block styles %}
+    {% endblock %}
+
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+
+    {% block body %}
+    {% endblock %}
+
+
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+
+</html>
