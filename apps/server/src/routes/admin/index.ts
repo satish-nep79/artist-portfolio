@@ -1,5 +1,6 @@
 import { type FastifyPluginAsync } from 'fastify';
 import { PublicRoutes } from '../../constants/public-routes';
+import { DEFAULT_ERROR_MESSAGES } from '../../constants/error-messages';
 
 const AdminDashboard: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     fastify.get('/',
@@ -21,7 +22,7 @@ const AdminDashboard: FastifyPluginAsync = async (fastify, opts): Promise<void> 
             return await reply.view(PublicRoutes.LOGIN);
         } catch (err) {
             fastify.log.error(err);
-            return reply.status(500).send('Template Rendering Error');
+            return reply.status(500).send(DEFAULT_ERROR_MESSAGES[500]);
         }
     })
 

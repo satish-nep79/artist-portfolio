@@ -8,9 +8,13 @@
     <title>{% block title %} Admin {% endblock %}</title>
 
     <!-- Core Scripts & Styles -->
-    <script src="/admin/shared/js/tabler-config.js" defer></script>
     <link rel="stylesheet" href="/admin/shared/css/admin.css?v={{ assetVersion | default('20260906-5') }}">
-    <script src="/admin/shared/components/admin-header.js" defer></script>
+    <script src="/admin/shared/js/tabler-config.js" defer></script>
+    <script src="/admin/shared/js/api_request.js" type="module"></script>
+    <script src="/admin/shared/js/toast.js" type="module"></script>
+    <script src="/admin/shared/js/loading-indicator.js" type="module"></script>
+    <script src="/admin/shared/js/theme.js" type="module"></script>
+
 
     {% block meta %}
     {% endblock %}

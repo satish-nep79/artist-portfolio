@@ -3,6 +3,7 @@ import { type FastifyPluginAsync } from 'fastify'
 import { buildSuccessResponse, buildErrorResponse, standardApiResponseSchema } from '../../../schemas/response'
 import { comparePassword } from '../../../util/password.util'
 import { createAuthToken } from '../../../services/auth.service'
+import { DEFAULT_ERROR_MESSAGES } from '../../../constants/error-messages'
 
 const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
@@ -29,13 +30,13 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
         if (!user) {
             fastify.log.info(`User not found: ${email}`)
-            return reply.status(404).send(buildErrorResponse({ status: 404, message: 'Invalid email or password' }))
+            return reply.status(401).send(buildErrorResponse({ status: 401, message: DEFAULT_ERROR_MESSAGES[401] }))
         }
 
         const isPasswordValid = await comparePassword(user.passwordHash, password)
 
         if (!isPasswordValid) {
-            return reply.status(401).send(buildErrorResponse({ status: 401, message: 'Invalid email or password' }))
+            return reply.status(401).send(buildErrorResponse({ status: 401, message: DEFAULT_ERROR_MESSAGES[401] }))
         }
 
         const tokenId = randomUUID()

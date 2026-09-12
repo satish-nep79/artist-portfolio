@@ -1,5 +1,6 @@
 import { type FastifyPluginAsync } from 'fastify'
-import { PublicHtmlFiles, PublicRoutes } from '../constants/public-routes';
+import { PublicRoutes } from '../constants/public-routes';
+import { DEFAULT_ERROR_MESSAGES } from '../constants/error-messages';
 
 const RootRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
@@ -9,10 +10,18 @@ const RootRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   })
 
   fastify.setNotFoundHandler(async (request, reply) => {
+    const errorMessage = DEFAULT_ERROR_MESSAGES[404];
+
     fastify.log.info(`Request to ${request.url} not found, serving 404 page`);
     fastify.log.info(`Serving 404 page for request to ${request.url}`);
-    const html = await PublicHtmlFiles.getHtml(PublicRoutes.NO_PAGE_FOUND, { cache: true });
-    return reply.status(404).type('text/html').send(html);
+    return await reply.view(PublicRoutes.ERROR, {
+      code: 404,
+      title: 'Page Not Found',
+      message: errorMessage,
+      showBackBtn: true,
+      primaryBtnText: 'Back to Login',
+      primaryBtnLink: '/admin/login'
+    });
   });
 
 }

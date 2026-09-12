@@ -1,0 +1,49 @@
+{% macro adminSidebar(activePage='dashboard') %}
+<admin-sidebar active="{{ activePage }}">
+    <button class="sidebar-toggle" type="button" id="sidebarToggle" aria-expanded="true" aria-label="Hide sidebar"
+        title="Hide sidebar">
+        <i class="ti ti-layout-sidebar-left-collapse"></i>
+    </button>
+    <aside class="admin-sidebar-panel" aria-label="Admin sidebar">
+        <div class="sidebar-brand">
+            <a href="/admin" aria-label="Artist Portfolio Admin home">
+                <img src="/admin/assets/logo_white.png" alt="Artist Portfolio Admin" height="32">
+            </a>
+        </div>
+        <nav class="navbar-collapse" id="sidebar-menu" aria-label="Admin navigation">
+            <ul class="navbar-nav">
+                {% set menuItems = [
+                { id: 'dashboard', label: 'Dashboard', href: '/admin/dashboard', icon: 'layout-dashboard' },
+                { id: 'users', label: 'Users', href: '/admin/users', icon: 'users' },
+                { id: 'content', label: 'Content', href: '/admin/content', icon: 'files' },
+                { id: 'artworks', label: 'Artworks', href: '/admin/artworks', icon: 'photo' },
+                { id: 'orders', label: 'Orders', href: '/admin/orders', icon: 'shopping-cart' },
+                { id: 'analytics', label: 'Analytics', href: '/admin/analytics', icon: 'chart-bar' }
+                ] %}
+
+                {% for item in menuItems %}
+                <li class="nav-item {% if activePage == item.id %}active{% endif %}">
+                    <a class="nav-link" href="{{ item.href }}">
+                        <span class="nav-link-icon">
+                            <i class="ti ti-{{ item.icon }}"></i>
+                        </span>
+                        <span class="nav-link-title">{{ item.label }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+
+                <li class="nav-item-divider"></li>
+
+                <li class="nav-item {% if activePage == 'settings' %}active{% endif %}">
+                    <a class="nav-link" href="/admin/settings">
+                        <span class="nav-link-icon">
+                            <i class="ti ti-settings"></i>
+                        </span>
+                        <span class="nav-link-title">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</admin-sidebar>
+{% endmacro %}

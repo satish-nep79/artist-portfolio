@@ -2,6 +2,7 @@ import fp from 'fastify-plugin'
 import type { FastifyError } from 'fastify'
 import { buildErrorResponse } from '../schemas/response'
 import { PublicRoutes } from '../constants/public-routes'
+import { DEFAULT_ERROR_MESSAGES } from '../constants/error-messages'
 
 const getValidationMessage = (error: FastifyError): string => {
   const validationError = error.validation?.[0]
@@ -42,7 +43,7 @@ export default fp(async (fastify, opts) => {
 
       const errorMessage = statusCode === 400
         ? getValidationMessage(fastifyError)
-        : 'An unexpected error occurred. Please try again later.';
+        : DEFAULT_ERROR_MESSAGES[statusCode] ?? DEFAULT_ERROR_MESSAGES[500];
 
 
 

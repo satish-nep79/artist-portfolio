@@ -1,6 +1,7 @@
 import jwt, { FastifyJWT } from '@fastify/jwt';
 import fp from 'fastify-plugin';
 import { buildErrorResponse } from '../schemas/response';
+import { DEFAULT_ERROR_MESSAGES } from '../constants/error-messages';
 
 // ==========================================
 // 1. Module Type Augmentation
@@ -33,21 +34,21 @@ declare module 'fastify' {
 // 2. Constants & Helpers
 // ==========================================
 const JWT_ERROR_MAP: Record<string, string> = {
-    FST_JWT_NO_AUTHORIZATION_IN_HEADER: 'No authorization token provided',
-    FST_JWT_AUTHORIZATION_TOKEN_EXPIRED: 'Token has expired',
-    FST_JWT_AUTHORIZATION_TOKEN_INVALID: 'Invalid signature or token structure',
-    TokenRevoked: 'Session expired or logged in from another device',
-    UserNotFound: 'Authenticated user no longer exists',
+    FST_JWT_NO_AUTHORIZATION_IN_HEADER: DEFAULT_ERROR_MESSAGES[401],
+    FST_JWT_AUTHORIZATION_TOKEN_EXPIRED: DEFAULT_ERROR_MESSAGES[401],
+    FST_JWT_AUTHORIZATION_TOKEN_INVALID: DEFAULT_ERROR_MESSAGES[401],
+    TokenRevoked: DEFAULT_ERROR_MESSAGES[401],
+    UserNotFound: DEFAULT_ERROR_MESSAGES[401],
 };
 
 const getJwtErrorMessage = (err: unknown): string => {
-    if (!err || typeof err !== 'object') return 'Unauthorized';
+    if (!err || typeof err !== 'object') return DEFAULT_ERROR_MESSAGES[401];
     const errorSource = err as { code?: string; message?: string };
 
     return (
         (errorSource.code ? JWT_ERROR_MAP[errorSource.code] : null) ||
         (errorSource.message ? JWT_ERROR_MAP[errorSource.message] : null) ||
-        'Unauthorized'
+        DEFAULT_ERROR_MESSAGES[401]
     );
 };
 

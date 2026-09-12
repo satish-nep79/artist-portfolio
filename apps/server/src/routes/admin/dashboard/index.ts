@@ -1,5 +1,5 @@
 import { type FastifyPluginAsync } from 'fastify';
-import { PublicRoutes, PublicHtmlFiles } from '../../../constants/public-routes';
+import { PublicRoutes } from '../../../constants/public-routes';
 
 const AdminDashboard: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     fastify.get('/',
@@ -7,8 +7,7 @@ const AdminDashboard: FastifyPluginAsync = async (fastify, opts): Promise<void> 
         async function (request, reply) {
 
             fastify.log.info(`Serving dashboard HTML for request to ${request.url}`);
-            const html = await PublicHtmlFiles.getHtml(PublicRoutes.DASHBOARD, { cache: false });
-            return reply.type('text/html').send(html)
+            return await reply.view(PublicRoutes.DASHBOARD);
         })
 }
 

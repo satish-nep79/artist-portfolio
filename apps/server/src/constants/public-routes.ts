@@ -12,7 +12,7 @@ export class PublicRoutes {
 
     // Page templates
     static readonly LOGIN = path.join(BASE_PAGE_DIR, 'auth', 'login.njk');
-    static readonly DASHBOARD = path.join(BASE_PAGE_DIR, 'dashboard', 'index.njk');
+    static readonly DASHBOARD = path.join(BASE_PAGE_DIR, 'dashboard', 'dashboard.njk');
     static readonly SITE_CONTENT = path.join(BASE_PAGE_DIR, 'site_content', 'index.njk');
 }
 

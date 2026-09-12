@@ -1,5 +1,5 @@
-{% macro adminHeader(type='default', userName='John Doe', theme='system') %}
-<admin-header type="{{ type }}" user-name="{{ userName }}" data-theme="{{ theme }}">
+{% macro adminHeader(type='default', username='John Doe', theme='system') %}
+<admin-header type="{{ type }}" username="{{ username }}" data-theme="{{ theme }}">
     <header class="admin-topbar navbar navbar-expand-md d-print-none">
         <div class="container-xl">
             
@@ -48,11 +48,11 @@
                     <div class="nav-item dropdown">
                         <a href="#" id="profileDropdownBtn" class="nav-link d-flex lh-1 text-reset p-0 ps-2" role="button" aria-haspopup="true" aria-expanded="false">
                             <span class="avatar avatar-sm">
-                                {# Extract user initials dynamically #}
-                                {{ userName | default('John Doe') | replace(r/(\b\w)\w+/g, "$1") }}
+                                {# Fix 2: Safe single-character fallback for initial #}
+                                {{ username | first | upper }}
                             </span>
                             <div class="d-none d-xl-block ps-2">
-                                <div>{{ userName }}</div>
+                                <div>{{ username }}</div>
                             </div>
                         </a>
 
