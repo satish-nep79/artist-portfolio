@@ -13,7 +13,11 @@ export class PublicRoutes {
     // Page templates
     static readonly LOGIN = path.join(BASE_PAGE_DIR, 'auth', 'login.njk');
     static readonly DASHBOARD = path.join(BASE_PAGE_DIR, 'dashboard', 'dashboard.njk');
-    static readonly SITE_CONFIG = path.join(BASE_PAGE_DIR, 'dashboard', 'site-config.njk');
+    static readonly SITE_CONFIG_ABOUT = path.join(BASE_PAGE_DIR, 'site-config', 'about.njk');
+    static readonly SITE_CONFIG_HIGHLIGHTS = path.join(BASE_PAGE_DIR, 'site-config', 'highlights.njk');
+    static readonly SITE_CONFIG_CONTACT = path.join(BASE_PAGE_DIR, 'site-config', 'contact.njk');
+    static readonly SITE_CONFIG_SOCIAL = path.join(BASE_PAGE_DIR, 'site-config', 'social-links.njk');
+    static readonly SITE_CONFIG_PROFILE = path.join(BASE_PAGE_DIR, 'site-config', 'profile.njk');
 }
 
 export default PublicRoutes;

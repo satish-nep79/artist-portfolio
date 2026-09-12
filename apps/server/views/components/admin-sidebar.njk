@@ -14,13 +14,80 @@
             <ul class="navbar-nav">
                 {% set menuItems = [
                 { id: 'dashboard', label: 'Dashboard', href: '/admin/dashboard', icon: 'layout-dashboard' },
-                { id: 'site-config', label: 'Site Configuration', href: '/admin/site-config', icon: 'adjustments' },
+                {
+                id: 'site-config',
+                label: 'Site Configuration',
+                icon: 'files',
+                children: [
+                { id: 'site-config-profile', label: 'Profile', href: '/admin/site-config/profile', icon: 'user' },
+                { id: 'site-config-about', label: 'About', href: '/admin/site-config/about', icon: 'info-circle' },
+                { id: 'site-config-highlights', label: 'Highlights', href: '/admin/site-config/highlights', icon: 'star' },
+                { id: 'site-config-contact', label: 'Location & Contact', href: '/admin/site-config/contact', icon: 'phone' },
+                { id: 'site-config-social', label: 'Social Links', href: '/admin/site-config/social', icon: 'share' }
+                ]
+                },
                 { id: 'artworks', label: 'Artworks', href: '/admin/artworks', icon: 'photo' },
                 { id: 'orders', label: 'Orders', href: '/admin/orders', icon: 'shopping-cart' },
                 { id: 'analytics', label: 'Analytics', href: '/admin/analytics', icon: 'chart-bar' }
                 ] %}
 
                 {% for item in menuItems %}
+                {% if item.children %}
+                {% set isParentActive = false %}
+                {% for child in item.children %}
+                {% if activePage == child.id %}{% set isParentActive = true %}{% endif %}
+                {% endfor %}
+
+                <li class="nav-item {% if isParentActive or activePage == item.id %}active{% endif %}">
+
+                    <details {% if isParentActive or activePage==item.id %}open{% endif %}>
+
+                        <summary class="nav-link">
+
+                            <span class="nav-link-content">
+
+                                <span class="nav-link-icon">
+                                    <i class="ti ti-{{ item.icon }}"></i>
+                                </span>
+
+                                <span class="nav-link-title">
+                                    {{ item.label }}
+                                </span>
+
+                            </span>
+
+                            <i class="ti ti-chevron-down nav-dropdown-icon"></i>
+
+                        </summary>
+
+                        <ul class="navbar-nav">
+
+                            {% for child in item.children %}
+
+                            <li class="nav-item {% if activePage == child.id %}active{% endif %}">
+
+                                <a class="nav-link nav-link-child" href="{{ child.href }}">
+
+                                    <span class="nav-link-icon">
+                                        <i class="ti ti-{{ child.icon or 'corner-down-right' }}"></i>
+                                    </span>
+
+                                    <span class="nav-link-title">
+                                        {{ child.label }}
+                                    </span>
+
+                                </a>
+
+                            </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </details>
+
+                </li>
+                {% else %}
                 <li class="nav-item {% if activePage == item.id %}active{% endif %}">
                     <a class="nav-link" href="{{ item.href }}">
                         <span class="nav-link-icon">
@@ -29,6 +96,7 @@
                         <span class="nav-link-title">{{ item.label }}</span>
                     </a>
                 </li>
+                {% endif %}
                 {% endfor %}
 
                 <li class="nav-item-divider"></li>

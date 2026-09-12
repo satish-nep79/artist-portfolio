@@ -1,14 +1,11 @@
 import fp from 'fastify-plugin';
 import fastifyView from '@fastify/view';
-import nunjucks from 'nunjucks';
+import nunjucks, { Environment } from 'nunjucks';
 import path from 'path';
 
 export default fp(async (fastify, opts) => {
     try {
-        // Point to project root -> views
         const viewsPath = path.join(process.cwd(), 'views');
-        
-        // Log the exact path to verify it in your terminal logs
         fastify.log.info(`Registering views path: ${viewsPath}`);
 
         await fastify.register(fastifyView, {
@@ -16,10 +13,14 @@ export default fp(async (fastify, opts) => {
                 nunjucks,
             },
             root: viewsPath,
-            // Expressing options explicitly prevents template loading ambiguity
             options: {
                 noCache: process.env.NODE_ENV !== 'production',
-            }
+                configure: (env: Environment) => {
+                    env.addFilter('hasActiveChild', (children: { id: string }[], activePage: string) =>
+                        children.some((child) => child.id === activePage)
+                    );
+                },
+            },
         });
 
         fastify.log.info('View plugin registered successfully');

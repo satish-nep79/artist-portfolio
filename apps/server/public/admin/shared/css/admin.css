@@ -114,6 +114,8 @@ body.admin-shell {
     transform: translateX(0);
 }
 
+
+
 /* =========================================================
    Sidebar Toggle
    ========================================================= */
@@ -170,15 +172,28 @@ body.admin-shell {
         background-color 150ms ease;
 }
 
-#sidebar-menu .nav-link:hover,
-#sidebar-menu .nav-item.active .nav-link {
+#sidebar-menu .nav-link:hover {
     color: var(--admin-sidebar-text-hover);
     background: var(--admin-accent-soft);
 }
 
-#sidebar-menu .nav-item.active .nav-link {
+#sidebar-menu details > .navbar-nav {
+    margin-top: 0.5rem;
+}
+
+/* Active top-level item */
+#sidebar-menu .nav-item.active>.nav-link,
+#sidebar-menu .nav-item.active>details>summary {
     font-weight: 600;
     color: var(--admin-sidebar-text-active);
+    background: var(--admin-accent-soft);
+}
+
+/* Active child only */
+#sidebar-menu details>.navbar-nav>.nav-item.active>.nav-link {
+    font-weight: 600;
+    color: var(--admin-sidebar-text-active);
+    background: var(--admin-accent-soft);
 }
 
 .nav-item-divider {
@@ -187,6 +202,74 @@ body.admin-shell {
 
     background: var(--admin-sidebar-border);
 }
+
+/* =========================================================
+   Sidebar Expandable Navigation
+   ========================================================= */
+
+#sidebar-menu details {
+    width: 100%;
+}
+
+#sidebar-menu details>summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+#sidebar-menu details>summary::-webkit-details-marker {
+    display: none;
+}
+
+#sidebar-menu>.navbar-nav>.nav-item {
+    margin-bottom: 1rem;
+}
+
+#sidebar-menu details>.navbar-nav>.nav-item {
+    margin-bottom: 0.75rem;
+}
+
+/* Parent icon + title */
+#sidebar-menu .nav-link-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Expand/collapse arrow */
+#sidebar-menu .nav-dropdown-icon {
+    margin-left: auto;
+
+    transition: transform 200ms ease;
+}
+
+/* Rotate arrow when expanded */
+#sidebar-menu details[open]>summary .nav-dropdown-icon {
+    transform: rotate(180deg);
+}
+
+/* Sub-navigation */
+#sidebar-menu .nav-link-child {
+    padding-left: 2rem;
+}
+
+/* Small animation when submenu opens */
+#sidebar-menu details[open]>.navbar-nav {
+    animation: sidebar-submenu-open 180ms ease;
+}
+
+@keyframes sidebar-submenu-open {
+    from {
+        opacity: 0;
+        transform: translateY(-0.25rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+¬
 
 /* =========================================================
    Center Pages

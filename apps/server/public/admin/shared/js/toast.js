@@ -25,7 +25,7 @@ export function checkPendingToast() {
   const raw = sessionStorage.getItem(PENDING_TOAST_KEY);
   if (!raw) return;
 
-  sessionStorage.removeItem(PENDING_TOAST_KEY); // consume immediately
+  sessionStorage.removeItem(PENDING_TOAST_KEY);
 
   try {
     const { message, type, title } = JSON.parse(raw);
