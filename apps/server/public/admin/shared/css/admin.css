@@ -46,11 +46,10 @@ body.admin-shell {
     background: var(--admin-page-bg);
 }
 
-.dashboard-layout > admin-sidebar {
-    position: relative;
+.dashboard-layout>admin-sidebar {
     flex: 0 0 16rem;
     height: 100%;
-    transition: flex-basis 180ms ease;
+    transition: flex-basis 200ms ease, margin-left 200ms ease;
 }
 
 .dashboard-layout .admin-sidebar-panel {
@@ -65,14 +64,14 @@ body.admin-shell {
     border-bottom: 1px solid #1e293b;
 }
 
-.dashboard-layout > .page-wrapper {
+.dashboard-layout>.page-wrapper {
     flex: 1 1 auto;
     min-width: 0;
     height: 100%;
     overflow-y: auto;
 }
 
-.dashboard-layout.sidebar-collapsed > admin-sidebar {
+.dashboard-layout.sidebar-collapsed>admin-sidebar {
     flex-basis: 0;
 }
 
@@ -80,11 +79,46 @@ body.admin-shell {
     transform: translateX(-100%);
 }
 
-.sidebar-toggle {
+.dashboard-layout.sidebar-collapsed .sidebar-toggle {
+    left: -0.70rem;
+}
+
+.dashboard-layout.sidebar-collapsed > admin-sidebar {
+    flex-basis: 0;
+    margin-left: -16rem; /* Hides sidebar off-screen completely */
+}
+
+.dashboard-layout.sidebar-collapsed #adminHeaderLogo {
+    display: flex;
     position: absolute;
+    left: 1.25rem;
+}
+
+.header-logo {
+    position: absolute;
+    left: 1.25rem;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-0.5rem);
+
+    transition:
+        opacity 200ms ease,
+        transform 200ms ease,
+        visibility 200ms ease;
+}
+
+.dashboard-layout.sidebar-collapsed .header-logo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.sidebar-toggle {
+    position: fixed;
     z-index: 20;
-    right: -1rem;
     bottom: 3rem;
+    left: 15rem;
     display: grid;
     width: 2rem;
     height: 2rem;
@@ -94,6 +128,7 @@ body.admin-shell {
     border-radius: 0.375rem;
     place-items: center;
     cursor: pointer;
+    transition:  left 180ms ease, background-color 0.15s ease;
 }
 
 .sidebar-toggle:hover {
