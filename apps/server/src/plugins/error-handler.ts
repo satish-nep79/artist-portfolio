@@ -1,6 +1,7 @@
 import fp from 'fastify-plugin'
 import type { FastifyError } from 'fastify'
 import { buildErrorResponse } from '../schemas/response'
+import { PublicRoutes } from '../constants/public-routes'
 
 const getValidationMessage = (error: FastifyError): string => {
   const validationError = error.validation?.[0]
@@ -32,16 +33,37 @@ const getValidationMessage = (error: FastifyError): string => {
 export default fp(async (fastify, opts) => {
   try {
     fastify.setErrorHandler((error, request, reply) => {
-      const fastifyError = error as FastifyError
-      const statusCode = fastifyError.statusCode ?? 500
-      return reply.status(statusCode).send(
-        buildErrorResponse({
-          status: statusCode,
-          message: statusCode === 400
-            ? getValidationMessage(fastifyError)
-            : 'Request failed'
-        })
-      )
+      const err = error as FastifyError;
+      const fastifyError = error as FastifyError;
+      const statusCode = fastifyError.statusCode ?? 500;
+      fastify.log.error(`Error occurred during request to ${request.url}: ${err.message}`)
+
+      const isHtmlRequest = request.headers.accept?.includes('text/html');
+
+      const errorMessage = statusCode === 400
+        ? getValidationMessage(fastifyError)
+        : 'An unexpected error occurred. Please try again later.';
+
+
+
+      if (!isHtmlRequest) {
+        return reply.status(statusCode).send(
+          buildErrorResponse({
+            status: statusCode,
+            message: errorMessage,
+          })
+        )
+      } else {
+        return reply.status(statusCode).view(PublicRoutes.ERROR, {
+          code: statusCode,
+          title: statusCode === 404 ? 'Page Not Found' : 'Server Error',
+          message: errorMessage,
+          showBackBtn: true,
+          primaryBtnText: 'Back to Login',
+          primaryBtnLink: '/admin/login'
+        });
+      }
+
     });
   } catch (err) {
     fastify.log.error(`Error registering error handler plugin: ${err}`);

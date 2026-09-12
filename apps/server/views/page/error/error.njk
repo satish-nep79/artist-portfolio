@@ -1,0 +1,64 @@
+{% extends "layouts/base.njk" %}
+{% from "components/admin-header.njk" import adminHeader %}
+
+{% block title %}{{ title | default("Error") }} - Admin Panel{% endblock %}
+
+{% block body %}
+{{ adminHeader('simple') }}
+<div class="page page-center">
+    <div class="container container-tight py-4">
+
+        <!-- Dynamic Error Card -->
+        <div class="card card-md">
+            <div class="card-body text-center py-5">
+
+                {% if code %}
+                <div class="empty-header display-1 {{ codeClass | default('text-warning') }} fw-bold mb-2">
+                    {{ code }}
+                </div>
+                {% endif %}
+
+                {% if icon %}
+                <div class="mb-4">
+                    <i class="ti ti-{{ icon }} text-{{ iconColor | default('danger') }}" style="font-size: 4rem;"></i>
+                </div>
+                {% endif %}
+
+                <h2 class="h2 mb-2">{{ title | default("Something went wrong") }}</h2>
+
+                <p class="text-secondary mb-4">
+                    {{ message | default("An unexpected error occurred. Please try again later.") }}
+                </p>
+
+                <div class="d-flex align-items-center justify-content-center gap-2">
+                    {% if showBackBtn %}
+                    <a href="javascript:history.back()" class="btn btn-outline-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left me-1"
+                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M5 12l14 0" />
+                            <path d="M5 12l6 6" />
+                            <path d="M5 12l6 -6" />
+                        </svg>
+                        Go Back
+                    </a>
+                    {% endif %}
+
+                    <a href="{{ primaryBtnLink if primaryBtnLink else '/admin/dashboard' }}" class="btn btn-primary text-white">
+                        <span>{% if primaryBtnText %}{{ primaryBtnText }}{% else %}Take Me Home{% endif %}</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="text-center text-secondary mt-3">
+            <small>
+                Think this is a bug? <a href="/admin/support" class="text-secondary underline">Report an issue</a>.
+            </small>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

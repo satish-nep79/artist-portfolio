@@ -1,0 +1,61 @@
+{% extends "layouts/base.njk" %}
+{% from "components/admin-header.njk" import adminHeader %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block body_class %}login-shell d-flex flex-column{% endblock %}
+
+{% block head %}
+<!-- Page Logic -->
+<script src="/admin/pages/login/auth.js" type="module"></script>
+{% endblock %}
+
+
+{% block body %}
+{{ adminHeader('simple') }}
+<div class="page page-center">
+    <div class="container container-tight py-4">
+        <div class="card card-md">
+            <div class="card-body">
+                <h2 class="h2 text-center mb-4">Login to Admin Panel</h2>
+
+                <!-- Login Form -->
+                <form id="loginForm" autocomplete="off">
+
+                    <!-- Email address Field -->
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Email address</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="admin@example.com"
+                            value="admin@example.com" required>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Password</label>
+                        <div class="input-group input-group-flat">
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="Your password" value="adminpass" required>
+                            <span class="input-group-text">
+                                <button type="button" id="togglePassword"
+                                    class="link-secondary border-0 bg-transparent p-0" title="Show password"
+                                    aria-label="Show password">
+                                    <i class="ti ti-eye-off fs-2 stroke-1.5 icon-muted" id="togglePasswordIcon"
+                                        size="24"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

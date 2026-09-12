@@ -5,15 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        {% block title %}Application{% endblock %}
-    </title>
+    <title>{% block title %} Admin {% endblock %}</title>
 
-    <!-- Shared Tabler Config -->
+    <!-- Core Scripts & Styles -->
     <script src="/admin/shared/js/tabler-config.js" defer></script>
-
-    <!-- Shared Admin Styles -->
-    <link rel="stylesheet" href="/admin/shared/css/admin.css?v=20260906-5">
+    <link rel="stylesheet" href="/admin/shared/css/admin.css?v={{ assetVersion | default('20260906-5') }}">
+    <script src="/admin/shared/components/admin-header.js" defer></script>
 
     {% block meta %}
     {% endblock %}
@@ -25,13 +22,9 @@
     {% endblock %}
 </head>
 
-<body>
+<body class="admin-shell {% block body_class %}{% endblock %}">
 
     {% block body %}
-    {% endblock %}
-
-
-    {% block scripts %}
     {% endblock %}
 
 </body>

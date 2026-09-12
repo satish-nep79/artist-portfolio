@@ -1,0 +1,77 @@
+{% macro adminHeader(type='default', userName='John Doe', theme='system') %}
+<admin-header type="{{ type }}" user-name="{{ userName }}" data-theme="{{ theme }}">
+    <header class="admin-topbar navbar navbar-expand-md d-print-none">
+        <div class="container-xl">
+            
+            {% if type == 'simple' %}
+                <!-- Simple Header Logo -->
+                <a href="/admin" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                    <img src="/admin/assets/logo_normal.png" alt="Admin Logo" height="32" class="navbar-brand-image">
+                </a>
+            {% endif %}
+
+            <div class="navbar-nav flex-row order-md-last ms-auto">
+                <!-- Theme Toggle Button -->
+                <div class="nav-item">
+                    <a href="#" id="themeToggle" class="nav-link px-0 px-md-2" title="Switch Theme" aria-label="Switch Theme">
+                        <i class="ti ti-device-desktop"></i>
+                    </a>
+                </div>
+
+                {% if type != 'simple' %}
+                    <!-- Notifications Dropdown -->
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link px-2 position-relative" id="notificationDropdownBtn" role="button" aria-haspopup="true" aria-expanded="false" title="Notifications">
+                            <i class="ti ti-bell"></i><span class="notification-dot"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notification-menu" id="notificationDropdown" aria-labelledby="notificationDropdownBtn">
+                            <div class="dropdown-header d-flex justify-content-between">
+                                <strong>Notifications</strong>
+                                <span class="badge bg-blue-lt">3 new</span>
+                            </div>
+                            <a class="dropdown-item notification-item" href="/admin/inquiries">
+                                <i class="ti ti-mail text-red"></i>
+                                <span><strong>New inquiry received</strong><small>Elena Rossi · 12 min ago</small></span>
+                            </a>
+                            <a class="dropdown-item notification-item" href="/admin/programs">
+                                <i class="ti ti-calendar-event text-blue"></i>
+                                <span><strong>Program update published</strong><small>Open Studio Weekend · 1 hr ago</small></span>
+                            </a>
+                            <a class="dropdown-item notification-item" href="/admin/artworks">
+                                <i class="ti ti-photo text-green"></i>
+                                <span><strong>Artwork approved</strong><small>Quiet Geometry · 2 hrs ago</small></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- User Profile Dropdown -->
+                    <div class="nav-item dropdown">
+                        <a href="#" id="profileDropdownBtn" class="nav-link d-flex lh-1 text-reset p-0 ps-2" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="avatar avatar-sm">
+                                {# Extract user initials dynamically #}
+                                {{ userName | default('John Doe') | replace(r/(\b\w)\w+/g, "$1") }}
+                            </span>
+                            <div class="d-none d-xl-block ps-2">
+                                <div>{{ userName }}</div>
+                            </div>
+                        </a>
+
+                        <div id="profileDropdown" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" aria-labelledby="profileDropdownBtn">
+                            <a class="dropdown-item" href="/admin/profile">
+                                <i class="ti ti-user me-2"></i> Profile
+                            </a>
+                            <a class="dropdown-item" href="/admin/change-password">
+                                <i class="ti ti-lock me-2"></i> Change Password
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/admin/logout">
+                                <i class="ti ti-logout me-2"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+</admin-header>
+{% endmacro %}
