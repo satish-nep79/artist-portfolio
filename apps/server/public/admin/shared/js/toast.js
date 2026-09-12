@@ -1,43 +1,37 @@
 const TOAST_DURATION = 5000;
 const TOAST_TYPES = new Set(["success", "danger", "warning", "info"]);
-const FLASH_TOAST_KEY = "adminFlashToast";
-
+const PENDING_TOAST_KEY = "pendingToast";
 
 /**
  * @param {string} message
  * @param {"success" | "danger" | "warning" | "info"} type
  * @param {string | null} title
+ *
+ * Persist a toast to sessionStorage, then let the caller navigate.
+ * The next page load will pick it up via checkPendingToast().
  */
-export function setToastForNextPage(message, type = "info", title = null) {
+export function queueToast(message, type = "info", title = null) {
   sessionStorage.setItem(
-    FLASH_TOAST_KEY,
-    JSON.stringify({
-      message,
-      type,
-      title,
-    }),
+    PENDING_TOAST_KEY,
+    JSON.stringify({ message, type, title }),
   );
 }
 
-export function showStoredToast() {
-  const storedToast = sessionStorage.getItem(FLASH_TOAST_KEY);
+/**
+ * Call once on DOMContentLoaded in every page (or shared layout init).
+ * Shows the queued toast if one exists, then clears it.
+ */
+export function checkPendingToast() {
+  const raw = sessionStorage.getItem(PENDING_TOAST_KEY);
+  if (!raw) return;
 
-  if (!storedToast) {
-    return;
-  }
-
-  sessionStorage.removeItem(FLASH_TOAST_KEY);
+  sessionStorage.removeItem(PENDING_TOAST_KEY); // consume immediately
 
   try {
-    const { message, type, title } = JSON.parse(storedToast);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        showToast(message, type, title);
-      });
-    });
-  } catch (error) {
-    console.error("Failed to restore toast:", error);
+    const { message, type, title } = JSON.parse(raw);
+    showToast(message, type, title);
+  } catch {
+    // Malformed entry — silently discard.
   }
 }
 
@@ -209,3 +203,5 @@ function getToastIcon(type) {
       return "ti-info-circle";
   }
 }
+
+checkPendingToast();

@@ -1,4 +1,4 @@
-import { setToastForNextPage, showToast } from "../../shared/js/toast.js";
+import { queueToast, showToast } from "../../shared/js/toast.js";
 import { apiRequest } from "../../shared/js/api_request.js";
 import {
   showProgressDialog,
@@ -68,7 +68,7 @@ function initLogout() {
       console.log("Logout response:", response);
 
       if (response.success) {
-        setToastForNextPage(
+        queueToast(
           response.message || "Logged out successfully.",
           "success",
           "Logout",
@@ -76,7 +76,7 @@ function initLogout() {
 
         window.location.href = "/admin/login";
       } else {
-        setToastForNextPage(
+        showToast(
           response.message || "Logout failed. Please try again.",
           "danger",
           "Logout Error",
