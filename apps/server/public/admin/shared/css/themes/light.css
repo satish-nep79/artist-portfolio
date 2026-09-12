@@ -1,0 +1,53 @@
+/* =========================================================
+   Light Theme - Design System Variables
+   ========================================================= */
+:root {
+    /* Core */
+    --admin-page-bg: #f8fafc;
+    --admin-surface: #ffffff;
+    --admin-border: #e2e8f0;
+    --admin-text: #0f172a;
+    --admin-muted: #64748b;
+
+    /* Accent */
+    --admin-accent: #2563eb;
+    --admin-accent-dark: #1d4ed8;
+    --admin-accent-soft: rgba(37, 99, 235, 0.15);
+    --admin-focus-ring: rgba(37, 99, 235, 0.15);
+
+    /* Status */
+    --admin-success: #2fb344;
+    --admin-success-soft: #eaf8ed;
+
+    --admin-danger: #d63939;
+    --admin-danger-soft: #fff0f0;
+
+    --admin-warning: #f59f00;
+    --admin-warning-soft: #fff8e6;
+
+    /* Sidebar */
+    --admin-sidebar-bg: #0f172a;
+    --admin-sidebar-border: #1e293b;
+    --admin-sidebar-text: #94a3b8;
+    --admin-sidebar-text-active: #60a5fa;
+    --admin-sidebar-text-hover: #ffffff;
+    --admin-sidebar-toggle-bg: #1e293b;
+    --admin-sidebar-toggle-border: #334155;
+
+    /* Overlay */
+    --admin-overlay: rgba(15, 23, 42, 0.45);
+
+    /* Shadows */
+    --admin-shadow: 0 0.125rem 0.25rem rgba(15, 23, 42, 0.05);
+    --admin-dialog-shadow: 0 0.5rem 1rem rgba(15, 23, 42, 0.15);
+    --admin-toast-shadow: 0 0.75rem 2rem rgba(31, 41, 51, 0.16);
+
+    --admin-radius: 0.5rem;
+
+    --admin-hover-bg: rgba(148, 163, 184, 0.12);
+    --admin-accent-text: #ffffff;
+    --admin-notification: #f97316;
+
+    --admin-header-height: 4rem;
+    --admin-element-height: 2.25rem;
+}

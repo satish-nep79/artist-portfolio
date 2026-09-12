@@ -1,0 +1,49 @@
+/* =========================================================
+   Dark Theme - Design System Variables
+   ========================================================= */
+
+[data-bs-theme="dark"] {
+    /* Core */
+    --admin-page-bg: #0b0f17;
+    --admin-surface: #1e293b;
+    --admin-border: #334155;
+    --admin-text: #f8fafc;
+    --admin-muted: #94a3b8;
+
+    /* Accent */
+    --admin-accent: #3b82f6;
+    --admin-accent-dark: #2563eb;
+    --admin-accent-soft: rgba(59, 130, 246, 0.15);
+    --admin-focus-ring: rgba(59, 130, 246, 0.2);
+
+    /* Status */
+    --admin-success: #4ade80;
+    --admin-success-soft: rgba(74, 222, 128, 0.12);
+
+    --admin-danger: #f87171;
+    --admin-danger-soft: rgba(248, 113, 113, 0.12);
+
+    --admin-warning: #fbbf24;
+    --admin-warning-soft: rgba(251, 191, 36, 0.12);
+
+    /* Sidebar */
+    --admin-sidebar-bg: #0b0f17;
+    --admin-sidebar-border: #1e293b;
+    --admin-sidebar-text: #94a3b8;
+    --admin-sidebar-text-active: #60a5fa;
+    --admin-sidebar-text-hover: #f8fafc;
+    --admin-sidebar-toggle-bg: #1e293b;
+    --admin-sidebar-toggle-border: #334155;
+
+    /* Overlay */
+    --admin-overlay: rgba(0, 0, 0, 0.55);
+
+    /* Shadows */
+    --admin-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+    --admin-dialog-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.35);
+    --admin-toast-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.35);
+
+    --admin-hover-bg: rgba(148, 163, 184, 0.12);
+    --admin-accent-text: #ffffff;
+    --admin-notification: #fb923c;
+}

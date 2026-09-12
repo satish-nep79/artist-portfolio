@@ -55,9 +55,9 @@ function initLogout() {
   logoutBtn?.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    try {
-      showProgressDialog("Signing out...");
+    showProgressDialog("Signing out...");
 
+    try {
       const response = await apiRequest({
         url: "/api/v1/logout",
         method: "POST",
@@ -65,15 +65,12 @@ function initLogout() {
 
       hideProgressDialog();
 
-      console.log("Logout response:", response);
-
       if (response.success) {
         queueToast(
           response.message || "Logged out successfully.",
           "success",
           "Logout",
         );
-
         window.location.href = "/admin/login";
       } else {
         showToast(
@@ -81,12 +78,11 @@ function initLogout() {
           "danger",
           "Logout Error",
         );
-
-        window.location.href = "/admin/login";
       }
     } catch (error) {
       console.error("Logout failed:", error);
       hideProgressDialog();
+      showToast("An unexpected error occurred.", "danger", "Logout Error");
     }
   });
 }

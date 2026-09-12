@@ -1,0 +1,208 @@
+/* =========================================================
+   Toast Container
+   ========================================================= */
+.admin-toast-container {
+    position: fixed;
+    z-index: 1080;
+    top: 1rem;
+    right: 1rem;
+
+    display: grid;
+    gap: 0.75rem;
+
+    width: min(24rem, calc(100vw - 2rem));
+
+    pointer-events: none;
+}
+
+/* =========================================================
+   Toast
+   ========================================================= */
+.admin-toast {
+    --toast-color: var(--admin-accent);
+    --toast-tint: var(--admin-accent-soft);
+
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto;
+    gap: 0.75rem;
+    align-items: start;
+
+    overflow: hidden;
+
+    padding: 1rem 1rem 1.125rem;
+
+    color: var(--admin-text);
+    background: var(--admin-surface);
+
+    border: 1px solid var(--admin-border);
+    border-left: 0.25rem solid var(--toast-color);
+    border-radius: var(--admin-radius);
+
+    box-shadow: var(--admin-toast-shadow);
+
+    opacity: 0;
+    transform: translateX(1rem);
+
+    transition:
+        opacity 180ms ease,
+        transform 180ms ease;
+
+    pointer-events: auto;
+}
+
+.admin-toast-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.admin-toast-closing {
+    opacity: 0;
+    transform: translateX(1rem);
+}
+
+/* =========================================================
+   Toast Variants
+   ========================================================= */
+.admin-toast-success {
+    --toast-color: var(--admin-success);
+    --toast-tint: var(--admin-success-soft);
+}
+
+.admin-toast-danger {
+    --toast-color: var(--admin-danger);
+    --toast-tint: var(--admin-danger-soft);
+}
+
+.admin-toast-warning {
+    --toast-color: var(--admin-warning);
+    --toast-tint: var(--admin-warning-soft);
+}
+
+/* =========================================================
+   Toast Icon
+   ========================================================= */
+.admin-toast-icon {
+    display: grid;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    color: var(--toast-color);
+    background: var(--toast-tint);
+
+    border-radius: 50%;
+
+    place-items: center;
+
+    font-size: 1.25rem;
+}
+
+/* =========================================================
+   Toast Content
+   ========================================================= */
+.admin-toast-content {
+    min-width: 0;
+    padding-top: 0.125rem;
+}
+
+.admin-toast-title {
+    margin-bottom: 0.25rem;
+
+    color: var(--admin-text);
+
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.admin-toast-message {
+    color: var(--admin-muted);
+
+    font-size: 0.8125rem;
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   Toast Close Button
+   ========================================================= */
+.admin-toast-close {
+    display: grid;
+
+    width: 1.75rem;
+    height: 1.75rem;
+
+    padding: 0;
+
+    color: var(--admin-muted);
+    background: transparent;
+
+    border: 0;
+    border-radius: 0.375rem;
+
+    place-items: center;
+
+    cursor: pointer;
+}
+
+.admin-toast-close:hover {
+    color: var(--admin-text);
+    background: var(--toast-tint);
+}
+
+/* =========================================================
+   Toast Progress
+   ========================================================= */
+.admin-toast-progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 0.1875rem;
+
+    background: var(--toast-color);
+
+    transform-origin: left;
+
+    animation: admin-toast-progress 5s linear forwards;
+}
+
+@keyframes admin-toast-progress {
+    from {
+        transform: scaleX(1);
+    }
+
+    to {
+        transform: scaleX(0);
+    }
+}
+
+/* =========================================================
+   Reduced Motion
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+    .admin-toast {
+        transition: none;
+    }
+
+    .admin-toast-progress {
+        animation: none;
+    }
+}
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+@media (max-width: 767.98px) {
+    .admin-toast-container {
+        top: 0.75rem;
+        right: 0.75rem;
+        left: 0.75rem;
+
+        width: auto;
+    }
+}

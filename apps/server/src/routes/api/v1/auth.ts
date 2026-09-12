@@ -69,7 +69,7 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
                 expires_at: tokenExpiration.toISOString(),
             }
         }))
-    })
+    });
 
     fastify.post('/logout', {
         onRequest: [fastify.authenticate],
@@ -78,8 +78,7 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         }
     }, async function (request, reply) {
         try {
-            const payload = await request.jwtVerify<UserPayload>();
-            const userId = payload.id;
+            const userId = request.user.id; // already set by fastify.authenticate
 
             const updatedUser = await fastify.prisma.user.update({
                 where: { id: userId },
@@ -97,16 +96,15 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
                 sameSite: 'strict',
             });
 
-            fastify.log.info(`User logged out: ${payload.email}`);
+            fastify.log.info(`User logged out: ${request.user.email}`);
             return reply.status(200).send(buildSuccessResponse({ status: 200, message: 'Logout successful', data: {} }));
 
-
         } catch (err) {
-            fastify.log.error(`Error during logout for user ${request.user?.email}: ${err}`)
-            return reply.status(500).send(buildErrorResponse({ status: 500, message: DEFAULT_ERROR_MESSAGES[500] }))
+            fastify.log.error(`Error during logout for user ${request.user?.email}: ${err}`);
+            return reply.status(500).send(buildErrorResponse({ status: 500, message: DEFAULT_ERROR_MESSAGES[500] }));
         }
+    });
 
-    })
 
 }
 
