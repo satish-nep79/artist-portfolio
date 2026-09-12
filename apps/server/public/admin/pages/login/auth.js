@@ -1,5 +1,5 @@
 import { setButtonLoading } from "../../shared/js/loading-indicator.js";
-import { showToast } from "../../shared/js/toast.js";
+import { setToastForNextPage, showToast } from "../../shared/js/toast.js";
 import { apiRequest } from "../../shared/js/api_request.js";
 
 const passwordInput = document.getElementById("password");
@@ -62,8 +62,9 @@ async function onSubmit(event) {
     console.log("Login response:", response);
 
     if (response.success) {
-      showToast("Login successful!", "success", "Success");
+      setToastForNextPage("Login successful!", "success", "Success");
       window.location.href = "/admin";
+      
     } else {
       showToast(
         response.message || "Invalid email or password.",

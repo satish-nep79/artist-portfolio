@@ -1,5 +1,45 @@
 const TOAST_DURATION = 5000;
 const TOAST_TYPES = new Set(["success", "danger", "warning", "info"]);
+const FLASH_TOAST_KEY = "adminFlashToast";
+
+
+/**
+ * @param {string} message
+ * @param {"success" | "danger" | "warning" | "info"} type
+ * @param {string | null} title
+ */
+export function setToastForNextPage(message, type = "info", title = null) {
+  sessionStorage.setItem(
+    FLASH_TOAST_KEY,
+    JSON.stringify({
+      message,
+      type,
+      title,
+    }),
+  );
+}
+
+export function showStoredToast() {
+  const storedToast = sessionStorage.getItem(FLASH_TOAST_KEY);
+
+  if (!storedToast) {
+    return;
+  }
+
+  sessionStorage.removeItem(FLASH_TOAST_KEY);
+
+  try {
+    const { message, type, title } = JSON.parse(storedToast);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        showToast(message, type, title);
+      });
+    });
+  } catch (error) {
+    console.error("Failed to restore toast:", error);
+  }
+}
 
 /**
  * @param {string} message
@@ -7,24 +47,24 @@ const TOAST_TYPES = new Set(["success", "danger", "warning", "info"]);
  * @param {string | null} title
  */
 export function showToast(message, type = "info", title = null) {
-    if (!TOAST_TYPES.has(type)) {
-        throw new TypeError(
-            `Invalid toast type "${type}". Expected: success, danger, warning, or info.`
-        );
-    }
+  if (!TOAST_TYPES.has(type)) {
+    throw new TypeError(
+      `Invalid toast type "${type}". Expected: success, danger, warning, or info.`,
+    );
+  }
 
-    const container = getToastContainer();
+  const container = getToastContainer();
 
-    const toast = document.createElement("div");
+  const toast = document.createElement("div");
 
-    const toastTitle = title || getToastTitle(type);
-    const icon = getToastIcon(type);
+  const toastTitle = title || getToastTitle(type);
+  const icon = getToastIcon(type);
 
-    toast.className = `admin-toast admin-toast-${type}`;
-    toast.setAttribute("role", type === "danger" ? "alert" : "status");
-    toast.setAttribute("aria-live", "polite");
+  toast.className = `admin-toast admin-toast-${type}`;
+  toast.setAttribute("role", type === "danger" ? "alert" : "status");
+  toast.setAttribute("aria-live", "polite");
 
-    toast.innerHTML = `
+  toast.innerHTML = `
         <div class="admin-toast-icon" aria-hidden="true">
             <i class="ti ${icon}"></i>
         </div>
@@ -45,130 +85,127 @@ export function showToast(message, type = "info", title = null) {
         <div class="admin-toast-progress" aria-hidden="true"></div>
     `;
 
-    toast.querySelector(".admin-toast-title").textContent = toastTitle;
-    toast.querySelector(".admin-toast-message").textContent = message;
+  toast.querySelector(".admin-toast-title").textContent = toastTitle;
+  toast.querySelector(".admin-toast-message").textContent = message;
 
-    container.appendChild(toast);
+  container.appendChild(toast);
 
-    // Trigger entrance animation after insertion.
-    requestAnimationFrame(() => {
-        toast.classList.add("admin-toast-visible");
-    });
+  // Trigger entrance animation after insertion.
+  requestAnimationFrame(() => {
+    toast.classList.add("admin-toast-visible");
+  });
 
-    const closeButton = toast.querySelector(".admin-toast-close");
-    const progressBar = toast.querySelector(".admin-toast-progress");
+  const closeButton = toast.querySelector(".admin-toast-close");
+  const progressBar = toast.querySelector(".admin-toast-progress");
 
-    let timeoutId;
-    let remainingTime = TOAST_DURATION;
-    let startTime = Date.now();
-    let paused = false;
+  let timeoutId;
+  let remainingTime = TOAST_DURATION;
+  let startTime = Date.now();
+  let paused = false;
 
-    function closeToast() {
-        clearTimeout(timeoutId);
+  function closeToast() {
+    clearTimeout(timeoutId);
 
-        toast.classList.remove("admin-toast-visible");
-        toast.classList.add("admin-toast-closing");
+    toast.classList.remove("admin-toast-visible");
+    toast.classList.add("admin-toast-closing");
 
-        toast.addEventListener(
-            "transitionend",
-            () => {
-                toast.remove();
-            },
-            { once: true }
-        );
+    toast.addEventListener(
+      "transitionend",
+      () => {
+        toast.remove();
+      },
+      { once: true },
+    );
+  }
+
+  function startTimer() {
+    startTime = Date.now();
+    paused = false;
+
+    timeoutId = setTimeout(() => {
+      closeToast();
+    }, remainingTime);
+  }
+
+  function pauseTimer() {
+    if (paused) {
+      return;
     }
 
-    function startTimer() {
-        startTime = Date.now();
-        paused = false;
+    paused = true;
 
-        timeoutId = setTimeout(() => {
-            closeToast();
-        }, remainingTime);
+    clearTimeout(timeoutId);
+    progressBar.style.animationPlayState = "paused";
+
+    remainingTime -= Date.now() - startTime;
+  }
+
+  function resumeTimer() {
+    if (!paused) {
+      return;
     }
 
-    function pauseTimer() {
-        if (paused) {
-            return;
-        }
-
-        paused = true;
-
-        clearTimeout(timeoutId);
-        progressBar.style.animationPlayState = "paused";
-
-        remainingTime -= Date.now() - startTime;
-    }
-
-    function resumeTimer() {
-        if (!paused) {
-            return;
-        }
-
-        progressBar.style.animationPlayState = "running";
-        startTimer();
-    }
-
-    closeButton.addEventListener("click", closeToast);
-
-    toast.addEventListener("mouseenter", pauseTimer);
-    toast.addEventListener("mouseleave", resumeTimer);
-
+    progressBar.style.animationPlayState = "running";
     startTimer();
+  }
 
-    return {
-        close: closeToast
-    };
+  closeButton.addEventListener("click", closeToast);
+
+  toast.addEventListener("mouseenter", pauseTimer);
+  toast.addEventListener("mouseleave", resumeTimer);
+
+  startTimer();
+
+  return {
+    close: closeToast,
+  };
 }
-
 
 function getToastContainer() {
-    let container = document.getElementById("adminToastContainer");
+  let container = document.getElementById("adminToastContainer");
 
-    if (!container) {
-        container = document.createElement("div");
+  if (!container) {
+    container = document.createElement("div");
 
-        container.id = "adminToastContainer";
-        container.className = "admin-toast-container";
+    container.id = "adminToastContainer";
+    container.className = "admin-toast-container";
 
-        document.body.appendChild(container);
-    }
+    document.body.appendChild(container);
+  }
 
-    return container;
+  return container;
 }
-
 
 function getToastTitle(type) {
-    switch (type) {
-        case "success":
-            return "Success";
+  switch (type) {
+    case "success":
+      return "Success";
 
-        case "danger":
-            return "Something went wrong";
+    case "danger":
+      return "Something went wrong";
 
-        case "warning":
-            return "Warning";
+    case "warning":
+      return "Warning";
 
-        case "info":
-        default:
-            return "Information";
-    }
+    case "info":
+    default:
+      return "Information";
+  }
 }
 
-
 function getToastIcon(type) {
-    switch (type) {
-        case "success":
-            return "ti-circle-check";
+  switch (type) {
+    case "success":
+      return "ti-circle-check";
 
-        case "danger":
-            return "ti-circle-x";
+    case "danger":
+      return "ti-circle-x";
 
-        case "warning":
-            return "ti-alert-triangle";
+    case "warning":
+      return "ti-alert-triangle";
 
-        case "info":
-        default:
-            return "ti-info-circle";
-    }
+    case "info":
+    default:
+      return "ti-info-circle";
+  }
 }

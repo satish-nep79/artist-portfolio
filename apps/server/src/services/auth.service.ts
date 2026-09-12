@@ -1,7 +1,7 @@
 // src/services/auth.service.ts
 import type { FastifyInstance } from 'fastify'
 
-type UserPayload = {
+export type UserPayload = {
     id: string
     email: string
     tokenId: string

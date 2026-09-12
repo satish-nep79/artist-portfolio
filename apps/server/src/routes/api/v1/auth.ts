@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { type FastifyPluginAsync } from 'fastify'
 import { buildSuccessResponse, buildErrorResponse, standardApiResponseSchema } from '../../../schemas/response'
 import { comparePassword } from '../../../util/password.util'
-import { createAuthToken } from '../../../services/auth.service'
+import { createAuthToken, type UserPayload } from '../../../services/auth.service'
 import { DEFAULT_ERROR_MESSAGES } from '../../../constants/error-messages'
 
 const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
@@ -43,7 +43,12 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
         const token = await createAuthToken(fastify, { id: user.id, email: user.email, tokenId })
         const tokenExpiration = new Date(Date.now() + 60 * 60 * 1000)
 
-        await fastify.prisma.user.update({ where: { id: user.id }, data: { tokenId } })
+        const updatedUser = await fastify.prisma.user.update({ where: { id: user.id }, data: { tokenId } })
+        if (!updatedUser) {
+            fastify.log.error(`Failed to update tokenId for user ${user.email}`)
+            return reply.status(500).send(buildErrorResponse({ status: 500, message: DEFAULT_ERROR_MESSAGES[500] }))
+        }
+
         fastify.log.info(`User logged in: ${user.email}`)
 
         // Set the token in cookie with HttpOnly and Secure flags
@@ -65,6 +70,44 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
             }
         }))
     })
+
+    fastify.post('/logout', {
+        onRequest: [fastify.authenticate],
+        schema: {
+            response: standardApiResponseSchema,
+        }
+    }, async function (request, reply) {
+        try {
+            const payload = await request.jwtVerify<UserPayload>();
+            const userId = payload.id;
+
+            const updatedUser = await fastify.prisma.user.update({
+                where: { id: userId },
+                data: { tokenId: null },
+            });
+
+            if (!updatedUser) {
+                fastify.log.error(`Failed to clear tokenId for user ${userId}`);
+                return reply.status(500).send(buildErrorResponse({ status: 500, message: DEFAULT_ERROR_MESSAGES[500] }));
+            }
+
+            reply.clearCookie('auth_token', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+            });
+
+            fastify.log.info(`User logged out: ${payload.email}`);
+            return reply.status(200).send(buildSuccessResponse({ status: 200, message: 'Logout successful', data: {} }));
+
+
+        } catch (err) {
+            fastify.log.error(`Error during logout for user ${request.user?.email}: ${err}`)
+            return reply.status(500).send(buildErrorResponse({ status: 500, message: DEFAULT_ERROR_MESSAGES[500] }))
+        }
+
+    })
+
 }
 
 export default root

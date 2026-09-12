@@ -22,3 +22,27 @@ export function setButtonLoading(button, loading, loadingText = "Loading...") {
     delete button.dataset.originalContent;
   }
 }
+
+export function showProgressDialog(message = "Loading...") {
+  const dialog = document.createElement("div");
+
+  dialog.id = "progressDialog";
+  dialog.className = "progress-dialog";
+  dialog.innerHTML = `
+        <div class="progress-dialog-content">
+            <span
+                class="spinner-border"
+                role="status"
+                aria-hidden="true"
+            ></span>
+
+            <span>${message}</span>
+        </div>
+    `;
+
+  document.body.appendChild(dialog);
+}
+
+export function hideProgressDialog() {
+    document.getElementById("progressDialog")?.remove();
+}

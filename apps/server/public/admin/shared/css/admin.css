@@ -83,9 +83,10 @@ body.admin-shell {
     left: -0.70rem;
 }
 
-.dashboard-layout.sidebar-collapsed > admin-sidebar {
+.dashboard-layout.sidebar-collapsed>admin-sidebar {
     flex-basis: 0;
-    margin-left: -16rem; /* Hides sidebar off-screen completely */
+    margin-left: -16rem;
+    /* Hides sidebar off-screen completely */
 }
 
 .dashboard-layout.sidebar-collapsed #adminHeaderLogo {
@@ -128,7 +129,7 @@ body.admin-shell {
     border-radius: 0.375rem;
     place-items: center;
     cursor: pointer;
-    transition:  left 180ms ease, background-color 0.15s ease;
+    transition: left 180ms ease, background-color 0.15s ease;
 }
 
 .sidebar-toggle:hover {
@@ -233,4 +234,29 @@ body.admin-shell {
     flex-direction: column;
     gap: 0.5rem;
     width: min(24rem, calc(100vw - 2rem));
+}
+
+.progress-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(15, 23, 42, 0.45);
+}
+
+.progress-dialog-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    padding: 1rem 1.25rem;
+
+    background: #fff;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
