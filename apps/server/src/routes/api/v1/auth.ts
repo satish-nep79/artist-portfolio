@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { type FastifyPluginAsync } from 'fastify'
 import { buildSuccessResponse, buildErrorResponse, standardApiResponseSchema } from '../../../schemas/response'
 import { comparePassword } from '../../../util/password.util'
-import { createAuthToken, type UserPayload } from '../../../services/auth.service'
+import { createAuthToken } from '../../../services/auth.service'
 import { DEFAULT_ERROR_MESSAGES } from '../../../constants/error-messages'
 
 const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {

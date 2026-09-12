@@ -8,7 +8,7 @@ const AdminDashboard: FastifyPluginAsync = async (fastify, opts): Promise<void> 
         async function (request, reply) {
 
             fastify.log.info(`Serving dashboard HTML for request to ${request.url}`);
-            return await reply.view(PublicRoutes.DASHBOARD);
+            return reply.redirect("/admin/dashboard");
         })
 
     fastify.get('/login', async function (request, reply) {
@@ -21,6 +21,22 @@ const AdminDashboard: FastifyPluginAsync = async (fastify, opts): Promise<void> 
             return reply.status(500).send(DEFAULT_ERROR_MESSAGES[500]);
         }
     })
+
+    fastify.get('/dashboard',
+        { onRequest: [fastify.authenticate] },
+        async function (request, reply) {
+
+            fastify.log.info(`Serving dashboard HTML for request to ${request.url}`);
+            return await reply.view(PublicRoutes.DASHBOARD);
+        });
+
+    fastify.get('/site-config',
+        { onRequest: [fastify.authenticate] },
+        async function (request, reply) {
+
+            fastify.log.info(`Serving site config HTML for request to ${request.url}`);
+            return await reply.view(PublicRoutes.SITE_CONFIG);
+        });
 
 }
 
