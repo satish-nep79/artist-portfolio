@@ -6,6 +6,7 @@ export const DEFAULT_ERROR_MESSAGES: Record<number, string> = {
   403: 'Forbidden. You do not have permission to access this resource.',
   404: 'The requested resource was not found.',
   409: 'Conflict. The resource already exists.',
+  413: 'Payload Too Large. The uploaded file exceeds the allowed size limit.',
   422: 'Unprocessable Entity. Check validation rules.',
   500: 'An unexpected server error occurred. Please try again later.',
 }

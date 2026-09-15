@@ -38,6 +38,7 @@ export const standardApiResponseSchema = {
     403: errorResponseSchema,
     404: errorResponseSchema,
     409: errorResponseSchema,
+    413: errorResponseSchema,
     422: errorResponseSchema,
     500: errorResponseSchema,
 } as const
