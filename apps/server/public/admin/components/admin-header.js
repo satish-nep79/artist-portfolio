@@ -1,9 +1,9 @@
-import { queueToast, showToast } from "../../shared/js/toast.js";
-import { apiRequest } from "../../shared/js/api_request.js";
+import { queueToast, showToast } from "../shared/js/toast.js";
+import { apiRequest } from "../shared/js/api_request.js";
 import {
   showProgressDialog,
   hideProgressDialog,
-} from "../../shared/js/loading-indicator.js";
+} from "../shared/js/loading-indicator.js";
 
 function initHeaderDropdowns() {
   const profileBtn = document.getElementById("profileDropdownBtn");

@@ -1,0 +1,38 @@
+{% macro textarea(
+id,
+name,
+label,
+value="",
+placeholder="",
+rows=3,
+maxlength=500,
+required=false,
+hint=""
+) %}
+
+<div>
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <label for="{{ id }}" class="form-label">
+            {{ label }}
+        </label>
+
+        <span class="form-hint" data-character-counter="{{ id }}">
+            {{ value | length }} / {{ maxlength }}
+        </span>
+
+    </div>
+
+    <textarea id="{{ id }}" name="{{ name }}" class="form-control" rows="{{ rows }}" maxlength="{{ maxlength }}"
+        placeholder="{{ placeholder }}" data-character-input {% if required %}required{% endif %}>{{ value }}</textarea>
+
+    {% if hint %}
+    <div class="form-hint">
+        {{ hint }}
+    </div>
+    {% endif %}
+
+</div>
+
+{% endmacro %}
