@@ -2,6 +2,23 @@ import { v2 as cloudinary } from 'cloudinary';
 import { randomUUID } from 'crypto';
 import { Readable } from 'stream';
 
+export type ImageVariantName = 'thumbnail' | 'standard' | 'full';
+
+export interface TransformationOptions {
+    variant?: ImageVariantName;
+    width?: number;
+    height?: number;
+    crop?: 'fill' | 'fit' | 'limit' | 'thumb' | 'scale';
+    quality?: 'auto' | number;
+    format?: 'auto' | 'jpg' | 'png' | 'webp';
+}
+
+export interface ImageVariants {
+    thumbnail: string | null;  // w_300  (Small previews, admin lists, avatars)
+    standard: string | null;   // w_600  (Cards, grid view, main display)
+    full: string | null;       // w_2000 (Modal viewer, full-screen detail)
+}
+
 export interface UploadStreamOptions {
     fileStream: Readable;
     folder?: string;
@@ -14,9 +31,18 @@ export interface UploadResult {
     publicId: string;
 }
 
-export class ImageUploadService {
+// Preset mapping for predefined variant widths
+const VARIANT_PRESETS: Record<ImageVariantName, { width: number }> = {
+    thumbnail: { width: 300 },
+    standard: { width: 600 },
+    full: { width: 2000 },
+};
+
+export class ImageService {
+    private readonly cloudName: string;
+
     constructor() {
-        // Configure Cloudinary when the service is instantiated
+        this.cloudName = process.env.CLOUDINARY_CLOUD_NAME || '';
         cloudinary.config({
             cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
             api_key: process.env.CLOUDINARY_API_KEY,
@@ -29,7 +55,6 @@ export class ImageUploadService {
      * Uploads a file stream directly to Cloudinary
      */
     async uploadStream(options: UploadStreamOptions): Promise<UploadResult> {
-
         const {
             fileStream,
             folder = 'artwork',
@@ -41,14 +66,13 @@ export class ImageUploadService {
         const uploadFolder = `${rootFolder}/${folder}`;
         const uniqueFilename = `${folder}_${randomUUID()}`;
 
-
         return new Promise((resolve, reject) => {
             const uploadStream = cloudinary.uploader.upload_stream(
                 {
                     folder: uploadFolder,
                     resource_type: 'image',
                     public_id: hasUniqueFilename ? uniqueFilename : folder,
-                    unique_filename: false, // We are generating our own unique filename
+                    unique_filename: false,
                     overwrite: overwrite,
                 },
                 (error, result) => {
@@ -63,7 +87,7 @@ export class ImageUploadService {
             );
 
             fileStream.on('limit', () => {
-                uploadStream.destroy(); // Cancel Cloudinary connection immediately
+                uploadStream.destroy();
                 reject(new Error('LIMIT_FILE_SIZE'));
             });
 
@@ -78,5 +102,52 @@ export class ImageUploadService {
     async deleteImage(publicId: string): Promise<boolean> {
         const result = await cloudinary.uploader.destroy(publicId);
         return result.result === 'ok';
+    }
+
+    /**
+     * Generates a transformed Cloudinary CDN URL from a publicId.
+     * Accepts a preset variant string or custom width/height options.
+     */
+    getImageUrl(
+        publicId: string | null | undefined,
+        options: TransformationOptions = {}
+    ): string | null {
+        if (!publicId) return null;
+
+        const {
+            variant,
+            crop = 'fill',
+            quality = 'auto',
+            format = 'auto',
+        } = options;
+
+        // Apply preset dimensions if a variant key was supplied
+        const preset = variant ? VARIANT_PRESETS[variant] : undefined;
+        const targetWidth = options.width ?? preset?.width;
+        const targetHeight = options.height;
+
+        const transforms: string[] = [
+            `f_${format}`,
+            `q_${quality}`,
+        ];
+
+        if (targetWidth) transforms.push(`w_${targetWidth}`);
+        if (targetHeight) transforms.push(`h_${targetHeight}`);
+        if (targetWidth || targetHeight) transforms.push(`c_${crop}`);
+
+        const transformString = transforms.join(',');
+
+        return `https://res.cloudinary.com/${this.cloudName}/image/upload/${transformString}/${publicId}`;
+    }
+
+    /**
+     * Generates a predefined dictionary of URL variants for responsive layouts
+     */
+    getImageVariants(publicId: string | null | undefined): ImageVariants {
+        return {
+            thumbnail: this.getImageUrl(publicId, { variant: 'thumbnail' }),
+            standard: this.getImageUrl(publicId, { variant: 'standard' }),
+            full: this.getImageUrl(publicId, { variant: 'full' }),
+        };
     }
 }

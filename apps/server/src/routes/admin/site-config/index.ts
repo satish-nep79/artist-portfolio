@@ -7,11 +7,14 @@ const AdminSiteConfig: FastifyPluginAsync = async (fastify, opts): Promise<void>
         async function (request, reply) {
             fastify.log.info(`Serving site config profile HTML for request to ${request.url}`);
 
-            const siteConfig = await fastify.prisma.siteConfigs.findFirst();
+            let siteConfig = await fastify.prisma.siteConfigs.findFirst();
 
+
+
+            if (siteConfig && siteConfig?.profileImageUrl) {
+                siteConfig.profileImageUrl = fastify.imageUpload.getImageUrl(siteConfig?.profileImageUrl, { variant: 'standard' });
+            }
             fastify.log.info(`Site config profile data: ${JSON.stringify(siteConfig)}`);
-
-
             return await reply.view(PublicRoutes.SITE_CONFIG_PROFILE, {
                 siteConfig: siteConfig,
             });

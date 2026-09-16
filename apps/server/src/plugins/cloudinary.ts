@@ -1,10 +1,10 @@
 import fp from 'fastify-plugin';
-import { ImageUploadService } from '../services/image-upload.service';
+import { ImageService } from '../services/image-upload.service';
 
 // Module augmentation for TypeScript autocompletion
 declare module 'fastify' {
     interface FastifyInstance {
-        imageUpload: ImageUploadService;
+        imageUpload: ImageService;
     }
 }
 
@@ -19,7 +19,7 @@ export default fp(async (fastify) => {
     }
 
     // 2. Instantiate and attach service to Fastify instance
-    const imageUploadService = new ImageUploadService();
+    const imageUploadService = new ImageService();
     fastify.decorate('imageUpload', imageUploadService);
 
     fastify.log.info('Cloudinary ImageUploadService has been registered successfully.');
